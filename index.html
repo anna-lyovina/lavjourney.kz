@@ -9,7 +9,7 @@
   <meta property="og:title" content="Анна Лёвина">
   <meta property="og:description" content="Анна Лёвина — квалифицированная психологическая поддержка онлайн и в Алматы.">
   
-  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="favicon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
@@ -503,6 +503,10 @@
   color: var(--primary-color);
 }
 
+.announcement-text.mobile-only .contact-link {
+  font-size: 0.8em;
+}
+
 .announcement-btn {
   background-color: var(--accent-color);
   color: white;
@@ -522,10 +526,12 @@
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.35); /* slightly lighter for better shadow effect */
   justify-content: center;
   align-items: center;
   z-index: 3000;
+  backdrop-filter: blur(6px) brightness(0.95); /* add blur and dimming */
+  /* box-shadow: none; */ /* remove previous shadow */
 }
 
 .service-modal {
@@ -534,7 +540,7 @@
   max-width: 600px;
   width: 90%;
   border-radius: 12px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  box-shadow: 0 16px 48px 0 rgba(0,0,0,0.32), 0 2px 16px rgba(43,156,153,0.10);
   position: relative;
   animation: fadeInScale 0.3s ease;
   text-align: left;
@@ -571,6 +577,14 @@
   font-size: 1.5rem;
   cursor: pointer;
   color: #999;
+}
+
+lav-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+  letter-spacing: -0.5px;
+  color: var(--accent-color);
 }
 
 @keyframes fadeInScale {
@@ -614,6 +628,15 @@
         0% { opacity: 0.7; left: 18%; top: 12%; }
         100% { opacity: 1; left: 28%; top: 18%; }
       }
+
+@media (max-width: 767px) {
+  .desktop-only { display: none !important; }
+  .mobile-only { display: inline !important; }
+}
+@media (min-width: 768px) {
+  .desktop-only { display: inline !important; }
+  .mobile-only { display: none !important; }
+}
 </style>
 
 </style>
@@ -621,8 +644,13 @@
 <body>
   <header>
     <div class="container navbar">
+      <div class="logo">
+        <span style="font-weight: 900; font-size: 1.6rem; letter-spacing: -0.5px; color: var(--accent-color);">lav.</span>
+        <!-- <div style="font-size: 0.8rem; font-weight: 500; color: #444;">Анна Лёвина</div> -->
+      </div>
+      <!-- <div class="toggle" onclick="toggleMenu()">☰</div> -->
       <div class="logo">Анна Лёвина</div>
-      <div class="toggle" onclick="toggleMenu()">☰</div>
+
       <nav class="menu" id="mainMenu">
         <a href="#about">Обо мне</a>
         <a href="#services">Услуги</a>
@@ -632,8 +660,9 @@
 
     <div class="announcement-bar">
       <div class="container announcement-content">
-        <!-- <span class="announcement-text"></span> -->
-        <a href="#contact" class="announcement-btn">🎲 Игра Лила – 25 июля</a>
+        <span class="announcement-text mobile-only"><a href="#contact" class="contact-link">Сбор группы на расстановки — 25 июля</a></span>
+        <span class="announcement-text desktop-only">Сбор группы на расстановки — 25 июля</span>
+        <a href="#contact" class="announcement-btn desktop-only">Записаться!</a>
       </div>
     </div>
     
@@ -642,7 +671,7 @@
   <section class="hero">
     <div class="container">
       <div class="hero-text-block">
-        <!-- <h1>Время услышать себя</h1> -->
+        <h1>Анна Лёвина</h1>
         <!-- <p class="subtitle">Если вы здесь — возможно, настал момент что-то изменить</p> -->
       
         <div class="hero-paragraphs">
@@ -789,8 +818,16 @@
   </div>
 
 <footer>
-    &copy; Анна Лёвина <p><a href="#" onclick="openConsentModal(); return false;" class="contact-link">Информированное согласие</a></p>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.3rem;">
+      <p>
+        <a href="#" onclick="openConsentModal(); return false;" class="contact-link">Информированное согласие</a>
+      </p>
+      <div style="color: rgba(43, 156, 153, 0.25); font-weight: 900; font-size: 1.2rem; letter-spacing: -0.5px;">
+        lav.
+      </div>
+    </div>
   </footer>
+
 
   <script>
     function toggleMenu() {
