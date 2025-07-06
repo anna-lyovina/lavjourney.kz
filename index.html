@@ -6,8 +6,8 @@
   <title>Анна Лёвина</title>
   <meta name="description" content="Психологическая помощь онлайн – Анна Лёвина, КПТ, кризисная терапия.">
   <meta name="keywords" content="психолог, психотерапия, депрессия, тревога, Алматы, онлайн">
-  <meta property="og:title" content="психолог Анна Лёвина">
-  <meta property="og:description" content="Профессиональная психологическая помощь онлайн и офлайн в Алматы.">
+  <meta property="og:title" content="Анна Лёвина">
+  <meta property="og:description" content="Анна Лёвина — квалифицированная психологическая поддержка онлайн и в Алматы.">
   
   <link rel="icon" href="/favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -197,15 +197,65 @@
     }
 
     @media (max-width: 767px) {
+      .hero {
+        padding-top: 8rem;
+        padding-bottom: 1rem;
+      }
+
       .hero img {
-        width: 100%;
+        width: 33%;
+        max-width: 117px;
         aspect-ratio: 1 / 1;
         height: auto;
-        max-width: 350px;
         object-fit: cover;
         object-position: center top;
         display: block;
         margin: 0 auto;
+        transform: scale(3);
+        transform-origin: center center;
+        border-radius: 32% 38% 36% 32%/38% 32% 38% 32%;
+        margin-bottom: 22%;
+        box-shadow:
+          0 8px 32px 0 rgba(43,156,153,0.18),
+          0 1.5px 8px 0 rgba(0,0,0,0.10),
+          0 0 32px 8px rgba(43,156,153,0.13),
+          0 0 0 8px rgba(255,255,255,0.10) inset;
+        border: 3px solid transparent;
+        position: relative;
+        z-index: 1;
+        background: linear-gradient(135deg, rgba(43,156,153,0.08) 0%, rgba(255,255,255,0.12) 100%);
+      }
+      .hero img::before {
+        content: '';
+        position: absolute;
+        inset: -7px;
+        border-radius: 36% 42% 40% 36%/42% 36% 42% 36%;
+        padding: 0;
+        z-index: 2;
+        background: linear-gradient(120deg, rgba(43,156,153,0.25) 0%, rgba(255,255,255,0.18) 100%);
+        border: 2.5px solid;
+        border-image: linear-gradient(120deg, #2b9c99 30%, #fff 70%) 1;
+        pointer-events: none;
+        animation: borderGlow 3.5s linear infinite;
+      }
+      .hero img::after {
+        content: '';
+        position: absolute;
+        left: 18%;
+        top: 12%;
+        width: 32%;
+        height: 18%;
+        background: linear-gradient(120deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.0) 100%);
+        border-radius: 50%;
+        filter: blur(2px);
+        opacity: 0.7;
+        pointer-events: none;
+        z-index: 3;
+        animation: sparkle 2.5s ease-in-out infinite alternate;
+      }
+      section.visible {
+        padding-top: 1rem;
+        padding-bottom: 0rem;
       }
     }
 
@@ -223,7 +273,7 @@
     }
 
     .section {
-      padding: 3rem 1rem;
+      padding: 2rem 1rem;
       opacity: 0;
       transform: translateY(40px);
       transition: all 0.6s ease-out;
@@ -546,6 +596,25 @@
     .service-details-link:hover, .contact-link:hover {
       color: rgb(38, 139, 136);
     }
+
+    @keyframes heroFloat {
+        0% { transform: scale(3) rotate(-6deg) translateY(0); }
+        100% { transform: scale(3) rotate(-6deg) translateY(-22px); }
+      }
+      @keyframes heroTilt {
+        0% { filter: brightness(1) drop-shadow(0 0 0 #fff); }
+        50% { filter: brightness(1.08) drop-shadow(0 0 8px #2b9c99cc); }
+        100% { filter: brightness(1) drop-shadow(0 0 0 #fff); }
+      }
+      @keyframes borderGlow {
+        0% { filter: drop-shadow(0 0 0px #2b9c99); }
+        50% { filter: drop-shadow(0 0 8px #2b9c99); }
+        100% { filter: drop-shadow(0 0 0px #2b9c99); }
+      }
+      @keyframes sparkle {
+        0% { opacity: 0.7; left: 18%; top: 12%; }
+        100% { opacity: 1; left: 28%; top: 18%; }
+      }
 </style>
 
 </style>
@@ -564,8 +633,8 @@
 
     <div class="announcement-bar">
       <div class="container announcement-content">
-        <span class="announcement-text">🎲 Игра Лила – 25 июля</span>
-        <a href="#contact" class="announcement-btn">Записаться!</a>
+        <!-- <span class="announcement-text"></span> -->
+        <a href="#contact" class="announcement-btn">🎲 Игра Лила – 25 июля</a>
       </div>
     </div>
     
@@ -574,7 +643,7 @@
   <section class="hero">
     <div class="container">
       <div class="hero-text-block">
-        <h1>Время услышать себя</h1>
+        <!-- <h1>Время услышать себя</h1> -->
         <!-- <p class="subtitle">Если вы здесь — возможно, настал момент что-то изменить</p> -->
       
         <div class="hero-paragraphs">
