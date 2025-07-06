@@ -214,7 +214,7 @@
         transform: scale(3);
         transform-origin: center center;
         border-radius: 32% 38% 36% 32%/38% 32% 38% 32%;
-        margin-bottom: 22%;
+        margin-bottom: 25%;
         box-shadow:
           0 8px 32px 0 rgba(43,156,153,0.18),
           0 1.5px 8px 0 rgba(0,0,0,0.10),
@@ -539,9 +539,8 @@
   animation: fadeInScale 0.3s ease;
   text-align: left;
   max-height: 80vh;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent-color) #f0f0f0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .service-modal::-webkit-scrollbar {
