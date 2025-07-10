@@ -648,6 +648,24 @@ lav-logo {
   .desktop-only { display: inline !important; }
   .mobile-only { display: none !important; }
 }
+
+.service-price {
+  font-size: 0.9em;
+}
+@media (min-width: 768px) {
+  .service-price {
+    font-size: 1em;
+  }
+}
+
+.service-details-size {
+  font-size: 0.9em;
+}
+@media (min-width: 768px) {
+  .service-details-size {
+    font-size: 1em;
+  }
+}
 </style>
 
 </style>
@@ -1083,8 +1101,8 @@ window.addEventListener('DOMContentLoaded', function() {
     <h4 style="text-align: center;">${services[i].title}</h4>
     <p style="text-align: center;">${services[i].short_description}</p>
     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.2rem;">
-      <a href="#" class="service-details-link" style="color: var(--accent-color); font-weight: 600; text-decoration: underline; display: inline-block;" onclick="event.preventDefault(); openServiceModal(${i});">Узнать больше</a>
-      <span style="display: inline-flex; align-items: center; gap: 0.4em; background: #fff; color: var(--accent-color); font-weight: 700; font-size: 1.05rem; border-radius: 999px; padding: 0.45em 1.2em; box-shadow: 0 2px 12px rgba(43,156,153,0.10); letter-spacing: 0.5px; border: 2px solid var(--accent-color); text-align: right; min-width: 90px; transition: box-shadow 0.2s;">
+      <a href="#" class="service-details-link service-details-size" style="color: var(--accent-color); font-weight: 600; text-decoration: underline; display: inline-block;" onclick="event.preventDefault(); openServiceModal(${i});">Подробнее</a>
+      <span class="service-price" style="display: inline-flex; align-items: center; gap: 0.4em; background: #fff; color: var(--accent-color); font-weight: 700; border-radius: 999px; padding: 0.45em 1.2em; box-shadow: 0 2px 12px rgba(43,156,153,0.10); letter-spacing: 0.5px; border: 2px solid var(--accent-color); text-align: right; min-width: 90px; transition: box-shadow 0.2s;">
          ${services[i].short_price}
       </span>
     </div>
