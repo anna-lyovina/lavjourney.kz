@@ -47,7 +47,7 @@
       height: 100vh;
       background: url('background.jpg') no-repeat center center;
       background-size: cover;
-      opacity: 0.07;
+      opacity: 0.2;
       z-index: -1;
       pointer-events: none;
     }
@@ -76,7 +76,7 @@
 
     .logo {
       font-weight: 700;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       color: var(--accent-color);
     }
 
@@ -119,7 +119,7 @@
     }
 
     .hero {
-      background: linear-gradient(to right, rgba(212, 244, 244, 0.5), rgba(235, 251, 251, 0.5));
+      background: linear-gradient(to right, rgba(212, 244, 244, 0.175), rgba(235, 251, 251, 0.175));
       padding: 5rem 1rem;
       display: flex;
       flex-direction: column-reverse;
@@ -159,7 +159,7 @@
 
 .hero-paragraphs blockquote {
   font-style: italic;
-  background: rgba(43, 156, 153, 0.05);
+  background: rgba(43, 156, 153, 0.15);
   padding: 1rem;
   border-left: 4px solid var(--accent-color);
   margin: 1rem 0;
@@ -301,13 +301,14 @@
     }
 
     .card {
-      background: white;
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-      transition: transform 0.3s;
-      border: 1px solid rgba(43, 156, 153, 0.15);
-    }
+  background: linear-gradient(135deg, rgba(255,255,255,0.85) 80%, rgba(43,156,153,0.07) 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 6px 24px rgba(43,156,153,0.10), 0 1.5px 8px rgba(0,0,0,0.07);
+  border: 1.5px solid rgba(43,156,153,0.13);
+  backdrop-filter: blur(2.5px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
 
     .card:hover {
       transform: translateY(-4px);
@@ -330,7 +331,7 @@
     }
 
     .about-panel {
-      background-color: rgba(43, 156, 153, 0.05);
+      background-color: rgba(43, 156, 153, 0.1);
       border-left: 4px solid var(--accent-color);
       padding: 1.5rem;
       border-radius: 12px;
@@ -449,15 +450,18 @@
 }
 
 .fancy-service {
-  position: relative;
-  background: white;
-  border: 2px solid transparent;
-  background-clip: padding-box;
+  background: linear-gradient(135deg, rgba(255,255,255,0.85) 80%, rgba(43,156,153,0.07) 100%);
   border-radius: 16px;
   padding: 2rem;
-  text-align: center;
+  box-shadow: 0 6px 24px rgba(43,156,153,0.10), 0 1.5px 8px rgba(0,0,0,0.07);
+  border: 1.5px solid rgba(43,156,153,0.13);
+  backdrop-filter: blur(2.5px);
   transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+
+  position: relative;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  text-align: center;
 }
 
 .fancy-service:hover {
@@ -484,28 +488,43 @@
 }
 
 .announcement-bar {
-  background-color: #fff8dc;
-  border-bottom: 1px solid rgba(43, 156, 153, 0.2);
-  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, #e0f7fa 0%, #b2ebf2 100%);
+  border-bottom: none;
+  padding: 1rem 1.5rem;
   position: sticky;
   top: 0;
   z-index: 1100;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 12px rgba(43,156,153,0.10);
+  border-radius: 0 0 18px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .announcement-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
   flex-wrap: wrap;
   text-align: center;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #19747e;
+  letter-spacing: 0.02em;
 }
 
+.announcement-content .fa-bullhorn {
+  color: #2b9c99;
+  font-size: 1.3em;
+  margin-right: 0.5em;
+}
+
+
 .announcement-text {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--primary-color);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #19747e;
 }
 
 .announcement-text.mobile-only .contact-link {
@@ -524,8 +543,10 @@
 }
 
 .announcement-btn:hover {
-  background-color: rgb(38, 139, 136);
+  background: linear-gradient(90deg, #19747e 60%, #43e97b 100%);
+  box-shadow: 0 4px 16px rgba(43,156,153,0.18);
 }
+
 
 .service-modal-overlay {
   display: none;
@@ -666,24 +687,76 @@ lav-logo {
     font-size: 1em;
   }
 }
-</style>
+
+.subtitle {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--accent-color);
+  letter-spacing: 0.5px;
+  margin-top: -0.3rem;
+  margin-bottom: 0.2rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.hero-slogan {
+      font-size: clamp(1.3rem, 3vw, 2.1rem);
+      font-style: italic;
+      color: var(--accent-color);
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 2rem;
+      margin-top: 0.5rem;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 12px rgba(43,156,153,0.10);
+    }
+    .hero-slogan::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      margin: 0.7rem auto 0;
+      background: linear-gradient(90deg, #2b9c99 0%, #b2ebf2 100%);
+      border-radius: 2px;
+      opacity: 0.7;
+    }
+    @media (min-width: 768px) {
+      .hero-slogan {
+        text-align: left;
+        margin-left: 0;
+      }
+      .hero-slogan::after {
+        margin-left: 0;
+      }
+    }
+
+    /* Add profession accent style */
+.profession {
+  color: var(--accent-color);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+  </style>
 
 </style>
 </head>
 <body>
   <header>
     <div class="container navbar">
-      <div class="logo">
-        <span style="font-weight: 900; font-size: 1.6rem; letter-spacing: -0.5px; color: var(--accent-color);">lav.</span>
-        <!-- <div style="font-size: 0.8rem; font-weight: 500; color: #444;">Анна Лёвина</div> -->
+      <div class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
+        <img src="logo.png" alt="Психолог Анна Лёвина — логотип" style="height: 55px; object-fit: contain;">
+       <div class="logo desktop-only"><span class="profession">Психолог</span> Анна Лёвина</div>
       </div>
-      <!-- <div class="toggle" onclick="toggleMenu()">☰</div> -->
-      <div class="logo">Анна Лёвина</div>
+      <div class="logo mobile-only"><span class="profession">Психолог</span> Анна Лёвина</div>
+      <div class="subtitle"></div>
+
 
       <nav class="menu" id="mainMenu">
         <a href="#about">Обо мне</a>
         <a href="#how_i_work">Мой подход</a>
-        <a href="#services">Услуги</a>
+        <a href="#services">Услуги и цены</a>
         <a href="#" onclick="openConsentModal(); return false;">Информированное согласие</a>
         <a href="#contact">Контакты</a>
       </nav>
@@ -691,6 +764,7 @@ lav-logo {
 
     <div class="announcement-bar">
       <div class="container announcement-content">
+        <i class="fa fa-bullhorn"></i>
         <span class="announcement-text mobile-only"><a href="#contact" class="contact-link">Сбор группы на расстановки — 25 июля</a></span>
         <span class="announcement-text desktop-only">Сбор группы на расстановки — 25 июля</span>
         <a href="#contact" class="announcement-btn desktop-only">Записаться!</a>
@@ -702,15 +776,14 @@ lav-logo {
   <section class="hero">
     <div class="container">
       <div class="hero-text-block">
+        <div class="hero-slogan">Путешествие к самому себе</div>
         <!-- <h1>Анна Лёвина</h1> -->
         <!-- <p class="subtitle">Если вы здесь — возможно, настал момент что-то изменить</p> -->
-      
         <div class="hero-paragraphs">
           <p>Я верю в то, что случайности не случайны. Если Вы оказались на этой страничке, возможно, что-то внутри больше не даёт жить по-прежнему. В какой-то момент приходит осознание: так больше нельзя — жить на автомате, вывозить, делать вид, держаться — впишите своё. </p>
           <blockquote>«Я пока не знаю с чем именно Вы пришли. У меня нет универсальных ответов на Ваши вопросы. Я не всегда сразу понимаю, что делать в Вашей ситуации, потому что каждый человек — это отдельный мир со своим опытом, эмоциями и чувствами, мыслями, конфликтами, желаниями и мечтами.»</blockquote>
           <p>Что у меня точно есть — это огромный интерес к каждому человеку, определенные знания и собственный опыт. Я верю, что в точке настоящего человеческого контакта рождается нечто большее, чем просто диалог — это и есть психотерапевтическая алхимия. Если Вам важно разобраться в себе, почувствовать, дойти до сути — здесь есть место для этого пути.</p>
         </div>
-      
         <a href="#contact" class="cta-button">Записаться на встречу</a>
       </div>
       
@@ -855,12 +928,11 @@ lav-logo {
   </div>
 
 <footer>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.3rem;">
-      <div style="color: rgba(43, 156, 153, 0.25); font-weight: 900; font-size: 1.2rem; letter-spacing: -0.5px;">
-        lav.
-      </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+      <img src="logo.png" alt="Психолог Анна Лёвина — логотип" style="height: 55px; object-fit: contain;">
     </div>
   </footer>
+
 
 
   <script>
