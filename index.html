@@ -48,7 +48,6 @@
   display: flex;
   overflow-x: auto;
   gap: 1.5rem;
-  padding: 2rem 0 1rem 0;
   scroll-behavior: smooth;
   cursor: grab;
   /* Hide scrollbar for Webkit browsers */
@@ -57,6 +56,86 @@
 }
 .testimonials-board::-webkit-scrollbar {
   display: none;
+}
+
+/* Mobile carousel for testimonials */
+@media (max-width: 767px) {
+  .testimonials-board {
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    position: relative;
+    min-height: 420px;
+  }
+  .testimonial-card {
+    display: none;
+    margin: 0 auto;
+    transform: none !important;
+    animation: none !important;
+    width: 90vw;
+    max-width: 350px;
+    min-width: 0;
+    height: auto;
+    box-shadow: 0 6px 24px rgba(43,156,153,0.10), 0 1.5px 8px rgba(0,0,0,0.07);
+  }
+
+  .testimonial-card.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    animation: fadeInTestimonial 0.5s;
+  }
+  .testimonials-scroll-btns {
+    margin-top: 2em;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    z-index: 2;
+    transform: translateY(-50%);
+  }
+  .testimonial-scroll-btn {
+    pointer-events: auto;
+    background: rgba(43,156,153,0.85);
+    box-shadow: 0 2px 8px rgba(43,156,153,0.18);
+    font-size: 1.7rem;
+    width: 48px;
+    height: 48px;
+    opacity: 0.95;
+    border: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .testimonial-scroll-btn:active {
+    background: rgb(38, 139, 136);
+    transform: scale(1.08);
+  }
+  .testimonial-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+  }
+  .testimonial-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d1e6e5;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .testimonial-dot.active {
+    background: var(--accent-color);
+    transform: scale(1.2);
+  }
+}
+
+@keyframes fadeInTestimonial {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .testimonial-card {
@@ -79,6 +158,9 @@
   animation-delay: var(--levitate-delay, 0s);
   will-change: transform;
 }
+
+
+
 .testimonial-card:hover {
   /* Pause animation and intensify shadow on hover */
   animation-play-state: paused;
@@ -102,6 +184,7 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
+
 @keyframes levitateWave {
   0% {
     transform: translateY(0px);
@@ -122,25 +205,21 @@
     transform: translateY(0px);
   }
 }
-@media (max-width: 600px) {
-  .testimonials-scroll-btns {
-    position: static;
-    margin: 1.2rem auto 0 auto;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    width: 100%;
-  }
-}
 
 @media (max-width: 767px) {
   #testimonialLightboxImg {
-    transform: scale(1.1);
+    transform: scale(1.25);
   }
 }
 @media (min-width: 768px) {
   #testimonialLightboxImg {
     transform: scale(1.4);
+  }
+}
+@media (min-width: 768px) {
+  .testimonial-card.shifted
+  {
+    margin-top: 6em;
   }
 }
 
@@ -357,6 +436,7 @@
         </div>
 
       </div>
+      <div class="testimonial-dots"></div>
     </div>
   </section>
 
@@ -365,8 +445,8 @@
     <div class="testimonial-lightbox-content" onclick="closeTestimonialLightbox()" style="max-width: 95vw; max-height: 95vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
       <img id="testimonialLightboxImg" src="" alt="Фото отзыва" style="max-width: 90vw; max-height: 60vh; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.13); transition: transform 0.3s;">
       <div id="testimonialLightboxClient" style="margin-top: 1.2rem; font-size: 1.2rem; color: var(--accent-color); font-weight: 700;"></div>
-      <div class="nav prev" onclick="event.stopPropagation(); navigateTestimonial(-1);" style="position: absolute; left: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;">❮</div>
-      <div class="nav next" onclick="event.stopPropagation(); navigateTestimonial(1);" style="position: absolute; right: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;">❯</div>
+      <div class="nav prev" onclick="event.stopPropagation(); navigateTestimonial(-1);" style="position: absolute; left: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;display: none;">❮</div>
+      <div class="nav next" onclick="event.stopPropagation(); navigateTestimonial(1);" style="position: absolute; right: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;display: none;">❯</div>
     </div>
   </div>
   
@@ -475,28 +555,130 @@ document.addEventListener('keydown', function(e) {
 
 <script>
 // Testimonials scroll buttons logic
+
 document.addEventListener('DOMContentLoaded', function() {
   const board = document.querySelector('.testimonials-board');
   const btnLeft = document.querySelector('.testimonial-scroll-btn.left');
   const btnRight = document.querySelector('.testimonial-scroll-btn.right');
+  const testimonialCards = Array.from(document.querySelectorAll('.testimonial-card'));
+  const dotsContainer = document.querySelector('.testimonial-dots');
+  let currentMobileIndex = 0;
 
-  if (board && btnLeft && btnRight) {
-    btnLeft.addEventListener('click', function() {
+  function isMobile() {
+    return window.innerWidth <= 767;
+  }
+
+  function updateMobileCarousel(index) {
+    testimonialCards.forEach((card, i) => {
+      if (isMobile()) {
+        card.classList.toggle('active', i === index);
+        card.style.display = i === index ? 'flex' : 'none';
+      } else {
+        card.classList.remove('active');
+        card.style.display = '';
+      }
+    });
+    // Update dots
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      testimonialCards.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'testimonial-dot' + (i === index ? ' active' : '');
+        dot.setAttribute('aria-label', 'Показать отзыв ' + (i+1));
+        dot.tabIndex = 0;
+        dot.addEventListener('click', function(e) {
+          e.stopPropagation();
+          currentMobileIndex = i;
+          updateMobileCarousel(currentMobileIndex);
+        });
+        dot.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            currentMobileIndex = i;
+            updateMobileCarousel(currentMobileIndex);
+          }
+        });
+        dotsContainer.appendChild(dot);
+      });
+      dotsContainer.style.display = isMobile() ? 'flex' : 'none';
+    }
+  }
+
+  // Swipe gesture support for mobile carousel
+  let swipeStartX = null;
+  let swipeEndX = null;
+  function handleTouchStart(e) {
+    if (!isMobile()) return;
+    if (e.touches.length === 1) {
+      swipeStartX = e.touches[0].clientX;
+      swipeEndX = null;
+    }
+  }
+  function handleTouchMove(e) {
+    if (!isMobile()) return;
+    if (e.touches.length === 1) {
+      swipeEndX = e.touches[0].clientX;
+    }
+  }
+  function handleTouchEnd(e) {
+    if (!isMobile()) return;
+    if (swipeStartX !== null && swipeEndX !== null) {
+      const dx = swipeEndX - swipeStartX;
+      if (Math.abs(dx) > 40) { // threshold for swipe
+        if (dx < 0) {
+          // swipe left, next
+          currentMobileIndex = (currentMobileIndex + 1) % testimonialCards.length;
+          updateMobileCarousel(currentMobileIndex);
+        } else {
+          // swipe right, prev
+          currentMobileIndex = (currentMobileIndex - 1 + testimonialCards.length) % testimonialCards.length;
+          updateMobileCarousel(currentMobileIndex);
+        }
+      }
+    }
+    swipeStartX = null;
+    swipeEndX = null;
+  }
+
+  // Attach swipe listeners to the testimonials board (mobile only)
+  if (board) {
+    board.addEventListener('touchstart', handleTouchStart, {passive: true});
+    board.addEventListener('touchmove', handleTouchMove, {passive: true});
+    board.addEventListener('touchend', handleTouchEnd);
+  }
+
+  function handleLeft() {
+    if (isMobile()) {
+      currentMobileIndex = (currentMobileIndex - 1 + testimonialCards.length) % testimonialCards.length;
+      updateMobileCarousel(currentMobileIndex);
+    } else {
       board.scrollBy({left: -400, behavior: 'smooth'});
-    });
-    btnRight.addEventListener('click', function() {
+    }
+  }
+  function handleRight() {
+    if (isMobile()) {
+      currentMobileIndex = (currentMobileIndex + 1) % testimonialCards.length;
+      updateMobileCarousel(currentMobileIndex);
+    } else {
       board.scrollBy({left: 400, behavior: 'smooth'});
-    });
+    }
+  }
 
-    // Drag-to-scroll by dragging any card (mouse)
+  if (btnLeft && btnRight) {
+    btnLeft.addEventListener('click', handleLeft);
+    btnRight.addEventListener('click', handleRight);
+  }
+
+  // Only enable drag-to-scroll on desktop
+  if (board) {
     let isDown = false, startX, scrollLeft;
     board.addEventListener('mousedown', (e) => {
+      if (isMobile()) return; // Disable on mobile
+
       isDown = true;
       board.classList.add('dragging');
-      board._dragStartTime = Date.now(); // Store drag start time
+      board._dragStartTime = Date.now();
       startX = e.pageX - board.offsetLeft;
       scrollLeft = board.scrollLeft;
-      // Prevent image drag
       e.preventDefault();
     });
     board.addEventListener('mouseleave', () => {
@@ -514,7 +696,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const walk = (x - startX) * 1.2;
       board.scrollBy({left: (scrollLeft - walk) - board.scrollLeft, behavior: 'instant'});
     });
-
     // Touch support: drag-to-scroll by touching any card
     let touchStartX = 0, touchScrollLeft = 0, touchActive = false;
     board.addEventListener('touchstart', (e) => {
@@ -539,11 +720,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Set different background for even-indexed testimonial cards
-  const testimonialCards = document.querySelectorAll('.testimonial-card');
   testimonialCards.forEach((card, i) => {
     if (i % 2 === 1) {
       card.style.background = 'linear-gradient(135deg, rgba(238,226,231,0.95) 80%, rgba(254,251,251,0.95) 100%)';
-      card.style.marginTop = '6em';
+      card.classList.add('shifted');
     }
     // Add click event for lightbox only to the image
     const img = card.querySelector('img');
@@ -553,18 +733,32 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prevent accidental click after drag: only allow if not just dragged
         const board = document.querySelector('.testimonials-board');
         const now = Date.now();
-
         const should_ignore_click = board && board._dragStartTime && (now - board._dragStartTime > 200);
-        board._dragStartTime = null; // Reset drag start time after click
+        board._dragStartTime = null;
         if (should_ignore_click) {
           e.stopPropagation();
-          return; // Ignore click if dragged recently
+          return;
         }
-        
         openTestimonialLightbox(i);
       });
     }
   });
+
+  // Responsive: update carousel on resize
+  function handleResize() {
+    if (isMobile()) {
+      updateMobileCarousel(currentMobileIndex);
+    } else {
+      testimonialCards.forEach(card => {
+        card.classList.remove('active');
+        card.style.display = '';
+      });
+      if (dotsContainer) dotsContainer.style.display = 'none';
+    }
+  }
+  window.addEventListener('resize', handleResize);
+  // Initial state
+  handleResize();
 });
 
 // Testimonials Lightbox logic
