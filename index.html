@@ -691,6 +691,41 @@ function openLightbox(index) {
   document.body.style.overflow = 'hidden'; // Prevent background scroll
   // Add keyboard event listener for navigation
   document.addEventListener('keydown', lightboxKeyHandler);
+  // Add touch event listeners for swipe navigation
+  const lightbox = document.getElementById('lightbox');
+  let touchStartX = null;
+  let touchEndX = null;
+  function handleTouchStart(e) {
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchEndX = null;
+    }
+  }
+  function handleTouchMove(e) {
+    if (e.touches.length === 1) {
+      touchEndX = e.touches[0].clientX;
+    }
+  }
+  function handleTouchEnd(e) {
+    if (touchStartX !== null && touchEndX !== null) {
+      const dx = touchEndX - touchStartX;
+      if (Math.abs(dx) > 50) { // threshold for swipe
+        if (dx < 0) {
+          navigate(1); // swipe left, next
+        } else {
+          navigate(-1); // swipe right, prev
+        }
+      }
+    }
+    touchStartX = null;
+    touchEndX = null;
+  }
+  // Attach listeners
+  lightbox.addEventListener('touchstart', handleTouchStart);
+  lightbox.addEventListener('touchmove', handleTouchMove);
+  lightbox.addEventListener('touchend', handleTouchEnd);
+  // Store for removal
+  lightbox._swipeHandlers = { handleTouchStart, handleTouchMove, handleTouchEnd };
 }
 
 function closeLightbox() {
@@ -698,6 +733,14 @@ function closeLightbox() {
   document.body.style.overflow = '';
   // Remove keyboard event listener when closing
   document.removeEventListener('keydown', lightboxKeyHandler);
+  // Remove touch event listeners for swipe navigation
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox._swipeHandlers) {
+    lightbox.removeEventListener('touchstart', lightbox._swipeHandlers.handleTouchStart);
+    lightbox.removeEventListener('touchmove', lightbox._swipeHandlers.handleTouchMove);
+    lightbox.removeEventListener('touchend', lightbox._swipeHandlers.handleTouchEnd);
+    lightbox._swipeHandlers = null;
+  }
 }
 
 function navigate(offset) {
