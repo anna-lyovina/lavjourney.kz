@@ -807,6 +807,11 @@ lav-logo {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .footer-center img{
+    height: 110px;
   }
   .footer-right {
     text-align: right;
@@ -834,16 +839,15 @@ lav-logo {
       align-items: stretch;
       text-align: center;
     }
-    .footer-left, .footer-right {
+    .footer-left, .footer-center, .footer-right {
+      margin-top: 1em;
       text-align: center !important;
       padding: 0 !important;
     }
-    .footer-center {
-      margin-top: 1em;
-      margin-bottom: 1em;
-      padding: 0 !important;
-    }
-    
+    .footer-center img{
+    height: 80px;
+  }
+
     /* .footer-right a {
       display: block;
       text-align: center;

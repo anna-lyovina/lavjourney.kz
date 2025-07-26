@@ -422,7 +422,7 @@
       <div>г. Алматы, Казахстан</div>
     </div>
     <div class="footer-col footer-center">
-      <img src="logo.png" alt="Психолог Анна Лёвина" style="height: 130px; object-fit: contain; display: block;">
+      <img src="logo.png" alt="Психолог Анна Лёвина" style="object-fit: contain; display: block;">
     </div>
     <div class="footer-col footer-right">
       <a href="#about">Обо мне</a><br>
@@ -442,11 +442,17 @@ function openMenu() {
   menuOverlay.classList.add('active');
   hamburgerBtn.classList.add('hide');
   document.body.style.overflow = 'hidden';
+  // Hide announcement text when menu opens
+  var announcement = document.querySelector('.announcement-text');
+  if (announcement) announcement.style.visibility = 'hidden';
 }
 function closeMenu() {
   menuOverlay.classList.remove('active');
   hamburgerBtn.classList.remove('hide');
   document.body.style.overflow = '';
+  // Restore announcement text visibility when menu closes
+  var announcement = document.querySelector('.announcement-text');
+  if (announcement) announcement.style.visibility = '';
 }
 hamburgerBtn.addEventListener('click', openMenu);
 menuCloseBtn.addEventListener('click', closeMenu);
