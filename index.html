@@ -442,17 +442,13 @@ function openMenu() {
   menuOverlay.classList.add('active');
   hamburgerBtn.classList.add('hide');
   document.body.style.overflow = 'hidden';
-  // Hide announcement text when menu opens
-  var announcement = document.querySelector('.announcement-text');
-  if (announcement) announcement.style.visibility = 'hidden';
+  window.announcement_text_marquee_paused = true; // Pause marquee
 }
 function closeMenu() {
   menuOverlay.classList.remove('active');
   hamburgerBtn.classList.remove('hide');
   document.body.style.overflow = '';
-  // Restore announcement text visibility when menu closes
-  var announcement = document.querySelector('.announcement-text');
-  if (announcement) announcement.style.visibility = '';
+  window.announcement_text_marquee_paused = false; // Resume marquee
 }
 hamburgerBtn.addEventListener('click', openMenu);
 menuCloseBtn.addEventListener('click', closeMenu);
@@ -947,7 +943,7 @@ function closeServiceModal() {
   const container = marquee.parentElement;
   let reqId;
   let speed = 100; // pixels per second
-  let paused = false;
+  window.announcement_text_marquee_paused = false;
   let startOffset = 0.5; // 0.0 = fully hidden, 1.0 = fully visible, 0.5 = half visible
 
   function getWidths() {
@@ -969,7 +965,7 @@ function closeServiceModal() {
     const textNode = marquee.querySelector('.announcement-text');
 
     function step(ts) {
-      if (!paused) {
+      if (window.announcement_text_marquee_paused !== true) {
         x -= speed / 60; // 60fps
 
         bounding_rect = textNode.getBoundingClientRect();
@@ -991,8 +987,8 @@ function closeServiceModal() {
     animateMarquee();
   }
 
-  marquee.addEventListener('mouseenter', function() { paused = true; });
-  marquee.addEventListener('mouseleave', function() { paused = false; });
+  marquee.addEventListener('mouseenter', function() { window.announcement_text_marquee_paused = true; });
+  marquee.addEventListener('mouseleave', function() { window.announcement_text_marquee_paused = false; });
   start();
 })();
 </script>
