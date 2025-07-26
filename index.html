@@ -162,8 +162,7 @@
 
 
 .testimonial-card:hover {
-  /* Pause animation and intensify shadow on hover */
-  animation-play-state: paused;
+  animation: levitateWaveScaled 7s infinite;
   box-shadow: 0 16px 40px rgba(43,156,153,0.18), 0 2px 12px rgba(0,0,0,0.10);
   z-index: 2;
 }
@@ -206,6 +205,27 @@
   }
 }
 
+@keyframes levitateWaveScaled {
+  0% {
+    transform: translateY(0px) scale(1.05);
+  }
+  15% {
+    transform: translateY(-10px) scale(1.05);
+  }
+  35% {
+    transform: translateY(0px) scale(1.05);
+  }
+  60% {
+    transform: translateY(10px) scale(1.05);
+  }
+  85% {
+    transform: translateY(0px) scale(1.05);
+  }
+  100% {
+    transform: translateY(0px) scale(1.05);
+  }
+}
+
 @media (max-width: 767px) {
   #testimonialLightboxImg {
     transform: scale(1.25);
@@ -227,6 +247,7 @@
 
 </head>
 <body>
+
   <header>
     <div class="container navbar">
       <div class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
