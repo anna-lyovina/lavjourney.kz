@@ -5,773 +5,201 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Анна Лёвина</title>
   <meta name="description" content="Психологическая помощь онлайн – Анна Лёвина, КПТ, кризисная терапия.">
-  <meta name="keywords" content="психолог, психотерапия, депрессия, тревога, Алматы, онлайн">
+  <meta name="keywords" content="психолог, депрессия, тревога, Алматы, онлайн">
   <meta property="og:title" content="Анна Лёвина">
   <meta property="og:description" content="Анна Лёвина — квалифицированная психологическая поддержка онлайн и в Алматы.">
   
   <link rel="icon" href="favicon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <style>
-    :root {
-      --primary-color: #1f2937;
-      --secondary-color: #fefdf9;
-      --accent-color: rgb(43, 156, 153);
-      --font-main: 'Montserrat', sans-serif;
-    }
+  <link rel="stylesheet" href="styles.css">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-  scroll-behavior: smooth;
+<style>
+.testimonials-section {
+  margin-top: 3rem;
 }
-
-    body {
-      font-family: var(--font-main);
-      background-color: var(--secondary-color);
-      color: var(--primary-color);
-      line-height: 1.6;
-      scroll-behavior: smooth;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: url('background.jpg') no-repeat center center;
-      background-size: cover;
-      opacity: 0.2;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-
-    header {
-      background: white;
-      position: sticky;
-      top: 0;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      z-index: 1000;
-
-      -webkit-backdrop-filter: blur(8px) saturate(120%);
-  border-bottom: 1.5px solid rgba(43,156,153,0.13);
-  border-radius: 0 0 18px 18px;
-  box-shadow: 0 2px 12px rgba(43,156,153,0.10);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--accent-color);
-    }
-
-    .menu {
-      display: none;
-      flex-direction: column;
-      gap: 1rem;
-      transition: all 0.3s ease;
-    }
-
-    .menu.active {
-      display: flex;
-    }
-
-    .menu a {
-      text-decoration: none;
-      color: var(--primary-color);
-      font-weight: 600;
-    }
-
-    .menu a:hover {
-  color: var(--accent-color);
-  border-radius: 8px;
-}
-
-    .toggle {
-      display: block;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    @media (min-width: 768px) {
-      .menu {
-        display: flex !important;
-        flex-direction: row;
-      }
-      .toggle {
-        display: none;
-      }
-    }
-
-    .hero {
-      background: linear-gradient(to right, rgba(212, 244, 244, 0.175), rgba(235, 251, 251, 0.175));
-      padding: 5rem 1rem;
-      display: flex;
-      flex-direction: column-reverse;
-      align-items: center;
-      animation: fadeIn 1s ease-in;
-    }
-
-    .hero .container {
-      display: flex;
-      flex-direction: column-reverse;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .hero-text-block {
-      text-align: center;
-      max-width: 600px;
-    }
-
-    .hero-text-block h1 {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  color: var(--accent-color);
-  margin-bottom: 0.5rem;
-}
-
-.hero-text-block .subtitle {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #555;
-  margin-bottom: 2rem;
-}
-
-.hero-paragraphs p {
-  margin-bottom: 1rem;
-  font-size: 1.05rem;
-}
-
-.hero-paragraphs blockquote {
-  font-style: italic;
-  background: rgba(43, 156, 153, 0.15);
-  padding: 1rem;
-  border-left: 4px solid var(--accent-color);
-  margin: 1rem 0;
-  border-radius: 8px;
-}
-
-    .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-
-    .cta-button {
-      background-color: var(--accent-color);
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: background 0.3s ease;
-      display: inline-block;
-      margin-top: 1rem;
-    }
-
-    .cta-button:hover {
-      background-color: rgb(38, 139, 136);
-    }
-
-    .hero img {
-      max-width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      /* Default styles for desktop */
-      object-fit: cover;
-      object-position: center top;
-      height: auto;
-      aspect-ratio: unset;
-    }
-
-    @media (max-width: 767px) {
-      .hero {
-        padding-top: 7rem;
-        padding-bottom: 1rem;
-      }
-
-      .hero img {
-        width: 33%;
-        max-width: 100px;
-        aspect-ratio: 1 / 1;
-        height: auto;
-        object-fit: cover;
-        object-position: center top;
-        display: block;
-        margin: 0 auto;
-        transform: scale(3);
-        transform-origin: center center;
-        border-radius: 32% 38% 36% 32%/38% 32% 38% 32%;
-        margin-bottom: 25%;
-        box-shadow:
-          0 8px 32px 0 rgba(43,156,153,0.18),
-          0 1.5px 8px 0 rgba(0,0,0,0.10),
-          0 0 32px 8px rgba(43,156,153,0.13),
-          0 0 0 8px rgba(255,255,255,0.10) inset;
-        border: 3px solid transparent;
-        position: relative;
-        z-index: 1;
-        background: linear-gradient(135deg, rgba(43,156,153,0.08) 0%, rgba(255,255,255,0.12) 100%);
-      }
-      .hero img::before {
-        content: '';
-        position: absolute;
-        inset: -7px;
-        border-radius: 36% 42% 40% 36%/42% 36% 42% 36%;
-        padding: 0;
-        z-index: 2;
-        background: linear-gradient(120deg, rgba(43,156,153,0.25) 0%, rgba(255,255,255,0.18) 100%);
-        border: 2.5px solid;
-        border-image: linear-gradient(120deg, #2b9c99 30%, #fff 70%) 1;
-        pointer-events: none;
-        animation: borderGlow 3.5s linear infinite;
-      }
-      .hero img::after {
-        content: '';
-        position: absolute;
-        left: 18%;
-        top: 12%;
-        width: 32%;
-        height: 18%;
-        background: linear-gradient(120deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.0) 100%);
-        border-radius: 50%;
-        filter: blur(2px);
-        opacity: 0.7;
-        pointer-events: none;
-        z-index: 3;
-        animation: sparkle 2.5s ease-in-out infinite alternate;
-      }
-      section.visible {
-        padding-top: 1rem;
-        padding-bottom: 0rem;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .hero .container {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-      .hero-text-block {
-        text-align: left;
-      }
-      .hero img {
-        max-width: 400px;
-      }
-    }
-
-    .section {
-      padding: 2rem 1rem;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.6s ease-out;
-    }
-
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    @media (min-width: 768px) {
-      .grid-2 {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .card {
-  background: linear-gradient(135deg, rgba(255,255,255,0.85) 80%, rgba(43,156,153,0.07) 100%);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 6px 24px rgba(43,156,153,0.10), 0 1.5px 8px rgba(0,0,0,0.07);
-  border: 1.5px solid rgba(43,156,153,0.13);
-  backdrop-filter: blur(2.5px);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-    .card:hover {
-      transform: translateY(-4px);
-    }
-
-    .card.service-card {
-      border-top: 4px solid var(--accent-color);
-      text-align: center;
-    }
-    .card.service-card i {
-      font-size: 2rem;
-      color: var(--accent-color);
-      margin-bottom: 0.5rem;
-    }
-
-    .about-image {
-      width: 100%;
-      border-radius: 12px;
-      margin-top: 1rem;
-    }
-
-    .about-panel {
-      background-color: rgba(43, 156, 153, 0.1);
-      border-left: 4px solid var(--accent-color);
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
-    }
-
-
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background-color: rgba(43, 156, 153, 0.05);
-      color: rgb(43, 156, 153);
-      font-size: 0.9rem;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      font-weight: 700;
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: "";
-      display: block;
-      width: 60px;
-      height: 4px;
-      margin: 0.5rem auto 0;
-      background: var(--accent-color);
-      border-radius: 2px;
-      opacity: 0.9;
-      animation: growBar 1s ease;
-    }
-
-    @keyframes growBar {
-      from {
-        width: 0;
-        opacity: 0;
-      }
-      to {
-        width: 60px;
-        opacity: 1;
-      }
-    }
-  
-.cert-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.cert-grid img {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.cert-grid img:hover {
-  transform: scale(1.03);
-}
-
-@media (min-width: 768px) {
-  .cert-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
-
-.lightbox img {
-  max-width: 90%;
-  max-height: 80vh;
-  border-radius: 12px;
-}
-
-.lightbox .nav {
+.testimonials-scroll-btns {
   position: absolute;
-  top: 50%;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-  user-select: none;
-  padding: 0 1rem;
-  transform: translateY(-50%);
-}
-
-.lightbox .prev {
-  left: 20px;
-}
-
-.lightbox .next {
-  right: 20px;
-}
-
-.fancy-service {
-  background: linear-gradient(135deg, rgba(255,255,255,0.85) 80%, rgba(43,156,153,0.07) 100%);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 6px 24px rgba(43,156,153,0.10), 0 1.5px 8px rgba(0,0,0,0.07);
-  border: 1.5px solid rgba(43,156,153,0.13);
-  backdrop-filter: blur(2.5px);
-  transition: transform 0.3s, box-shadow 0.3s;
-
-  position: relative;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  text-align: center;
-}
-
-.fancy-service:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
-}
-
-.fancy-service i {
-  font-size: 2.5rem;
-  color: var(--accent-color);
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.fancy-service:hover i {
-  transform: scale(1.15);
-}
-
-.fancy-service h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--primary-color);
-}
-
-.announcement-bar {
-  background: linear-gradient(90deg, #e0f7fa 0%, #b2ebf2 100%);
-  border-bottom: none;
-  padding: 1rem 1.5rem;
-  position: sticky;
-  top: 0;
-  z-index: 1100;
-  box-shadow: 0 2px 12px rgba(43,156,153,0.10);
-  border-radius: 0 0 18px 18px;
+  top: 0.5rem;
+  right: 1rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 0.5rem;
+  z-index: 2;
 }
-
-.announcement-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.2rem;
-  flex-wrap: wrap;
-  text-align: center;
-  font-size: 1.12rem;
-  font-weight: 700;
-  color: #19747e;
-  letter-spacing: 0.02em;
-}
-
-.announcement-content .fa-bullhorn {
-  color: #2b9c99;
-  font-size: 1.3em;
-  margin-right: 0.5em;
-}
-
-
-.announcement-text {
-  font-size: 1.02rem;
-  font-weight: 700;
-  color: #19747e;
-}
-
-.announcement-text.mobile-only .contact-link {
-  font-size: 0.75em;
-}
-
-.announcement-btn {
-  background-color: var(--accent-color);
-  color: white;
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.3s ease;
-}
-
-.announcement-btn:hover {
-  background: linear-gradient(90deg, #19747e 60%, #43e97b 100%);
-  box-shadow: 0 4px 16px rgba(43,156,153,0.18);
-}
-
-
-.service-modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.35); /* slightly lighter for better shadow effect */
-  justify-content: center;
-  align-items: center;
-  z-index: 3000;
-  backdrop-filter: blur(6px) brightness(0.95); /* add blur and dimming */
-  /* box-shadow: none; */ /* remove previous shadow */
-}
-
-.service-modal {
-  background: white;
-  padding: 2rem;
-  max-width: 600px;
-  width: 90%;
-  border-radius: 12px;
-  box-shadow: 0 16px 48px 0 rgba(0,0,0,0.32), 0 2px 16px rgba(43,156,153,0.10);
-  position: relative;
-  animation: fadeInScale 0.3s ease;
-  text-align: left;
-  max-height: 80vh;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-}
-
-.service-modal::-webkit-scrollbar {
-  width: 8px;
-  background: #f0f0f0;
-  border-radius: 8px;
-}
-
-.service-modal::-webkit-scrollbar-thumb {
+.testimonial-scroll-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
   background: var(--accent-color);
-  border-radius: 8px;
-}
-
-.service-modal h3 {
-  margin-top: 0;
-  color: var(--accent-color);
-}
-
-.service-modal p {
-  margin: 1rem 0;
-  line-height: 1.5;
-}
-
-.service-modal .close-btn {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  font-size: 1.5rem;
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(43,156,153,0.10);
+  font-size: 1.3rem;
   cursor: pointer;
-  color: #999;
+  transition: background 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.testimonial-scroll-btn:hover {
+  background: rgb(38, 139, 136);
+  transform: scale(1.08);
+}
+.testimonials-board {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.5rem;
+  padding: 2rem 0 1rem 0;
+  scroll-behavior: smooth;
+  cursor: grab;
+  /* Hide scrollbar for Webkit browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.testimonials-board::-webkit-scrollbar {
+  display: none;
 }
 
-lav-logo {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 900;
-  font-size: 1.6rem;
-  letter-spacing: -0.5px;
-  color: var(--accent-color);
+.testimonial-card {
+  width: 300px;
+  height: 550px;
+  flex: 0 0 300px;
+
+  background: linear-gradient(135deg, rgba(254,251,251,0.95) 80%, rgba(43,156,153,0.07) 100%);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(43,156,153,0.10), 0 1.5px 8px rgba(0,0,0,0.07);
+  border: 1.5px solid rgba(43,156,153,0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.2rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  /* Animation for levitating and waving */
+  animation: levitateWave 7s  infinite;
+  animation-delay: var(--levitate-delay, 0s);
+  will-change: transform;
+}
+.testimonial-card:hover {
+  /* Pause animation and intensify shadow on hover */
+  animation-play-state: paused;
+  box-shadow: 0 16px 40px rgba(43,156,153,0.18), 0 2px 12px rgba(0,0,0,0.10);
+  z-index: 2;
+}
+.testimonial-client {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 20px;
+  margin-bottom: 0.7rem;
+  align-self: flex-start;
+}
+.testimonial-card img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  object-fit: contain;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
+@keyframes levitateWave {
+  0% {
+    transform: translateY(0px);
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+  15% {
+    transform: translateY(-10px);
+  }
+  35% {
+    transform: translateY(0px);
+  }
+  60% {
+    transform: translateY(10px);
+  }
+  85% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }
-
-.service-details-link, .contact-link {
-      color: var(--accent-color);
-      font-weight: 600;
-      text-decoration: underline;
-      margin-top: 0.5rem;
-      display: inline-block;
-      transition: color 0.2s;
-    }
-    .service-details-link:hover, .contact-link:hover {
-      color: rgb(38, 139, 136);
-    }
-
-    @keyframes heroFloat {
-        0% { transform: scale(3) rotate(-6deg) translateY(0); }
-        100% { transform: scale(3) rotate(-6deg) translateY(-22px); }
-      }
-      @keyframes heroTilt {
-        0% { filter: brightness(1) drop-shadow(0 0 0 #fff); }
-        50% { filter: brightness(1.08) drop-shadow(0 0 8px #2b9c99cc); }
-        100% { filter: brightness(1) drop-shadow(0 0 0 #fff); }
-      }
-      @keyframes borderGlow {
-        0% { filter: drop-shadow(0 0 0px #2b9c99); }
-        50% { filter: drop-shadow(0 0 8px #2b9c99); }
-        100% { filter: drop-shadow(0 0 0px #2b9c99); }
-      }
-      @keyframes sparkle {
-        0% { opacity: 0.7; left: 18%; top: 12%; }
-        100% { opacity: 1; left: 28%; top: 18%; }
-      }
+@media (max-width: 600px) {
+  .testimonials-scroll-btns {
+    position: static;
+    margin: 1.2rem auto 0 auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
+  }
+}
 
 @media (max-width: 767px) {
-  .desktop-only { display: none !important; }
-  .mobile-only { display: inline !important; }
-  #how_i_work .about-panel {
-    margin-bottom: 1.5rem;
-  }
-  #how_i_work .about-panel:last-child {
-    margin-bottom: 0rem;
+  #testimonialLightboxImg {
+    transform: scale(1.2);
   }
 }
 @media (min-width: 768px) {
-  .desktop-only { display: inline !important; }
-  .mobile-only { display: none !important; }
-}
-
-.service-price {
-  font-size: 0.9em;
-}
-@media (min-width: 768px) {
-  .service-price {
-    font-size: 1em;
+  #testimonialLightboxImg {
+    transform: scale(1.4);
   }
 }
-
-.service-details-size {
-  font-size: 0.9em;
-}
-@media (min-width: 768px) {
-  .service-details-size {
-    font-size: 1em;
-  }
-}
-
-.subtitle {
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: var(--accent-color);
-  letter-spacing: 0.5px;
-  margin-top: -0.3rem;
-  margin-bottom: 0.2rem;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.hero-slogan {
-      font-size: clamp(1rem, 3vw, 2.1rem);
-      font-style: italic;
-      color: var(--accent-color);
-      text-align: center;
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 2rem;
-      margin-top: 0.5rem;
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 2px 12px rgba(43,156,153,0.10);
-    }
-    .hero-slogan::after {
-      content: "";
-      display: block;
-      width: 80px;
-      height: 4px;
-      margin: 0.7rem auto 0;
-      background: linear-gradient(90deg, #2b9c99 0%, #b2ebf2 100%);
-      border-radius: 2px;
-      opacity: 0.7;
-    }
-    @media (min-width: 768px) {
-      .hero-slogan {
-        text-align: left;
-        margin-left: 0;
-      }
-      .hero-slogan::after {
-        margin-left: 0;
-      }
-    }
-
-    /* Add profession accent style */
-.profession {
-  color: var(--accent-color);
-  font-weight: 500;
-  letter-spacing: 0.03em;
-}
-
-  </style>
 
 </style>
+
 </head>
 <body>
   <header>
     <div class="container navbar">
       <div class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
-        <img src="logo.png" alt="Психолог Анна Лёвина — логотип" style="height: 55px; object-fit: contain;">
-       <div class="logo desktop-only"><span class="profession">Психолог</span> Анна Лёвина</div>
+        <img src="favicon.png" alt="Психолог Анна Лёвина" style="height: 90px; object-fit: contain;">
+        <div class="header-name-block logo desktop-only">
+          <div class="person-name">Анна Лёвина</div>
+          <div class="profession">психолог</div>
+        </div>
       </div>
-      <div class="logo mobile-only"><span class="profession">Психолог</span> Анна Лёвина</div>
+      <div class="header-name-block logo mobile-only">
+        <div class="person-name">Анна Лёвина</div>
+        <div class="profession">психолог</div>
+      </div>
       <div class="subtitle"></div>
 
 
       <nav class="menu" id="mainMenu">
         <a href="#about">Обо мне</a>
-        <a href="#how_i_work">Мой подход</a>
         <a href="#services">Услуги и цены</a>
-        <a href="#" onclick="openConsentModal(); return false;">Информированное согласие</a>
+        <a href="#how_i_work">Мой подход</a>
+        <a href="#" onclick="openConsentModal(); return false;">Соглашение</a>
         <a href="#contact">Контакты</a>
       </nav>
+      <button class="hamburger-btn" id="hamburgerOpen" aria-label="Открыть меню">
+        <span class="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
     </div>
 
     <div class="announcement-bar">
-      <div class="container announcement-content">
-        <i class="fa fa-bullhorn desktop-only"></i>
-        <span class="announcement-text mobile-only"><a href="#contact" class="contact-link">Сбор группы на расстановки — 25 июля</a></span>
-        <span class="announcement-text desktop-only">Сбор группы на расстановки — 25 июля</span>
-        <a href="#contact" class="announcement-btn desktop-only">Записаться!</a>
+    <!-- Hamburger Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+      <div class="menu-panel">
+        <button class="menu-close-btn" id="hamburgerClose" aria-label="Закрыть меню">×</button>
+        <nav>
+          <ul>
+            <li><a href="#about" class="menu-link">Обо мне</a></li>
+            <li><a href="#services" class="menu-link">Услуги и цены</a></li>
+            <li><a href="#how_i_work" class="menu-link">Мой подход</a></li>
+            <li><a href="#" class="menu-link" onclick="openConsentModal(); return false;">Соглашение</a></li>
+            <li><a href="#contact" class="menu-link">Контакты</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+      <div class="container announcement-content" style="overflow: hidden; position: relative;">
+        <div class="announcement-marquee">
+          <span class="announcement-text">Приглашаю Вас на Расстановки в г. Алматы, 12 сентября в 20:00</span>
+        </div>
       </div>
     </div>
     
@@ -780,13 +208,13 @@ lav-logo {
   <section class="hero">
     <div class="container">
       <div class="hero-text-block">
-        <div class="hero-slogan">Путешествие к самому себе</div>
+        <div class="hero-slogan"> Добро пожаловать в путешествие. <span class="no-break">К себе.</span> Без масок.</div>
         <!-- <h1>Анна Лёвина</h1> -->
         <!-- <p class="subtitle">Если вы здесь — возможно, настал момент что-то изменить</p> -->
         <div class="hero-paragraphs">
-          <p>Я верю в то, что случайности не случайны. Если Вы оказались на этой страничке, возможно, что-то внутри больше не даёт жить по-прежнему. В какой-то момент приходит осознание: так больше нельзя — жить на автомате, вывозить, делать вид, держаться — впишите своё. </p>
-          <blockquote>«Я пока не знаю с чем именно Вы пришли. У меня нет универсальных ответов на Ваши вопросы. Я не всегда сразу понимаю, что делать в Вашей ситуации, потому что каждый человек — это отдельный мир со своим опытом, эмоциями и чувствами, мыслями, конфликтами, желаниями и мечтами.»</blockquote>
-          <p>Что у меня точно есть — это огромный интерес к каждому человеку, определенные знания и собственный опыт. Я верю, что в точке настоящего человеческого контакта рождается нечто большее, чем просто диалог — это и есть психотерапевтическая алхимия. Если Вам важно разобраться в себе, почувствовать, дойти до сути — здесь есть место для этого пути.</p>
+          <p>Я верю в то, что случайности не случайны. Если Вы оказались на этой страничке, возможно, что-то внутри больше не даёт жить по-прежнему. В какой-то момент приходит осознание: так больше нельзя — жить на автомате, вывозить, делать вид, держаться — впишите своё.  </p>
+          <blockquote>Я пока не знаю с чем именно Вы пришли. У меня нет универсальных ответов на Ваши вопросы. Я не всегда сразу понимаю, что делать в Вашей ситуации, потому что каждый человек — это отдельный мир со своим опытом, эмоциями, чувствами, мыслями, конфликтами, желаниями и мечтами.</blockquote>
+          <p>Что у меня точно есть — это интерес, определенные знания и собственный опыт. Я верю, что в точке настоящего человеческого контакта рождается нечто большее, чем просто диалог — это и есть психотерапевтическая алхимия. Если Вам важно разобраться в себе, почувствовать, дойти до сути — Вы на месте.</p>
         </div>
         <a href="#contact" class="cta-button">Записаться на встречу</a>
       </div>
@@ -798,17 +226,32 @@ lav-logo {
   </section>
 
   <section class="section" id="about">
-    <div class="container">
-      <div style="text-align: center; font-size: 2rem; color: var(--accent-color);">
+        <div class="container">
+    <div style="text-align: center; font-size: 2rem; color: var(--accent-color);">
         <i class="fas fa-user-circle"></i>
       </div>
-      <h2 class="section-title">Обо мне</h2>
-      
-        <div class="about-panel">
-          <p>Я — Анна. Будучи подростком, хотела стать судебным психологом, насмотревшись сериала Галифакс. Жизнь сложилась иначе. По первому образованию я — экономист-международник, много лет посвятила бизнесу и уже во взрослой жизни получила MBA в МГУ. Учиться в МГУ было голубой мечтой юности. Мой путь в психологию начался с личной терапии более 10 лет назад — за это время случилось много интересного. Экзистенциальный кризис середины жизни накрыл как следует и без предупреждения. Всё это привело к тому, что в какой-то момент я решила изменить привычную жизнь — прошла переподготовку по основам психологической науки и практики, начала работать с людьми, ушла из бизнеса и окончила магистратуру по клинической психологии. Теперь я психолог — не тот, из сериала, а тот, кем смогла стать. Добро пожаловать на мою страницу. Будем знакомы.</p>
+    <h2 class="section-title">Обо мне</h2>
+    <div class="container about-grid">
+      <div class="about-image-block">
+        <div class="about-lotus-effect">
+          <img src="lotus.jpg" alt="Лотос — символ психологии" class="about-lotus-img">
         </div>
-
+      </div>
+      <div class="about-text-block">
+        <div class="about-panel pink">
+          <p>Будучи подростком, я хотела стать судебным психологом, насмотревшись сериала Галифакс, но жизнь сложилась иначе. По первому образованию я — экономист-международник, много лет посвятила бизнесу и уже во взрослой жизни получила MBA в МГУ. Учиться в МГУ было голубой мечтой юности. Мой путь в психологию начался с личной терапии более 10 лет назад — за это время случилось много интересного. Экзистенциальный кризис середины жизни накрыл как следует и без предупреждения. Всё это привело к тому, что в какой-то момент я решила изменить привычную жизнь — прошла переподготовку по основам психологической науки и практики, начала работать с людьми, ушла из бизнеса и окончила магистратуру по клинической психологии. Теперь я психолог — не тот, из сериала, а тот, кем смогла стать — будем знакомы.</p>
+        </div>
+        </div>
     </div>
+
+<div class="cert-gallery-strip" style="padding-right: 1.5em; padding-left: 3em;">
+        <img src="diploma_thumb1.jpg" onclick="openLightbox(0)" alt="Диплом 1">
+        <img src="diploma_thumb2.jpg" onclick="openLightbox(1)" alt="Диплом 2">
+        <img src="diploma_thumb3.jpg" onclick="openLightbox(2)" alt="Диплом 3">
+        <img src="diploma_thumb4.jpg" onclick="openLightbox(3)" alt="Диплом 4">
+      </div>
+</div>
+
   </section>
 
   <section class="section" id="how_i_work">
@@ -820,21 +263,21 @@ lav-logo {
       
       <div style="margin-bottom:2rem">
         <div class="about-panel">
-          <p>В своей работе я опираюсь на диалог, живое человеческое присутствие и исследование. Для меня важно не только «что» происходит, но и «как» — в теле, в чувствах, в мыслях. Я использую элементы из разных направлений: НЛП, экзистенциальный и психодинамический подходы, символдрама. В моём понимании главное — не метод, а контакт. Всё, что происходит в процессе, рождается из доверия, внимания и совместного поиска. Моя задача — не помогать, не спасать, а быть рядом, чтобы вместе увидеть то, что одному бывает трудно разглядеть. Когда то, что спрятано внутри, становится ясным, прожитым и осознаваемым, оно перестаёт незримо управлять жизнью — в этот момент становится комфортнее внутри, свободнее снаружи и появляется возможность выбирать и действовать иначе.</p>
+          <p>В своей работе я опираюсь на диалог, живое человеческое присутствие и исследование. Для меня важно не только «что» происходит, но и «как» — в теле, в чувствах, в мыслях. Я использую элементы из разных направлений: НЛП, экзистенциальный и психодинамический подходы, символдрама. В моём понимании главное — не метод, а контакт. Всё, что происходит в процессе, рождается из доверия, внимания и совместного поиска. Моя задача — не помогать и спасать, а быть рядом, чтобы вместе увидеть то, что одному бывает трудно разглядеть. Когда то, что спрятано внутри, становится ясным, прожитым и осознаваемым, оно перестаёт незримо управлять жизнью — в этот момент становится комфортнее внутри, свободнее снаружи и появляется возможность выбирать и действовать иначе.</p>
         </div>
       </div>
         
       <div class="grid grid-2">
         <div class="about-panel">
           <h3>Границы моего профессионального поля</h3>
-          <p>Я не работаю с детьми, подростками, семьями. <br>
-            Также не сопровождаю случаи, связанные с зависимостью от психоактивных веществ, расстройствами пищевого поведения, психотическими состояниями, тяжёлыми формами пограничного расстройства, выраженными суицидальными рисками и нарушениями нейроразвития.
+          <p style="font-size: 18px;">Я не работаю с детьми, подростками, семьями. <br>
+            Также не сопровождаю случаи, связанные с зависимостью от психоактивных веществ, расстройствами пищевого поведения, психотическими состояниями, тяжёлыми формами пограничного расстройства, выраженными суицидальными рисками, нарушениями нейроразвития.
             </p>
         </div>
 
         <div class="about-panel">
           <h3>С чем люблю работать</h3>
-          <p>Мне особенно близки темы поиска смысла, самоопределения, внутренней опоры; экзистенциальных кризисов, духовных переживаний, внутренних трансформаций — когда привычные опоры рушатся, а новые ещё не простроены. При этом совершенно не обязательно приходить именно с этим. Зачастую человек приходит с тревогой, усталостью, тупиком в отношениях, внешним конфликтом, ощущением, что «что-то не так», а в итоге так или иначе оказывается на пути вглубь себя — того самого, настоящего, живого и иногда почти забытого. Путешествие к себе — одно из самых интересных, на мой взгляд, приключений в жизни.</p>
+          <p style="font-size: 18px;">Мне особенно близки темы поиска самоопределения, смысла, внутренней опоры; экзистенциальных кризисов, духовных переживаний, внутренних трансформаций — когда привычные опоры рушатся, а новые ещё не простроены. При этом совершенно не обязательно приходить именно с этим. Зачастую человек приходит с тревогой, усталостью, тупиком в отношениях, внешним конфликтом, ощущением, что «что-то не так», а в итоге так или иначе оказывается на пути вглубь себя — того самого, настоящего, живого, иногда почти забытого. Вот здесь и начинается самое интересное.</p>
         </div>
       </div>
     </div>
@@ -851,46 +294,84 @@ lav-logo {
         <div class="card service-card fancy-service" onclick="openServiceModal(0)">
           <i class="fas fa-user-md"></i>
           <h3>Сессия</h3>
-          <p>Терапевтическая работа с использованием психологических техник.</p>
+          <p>Терапевтическая работа с использованием психологических техник</p>
         </div>
 
         <div class="card service-card fancy-service" onclick="openServiceModal(1)">
           <i class="fas fa-brain"></i>
           <h3>Разбор запроса по пирамиде логических уровней</h3>
-          <p>Когнитивная техника для выявления ценностей, установок и убеждений — и их влияния на Вашу жизнь.</p>
+          <p>Когнитивная техника, помогающая выявить ценности, установки и убеждения — и их влияние на Вашу жизнь</p>
         </div>
 
         <div class="card service-card fancy-service" onclick="openServiceModal(2)">
           <i class="fas fa-dice-d20"></i>
           <h3>Трансформационная игра Лила</h3>
-          <p>Психологическая настольная игра. Помогает понять причины, внутренние процессы и найти новые смыслы.</p>
+          <p>Психологическая настольная игра, которая помогает осознать глубинные причины, прояснить внутренние процессы и найти новые смыслы</p>
         </div>
 
 
       <div class="card service-card fancy-service" onclick="openServiceModal(3)">
         <i class="fas fa-chess"></i>
         <h3>Телесные шахматы</h3>
-        <p>Психологическая практика, в которой человек при помощи других участников разыгрывает свою жизненную ситуацию. Становятся видимыми скрытые роли, внутренние конфликты и стратегии поведения. Практика помогает осознать, что на самом деле происходит внутри, и найти новый способ действовать.</p>
+        <p>Психологическая практика, в которой человек при помощи других участников разыгрывает свою жизненную ситуацию</p>
       </div>
 
     </div>
     </div>
   </section>
-  
+  <!-- Testimonials Section -->
+  <section class="section testimonials-section" id="testimonials">
+    <div class="container" style="position: relative;">
+      <div style="text-align: center; font-size: 2rem; color: var(--accent-color);">
+        <i class="fas fa-comments"></i>
+      </div>
+      <h2 class="section-title">Отзывы</h2>
+      <div class="testimonials-scroll-btns">
+        <button class="testimonial-scroll-btn left" aria-label="Листать влево"><i class="fas fa-chevron-left"></i></button>
+        <button class="testimonial-scroll-btn right" aria-label="Листать вправо"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="testimonials-board">
+        <div class="testimonial-card" style="--levitate-delay: 0s;">
+          <div class="testimonial-client">Людмила</div>
+          <img src="testimonial1.jpeg" alt="Отзыв Людмилы">
+        </div>
+        <div class="testimonial-card" style="--levitate-delay: 0.3s;">
+          <div class="testimonial-client">Екатерина</div>
+          <img src="testimonial2.jpeg" alt="Отзыв Екатерины">
+        </div>
+        <div class="testimonial-card" style="--levitate-delay: 0.6s;">
+          <div class="testimonial-client">Надежда</div>
+          <img src="testimonial3.jpeg" alt="Отзыв Надежды">
+        </div>
+        <div class="testimonial-card" style="--levitate-delay: 0.9s;">
+          <div class="testimonial-client">Анастасия</div>
+          <img src="testimonial4.jpeg" alt="Отзыв Анастасии">
+        </div>
+        <div class="testimonial-card" style="--levitate-delay: 1.2s;">
+          <div class="testimonial-client">Анатолий</div>
+          <img src="testimonial5.jpeg" alt="Отзыв Анатолия">
+        </div>
+        <div class="testimonial-card" style="--levitate-delay: 1.5s;">
+          <div class="testimonial-client">Анна</div>
+          <img src="testimonial6.jpeg" alt="Отзыв Анны">
+        </div>
 
-  
-  
-  <section class="section" id="certificates">
-    <div class="container">
-      <!-- <h2 class="section-title">Сертификаты</h2> -->
-      <div class="cert-grid">
-        <img src="diploma_thumb1.jpg" onclick="openLightbox(0)" alt="Диплом психолога Анна Лёвина №1">
-        <img src="diploma_thumb2.jpg" onclick="openLightbox(1)" alt="Диплом психолога Анна Лёвина №2">
-        <img src="diploma_thumb3.jpg" onclick="openLightbox(2)" alt="Диплом психолога Анна Лёвина №3">
-        <img src="diploma_thumb4.jpg" onclick="openLightbox(3)" alt="Диплом психолога Анна Лёвина №4">
       </div>
     </div>
   </section>
+
+  <!-- Testimonials Lightbox -->
+  <div id="testimonialLightbox" class="lightbox" style="display:none; z-index: 10000;" onclick="closeTestimonialLightbox()">
+    <div class="testimonial-lightbox-content" onclick="event.stopPropagation()" style="max-width: 95vw; max-height: 95vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <img id="testimonialLightboxImg" src="" alt="Фото отзыва" style="max-width: 90vw; max-height: 60vh; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.13); transition: transform 0.3s;">
+      <div id="testimonialLightboxClient" style="margin-top: 1.2rem; font-size: 1.2rem; color: var(--accent-color); font-weight: 700;"></div>
+      <div class="nav prev" onclick="event.stopPropagation(); navigateTestimonial(-1);" style="position: absolute; left: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;">❮</div>
+      <div class="nav next" onclick="event.stopPropagation(); navigateTestimonial(1);" style="position: absolute; right: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;">❯</div>
+    </div>
+  </div>
+  
+
+  
 
 
   <section class="section" id="contact">
@@ -899,21 +380,21 @@ lav-logo {
         <i class="fas fa-envelope-open-text"></i>
       </div>
       <h2 class="section-title">Контакты</h2>
-      <p style="margin-top: 2rem; text-align: center;">
-        Напишите мне, если у Вас есть вопросы или Вы хотите назначить первую встречу.
+      <p style="margin-top: 2rem; text-align: center; font-size: 20px; color: rgb(68, 68, 68);">
+        Готовы начать или есть вопросы — напишите. Перед этим рекомендую ознакомиться с соглашением.
       </p>
 
       <div class="grid grid-2" style="margin-top: 2rem;">
-        <div class="card" style="text-align: center;">
-          <i class="fas fa-file-contract" style="font-size: 2rem; color: #0088cc;"></i>
-          <p><strong>Информированное согласие </strong></p>
-          <p><a href="#" onclick="openConsentModal(); return false;" class="contact-link">Ознакомиться</a></p>
+        <div class="card" style="text-align: center;" onclick="openConsentModal(); return false;">
+          <i class="fas fa-file-contract" style="font-size: 2rem; color: var(--accent-color);"></i>
+          <p><a href="#" class="contact-link">Соглашение</a></p>
         </div>
 
         <div class="card" style="text-align: center;">
-          <i class="fab fa-whatsapp" style="font-size: 2rem; color: #25D366;"></i>
-          <p><strong>WhatsApp:</strong></p>
-          <p><a href="https://wa.me/77772451227?text=Добрый день! Связываюсь с Вами через Ваш сайт." target="_blank" class="contact-link">Написать</a></p>
+          <a href="https://wa.me/77772451227?text=Добрый день! Связываюсь с Вами через Ваш сайт." target="_blank" style="display: block; text-decoration: none; color: inherit;cursor: default;">
+            <i class="fab fa-whatsapp" style="font-size: 2rem; color: var(--accent-color);"></i>
+            <p><span class="contact-link">WhatsApp</span></p>
+          </a>
         </div>
 
         
@@ -931,18 +412,247 @@ lav-logo {
     <div class="nav next" onclick="navigate(1)">❯</div>
   </div>
 
+
 <footer>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-      <img src="logo.png" alt="Психолог Анна Лёвина — логотип" style="height: 55px; object-fit: contain;">
+  <div class="footer-columns">
+    <div class="footer-col footer-left">
+      <div>Анна Лёвина</div>
+      <div>клинический психолог</div>
+      <div>онлайн и офлайн</div>
+      <div>г. Алматы, Казахстан</div>
     </div>
-  </footer>
+    <div class="footer-col footer-center">
+      <img src="logo.png" alt="Психолог Анна Лёвина" style="height: 130px; object-fit: contain; display: block;">
+    </div>
+    <div class="footer-col footer-right">
+      <a href="#about">Обо мне</a><br>
+      <a href="#how_i_work">Мой подход</a><br>
+      <a href="#services">Услуги и цены</a><br>
+      <a href="#testimonials">Отзывы</a>
+    </div>
+  </div>
+<script>
+// Hamburger menu logic
+const hamburgerBtn = document.getElementById('hamburgerOpen');
+const menuOverlay = document.getElementById('menuOverlay');
+const menuCloseBtn = document.getElementById('hamburgerClose');
+const menuLinks = document.querySelectorAll('.menu-link');
+
+function openMenu() {
+  menuOverlay.classList.add('active');
+  hamburgerBtn.classList.add('hide');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  menuOverlay.classList.remove('active');
+  hamburgerBtn.classList.remove('hide');
+  document.body.style.overflow = '';
+}
+hamburgerBtn.addEventListener('click', openMenu);
+menuCloseBtn.addEventListener('click', closeMenu);
+menuOverlay.addEventListener('click', function(e) {
+  if (e.target === menuOverlay) closeMenu();
+});
+menuLinks.forEach(link => {
+  link.addEventListener('click', closeMenu);
+});
+// Accessibility: close on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && menuOverlay.classList.contains('active')) closeMenu();
+});
+</script>
+</footer>
+
+
+
+<script>
+// Testimonials scroll buttons logic
+document.addEventListener('DOMContentLoaded', function() {
+  const board = document.querySelector('.testimonials-board');
+  const btnLeft = document.querySelector('.testimonial-scroll-btn.left');
+  const btnRight = document.querySelector('.testimonial-scroll-btn.right');
+
+  if (board && btnLeft && btnRight) {
+    btnLeft.addEventListener('click', function() {
+      board.scrollBy({left: -400, behavior: 'smooth'});
+    });
+    btnRight.addEventListener('click', function() {
+      board.scrollBy({left: 400, behavior: 'smooth'});
+    });
+
+    // Drag-to-scroll by dragging any card (mouse)
+    let isDown = false, startX, scrollLeft;
+    board.addEventListener('mousedown', (e) => {
+      isDown = true;
+      board.classList.add('dragging');
+      board._dragStartTime = Date.now(); // Store drag start time
+      startX = e.pageX - board.offsetLeft;
+      scrollLeft = board.scrollLeft;
+      // Prevent image drag
+      e.preventDefault();
+    });
+    board.addEventListener('mouseleave', () => {
+      isDown = false;
+      board.classList.remove('dragging');
+    });
+    board.addEventListener('mouseup', (e) => {
+      isDown = false;
+      board.classList.remove('dragging');
+    });
+    board.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - board.offsetLeft;
+      const walk = (x - startX) * 1.2;
+      board.scrollBy({left: (scrollLeft - walk) - board.scrollLeft, behavior: 'instant'});
+    });
+
+    // Touch support: drag-to-scroll by touching any card
+    let touchStartX = 0, touchScrollLeft = 0, touchActive = false;
+    board.addEventListener('touchstart', (e) => {
+      if (!e.target.closest('.testimonial-card')) return;
+      touchActive = true;
+      touchStartX = e.touches[0].pageX;
+      touchScrollLeft = board.scrollLeft;
+    });
+    board.addEventListener('touchend', () => {
+      touchActive = false;
+    });
+    board.addEventListener('touchmove', (e) => {
+      if (!touchActive) return;
+      const x = e.touches[0].pageX;
+      const walk = (x - touchStartX) * 1.2;
+      board.scrollBy({left: (touchScrollLeft - walk) - board.scrollLeft, behavior: 'instant'});
+    });
+    // Prevent image drag ghost
+    board.querySelectorAll('img').forEach(img => {
+      img.setAttribute('draggable', 'false');
+    });
+  }
+
+  // Set different background for even-indexed testimonial cards
+  const testimonialCards = document.querySelectorAll('.testimonial-card');
+  testimonialCards.forEach((card, i) => {
+    if (i % 2 === 1) {
+      card.style.background = 'linear-gradient(135deg, rgba(238,226,231,0.95) 80%, rgba(254,251,251,0.95) 100%)';
+      card.style.marginTop = '6em';
+    }
+    // Add click event for lightbox only to the image
+    const img = card.querySelector('img');
+    if (img) {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', function(e) {
+        // Prevent accidental click after drag: only allow if not just dragged
+        const board = document.querySelector('.testimonials-board');
+        const now = Date.now();
+
+        const should_ignore_click = board && board._dragStartTime && (now - board._dragStartTime > 200);
+        board._dragStartTime = null; // Reset drag start time after click
+        if (should_ignore_click) {
+          e.stopPropagation();
+          return; // Ignore click if dragged recently
+        }
+        
+        openTestimonialLightbox(i);
+      });
+    }
+  });
+});
+
+// Testimonials Lightbox logic
+const testimonialData = [
+  { img: 'testimonial1.jpeg', client: 'Людмила' },
+  { img: 'testimonial2.jpeg', client: 'Екатерина' },
+  { img: 'testimonial3.jpeg', client: 'Надежда' },
+  { img: 'testimonial4.jpeg', client: 'Анастасия' },
+  { img: 'testimonial5.jpeg', client: 'Анатолий' },
+  { img: 'testimonial6.jpeg', client: 'Анна' }
+];
+let currentTestimonialIndex = 0;
+
+function openTestimonialLightbox(index) {
+  currentTestimonialIndex = index;
+  const data = testimonialData[index];
+  document.getElementById('testimonialLightboxImg').src = data.img;
+  // document.getElementById('testimonialLightboxClient').textContent = data.client;
+  document.getElementById('testimonialLightbox').style.display = 'flex';
+  document.body.style.overflow = 'hidden'; // Prevent background scroll
+  document.addEventListener('keydown', testimonialLightboxKeyHandler);
+}
+
+function closeTestimonialLightbox() {
+  document.getElementById('testimonialLightbox').style.display = 'none';
+  document.body.style.overflow = '';
+  document.removeEventListener('keydown', testimonialLightboxKeyHandler);
+}
+
+function navigateTestimonial(offset) {
+  event.stopPropagation();
+  currentTestimonialIndex = (currentTestimonialIndex + offset + testimonialData.length) % testimonialData.length;
+  const data = testimonialData[currentTestimonialIndex];
+  document.getElementById('testimonialLightboxImg').src = data.img;
+  // document.getElementById('testimonialLightboxClient').textContent = data.client;
+}
+
+function testimonialLightboxKeyHandler(e) {
+  if (document.getElementById('testimonialLightbox').style.display !== 'flex') return;
+  if (e.key === 'ArrowLeft') {
+    navigateTestimonial(-1);
+    e.preventDefault();
+  } else if (e.key === 'ArrowRight') {
+    navigateTestimonial(1);
+    e.preventDefault();
+  } else if (e.key === 'Escape') {
+    closeTestimonialLightbox();
+    e.preventDefault();
+  }
+}
+</script>
+
+
 
 
 
   <script>
     function toggleMenu() {
-      document.getElementById('mainMenu').classList.toggle('active');
+      
     }
+
+    // Smooth scroll navigation with footer offset
+    document.addEventListener('DOMContentLoaded',  function() {
+      const menuLinks = document.querySelectorAll('.menu a[href^="#"], .footer-right a[href^="#"], .menu-overlay .menu-link[href^="#"]');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', async function(e) {
+          // Ignore links with custom onclick (e.g. consent modal)
+          if (this.hasAttribute('onclick')) return;
+          e.preventDefault();
+          
+
+          const sections = document.querySelectorAll('.section');
+          sections.forEach(section => {
+            section.classList.add('visible');
+            section.style.transform = 'none';
+            section.style.transition = 'none';
+          });
+
+          const targetId = this.getAttribute('href').slice(1);
+          const targetSection = document.getElementById(targetId);
+          const header = document.querySelector('header');
+
+          if (targetSection && header) {
+            const sectionRect = targetSection.getBoundingClientRect();
+            const headerRect = header.getBoundingClientRect();
+
+            window.scrollBy({
+              top: sectionRect.top - headerRect.bottom,
+              behavior: 'smooth'
+            });
+            // Optionally update hash for deep linking
+            history.replaceState(null, '', '#' + targetId);
+          }
+        });
+      });
+    });
 
     const sections = document.querySelectorAll('.section');
     const observer = new IntersectionObserver((entries) => {
@@ -956,7 +666,7 @@ lav-logo {
     sections.forEach(section => {
       observer.observe(section);
     });
-  
+
 const certImages = [
   "diploma1.jpg",
   "diploma2.jpg",
@@ -970,12 +680,14 @@ function openLightbox(index) {
   currentCertIndex = index;
   document.getElementById('lightbox-img').src = certImages[index];
   document.getElementById('lightbox').style.display = 'flex';
+  document.body.style.overflow = 'hidden'; // Prevent background scroll
   // Add keyboard event listener for navigation
   document.addEventListener('keydown', lightboxKeyHandler);
 }
 
 function closeLightbox() {
   document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = '';
   // Remove keyboard event listener when closing
   document.removeEventListener('keydown', lightboxKeyHandler);
 }
@@ -1019,16 +731,15 @@ function lightboxKeyHandler(e) {
 </div>
 
 <script>
-    function openConsentModal() {
+function openConsentModal() {
   // Retrieve previous values from window-scoped variables or set defaults
   const prevName = window._consentNameValue || '';
   const prevSurname = window._consentSurnameValue || '';
-  const prevPatronymic = window._consentPatronymicValue || '';
   const prevChecked = window._consentCheckboxChecked || false;
 
   const consentContent = document.getElementById('consentModalContent');
   consentContent.innerHTML = `
-    <h3>Информированное согласие</h3>
+    <h3>Соглашение</h3>
     <p>
     <strong>1.&nbsp;&nbsp;&nbsp;&nbsp;Характер работы</strong><br>Психологическая работа не является медицинской или психиатрической помощью. Я не ставлю диагнозов и не назначаю медикаментозного лечения. Моя задача — это сопровождение, исследование внутренних процессов и поддержка в поиске смысла, ясности и новых стратегий поведения.<br><br>
     <strong>2.&nbsp;&nbsp;&nbsp;&nbsp;Ощущения в процессе</strong><br>Наша совместная работа может вызывать разные переживания — облегчение, тревогу, раздражение, сомнение, усталость, внутренние открытия. Это естественно, особенно если затрагиваются глубинные темы. Всё это — часть живого процесса изменений.<br><br>
@@ -1041,37 +752,47 @@ function lightboxKeyHandler(e) {
     <br>5.4.&nbsp;&nbsp;&nbsp;&nbsp;Если я отменяю или переношу встречу и не предупреждаю об этом за 24 часа, за Вами сохраняется право на бесплатную сессию.
     <br>5.5.&nbsp;&nbsp;&nbsp;&nbsp;Эти правила — про взаимное уважение к нашему времени и совместной работе.
     <br><br>
-    <strong>6.&nbsp;&nbsp;&nbsp;&nbsp;Условия для групповых форматов</strong><br>Для участия в трансформационных играх и групповых практиках предусмотрена предварительная регистрация и предоплата. В случае отмены участия менее чем за 24 часа предоплата не возвращается.<br><br>
+    <strong>6.&nbsp;&nbsp;&nbsp;&nbsp;Условия для групповых форматов</strong><br>Для участия в трансформационных играх и групповых практиках предусмотрена предварительная регистрация и предоплата. В случае отмены участия менее чем за 24 часа до проведения мероприятия предоплата не возвращается.<br><br>
     <strong>7.&nbsp;&nbsp;&nbsp;&nbsp;Согласие с условиями</strong><br>Записываясь на индивидуальную или групповую работу, Вы подтверждаете, что ознакомлены с этими условиями и согласны с ними.<br><br>
-    Если у Вас есть вопросы по условиям работы, пожалуйста, задайте их до начала консультаций.</p>
+
+    <div style="background:rgba(43,156,153,0.07); border-radius:10px; padding:1.2rem 1rem; margin-bottom:1.2rem; display:flex; align-items:center; gap:0.8rem;">
+      <i class="fas fa-info-circle" style="color:var(--accent-color); font-size:1.5rem;"></i>
+      <span style="font-size:1.08rem; color:var(--primary-color); font-weight:500;">
+        Если у Вас есть вопросы по данному разделу, пожалуйста, задайте их до начала работы.
+      </span>
+    </div>
+    <div style="text-align:center; margin-bottom:1.2rem;">
+      <button type="button" class="cta-button" style="font-size:1.08rem; padding:0.5rem 2rem;" onclick="window.location.href='#contact'; closeConsentModal();">
+        Задать вопрос
+      </button>
+    </div>
+    Если вопросов нет, пожалуйста, заполните поля и нажмите на кнопку ниже.
     <form id="consentForm" autocomplete="off" style="margin-top: 1.5rem; text-align: center;">
       <div style="display: flex; flex-direction: column; gap: 0.7rem; align-items: center;">
         <input type="text" id="consentName" placeholder="Имя" value="${prevName.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
-        <input type="text" id="consentSurname" placeholder="Фамилия" value="${prevSurname.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
-        <input type="text" id="consentPatronymic" placeholder="Отчество" value="${prevPatronymic.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
+        <input type="text" id="consentSurname" placeholder="Фамилия (можно не полностью)" value="${prevSurname.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
       </div>
       <div style="margin-top: 1.2rem;">
         <label id="consentCheckboxLabel" style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;">
           <input type="checkbox" id="consentCheckbox" style="width: 1.2em; height: 1.2em; accent-color: var(--accent-color);" ${prevChecked ? 'checked' : ''}>
-          <span>Я ознакомлен(а) и понимаю</span>
+          <span>Я принимаю условия соглашения</span>
         </label>
       </div>
-      <button type="button" id="consentProceedBtn" class="announcement-btn" style="font-size: 1.1rem; padding: 0.5rem 2rem; margin-top: 1.2rem;">Продолжить</button>
+      <button type="button" id="consentProceedBtn" class="cta-button" style="font-size: 1.1rem; padding: 0.5rem 2rem; margin-top: 1.2rem;">Подписать</button>
     </form>
   `;
   document.getElementById('consentModalOverlay').style.display = 'flex';
+  document.body.style.overflow = 'hidden'; // Prevent background scroll
   setTimeout(() => {
     const btn = document.getElementById('consentProceedBtn');
     const checkbox = document.getElementById('consentCheckbox');
     const label = document.getElementById('consentCheckboxLabel');
     const nameInput = document.getElementById('consentName');
     const surnameInput = document.getElementById('consentSurname');
-    const patronymicInput = document.getElementById('consentPatronymic');
-    if (btn && checkbox && label && nameInput && surnameInput && patronymicInput) {
+    if (btn && checkbox && label && nameInput && surnameInput) {
       // Save values on input/change
       nameInput.addEventListener('input', () => { window._consentNameValue = nameInput.value; });
       surnameInput.addEventListener('input', () => { window._consentSurnameValue = surnameInput.value; });
-      patronymicInput.addEventListener('input', () => { window._consentPatronymicValue = patronymicInput.value; });
       checkbox.addEventListener('change', () => { window._consentCheckboxChecked = checkbox.checked; });
       // Button click logic
       btn.onclick = function() {
@@ -1087,7 +808,7 @@ function lightboxKeyHandler(e) {
           });
           valid = false;
         }
-        [nameInput, surnameInput, patronymicInput].forEach(input => {
+        [nameInput, surnameInput].forEach(input => {
           if (!input.value.trim()) {
             input.animate([
               { boxShadow: '0 0 0 0px red', borderColor: 'red' },
@@ -1112,55 +833,54 @@ function closeConsentModal() {
   // Save current values before closing
   const nameInput = document.getElementById('consentName');
   const surnameInput = document.getElementById('consentSurname');
-  const patronymicInput = document.getElementById('consentPatronymic');
   const checkbox = document.getElementById('consentCheckbox');
   if (nameInput) window._consentNameValue = nameInput.value;
   if (surnameInput) window._consentSurnameValue = surnameInput.value;
-  if (patronymicInput) window._consentPatronymicValue = patronymicInput.value;
   if (checkbox) window._consentCheckboxChecked = checkbox.checked;
   document.getElementById('consentModalOverlay').style.display = 'none';
+  document.body.style.overflow = '';
 }
 
 const services = [
   {
     title: "Сессия",
-    icon: "fas fa-user-md",
-    short_description: "Терапевтическая работа с использованием психологических техник.",
+    icon: "fas fa-user",
+    short_description: "Терапевтическая работа с использованием психологических техник",
     description: "Терапевтическая работа с использованием психологических техник.",
-    format: "Онлайн, регулярные встречи один раз в неделю. Продолжительность зависит от запроса: до достижения желаемого результата или по договорённости.",
-    duration: "45-60 минут.",
+    format: "Онлайн, регулярные встречи один раз в неделю <br> Продолжительность зависит от запроса: до достижения желаемого результата или по договорённости",
+    duration: "45-60 минут",
     short_price: "25 000 ₸",
     price: "25 000 ₸"
   },
   {
     title: "Разбор запроса по пирамиде логических уровней",
     icon: "fas fa-brain",
-    short_description: "Когнитивная техника для выявления ценностей, установок и убеждений — и их влияния на Вашу жизнь.",
-    description: "Когнитивная техника, помогающая выявить ценности, установки и убеждения — и понять, как они влияют на Вашу жизнь. В процессе мы работаем с ограничивающими убеждениями, формируем новые и закрепляем их через самостоятельную практику.",
-    format: "Онлайн, разовая сессия по конкретному запросу.",
-    duration: "1,5-2 часа.",
+    short_description: "Когнитивная техника, помогающая выявить ценности, установки и убеждения — и их влияние на Вашу жизнь",
+    description: "Когнитивная техника, помогающая выявить ценности, установки и убеждения — и их влияние на Вашу жизнь. В процессе мы работаем с ограничивающими убеждениями, формируем новые и закрепляем их через самостоятельную практику.",
+    format: "Онлайн, разовая сессия по конкретному запросу",
+    duration: "1,5-2 часа",
     short_price: "45 000 ₸",
     price: "45 000 ₸"
   },
   {
     title: "Трансформационная игра Лила",
     icon: "fas fa-dice-d20",
-    short_description: "Психологическая настольная игра. Помогает понять причины, внутренние процессы и найти новые смыслы.",
-    description: "Психологическая настольная игра. Помогает осознать глубинные причины, прояснить внутренние процессы и найти новые смыслы.",
-    format: "Офлайн, индивидуально или в группе (2-5 человек).",
-    duration: "1-5 часов.",
+    short_description: "Психологическая настольная игра, которая помогает осознать глубинные причины, прояснить внутренние процессы и найти новые смыслы",
+    description: "Психологическая настольная игра, которая помогает осознать глубинные причины, прояснить внутренние процессы и найти новые смыслы.",
+    format: "Офлайн, индивидуально или в группе (2-5 человек)",
+    duration: "1-5 часов",
     short_price: "от 40 000 ₸",
-    price: "50 000 ₸ — индивидуальная. <br> 40 000 ₸ / чел. — групповая. <br> Предоплата 50%."
+    price: "50 000 ₸ — индивидуальная <br> 40 000 ₸ / чел — групповая <br> Предоплата 50%"
   },
   {
     title: "Телесные шахматы",
     icon: "fas fa-chess",
-    short_description: "Психологическая практика, в которой человек при помощи других участников разыгрывает свою жизненную ситуацию.",
+    short_description: "Психологическая практика, в которой человек при помощи других участников разыгрывает свою жизненную ситуацию",
     description: "Психологическая практика, в которой человек при помощи других участников разыгрывает свою жизненную ситуацию. Становятся видимыми скрытые роли, внутренние конфликты и стратегии поведения. Практика помогает осознать, что на самом деле происходит внутри, и найти новый способ действовать.",
-    format: "Офлайн, в группе (5-6 человек).",
-    duration: "6-8 часов.",
+    format: "Офлайн, в группе (5-6 человек)",
+    duration: "6-8 часов",
     short_price: "25 000 ₸",
-    price: "25 000 ₸ / чел. <br> Предоплата 50%."
+    price: "25 000 ₸ / чел <br> Предоплата 50%"
   }
 ];
 
@@ -1199,16 +919,80 @@ function openServiceModal(index) {
      <p>${services[index].duration}</p>
      <h3>Стоимость, тенге</h3>
      <p>${services[index].price}</p>
-     <div style="text-align: center; margin-top: 1.5rem;">
-       <a href="#contact" class="announcement-btn" style="font-size: 1.2rem; padding: 0.6rem 2rem;" onclick="closeServiceModal()">Запись</a>
+     <div style="text-align: center; margin-top: 0.3rem;">
+       <a href="#contact" class="cta-button" style="font-size: 1.2rem; padding: 0.6rem 2rem;" onclick="closeServiceModal()">Написать</a>
      </div>
   `;
   document.getElementById('serviceModalOverlay').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
 
 function closeServiceModal() {
   document.getElementById('serviceModalOverlay').style.display = 'none';
+  document.body.style.overflow = '';
 }
+
+</script>
+
+<script>
+// JS Marquee for announcement bar
+(function() {
+  const marquee = document.querySelector('.announcement-marquee');
+  const container = marquee.parentElement;
+  let reqId;
+  let speed = 100; // pixels per second
+  let paused = false;
+  let startOffset = 0.5; // 0.0 = fully hidden, 1.0 = fully visible, 0.5 = half visible
+
+  function getWidths() {
+    // Use the width of the actual text node inside the marquee
+    const textNode = marquee.querySelector('.announcement-text');
+    return {
+      container: container.offsetWidth,
+      text: textNode ? textNode.offsetWidth : marquee.offsetWidth
+    };
+  }
+
+  function animateMarquee() {
+    // Flag for mobile/desktop mode
+    const isMobile = window.innerWidth < 768;
+    animateMarquee.isMobile = isMobile;
+    const { container, text } = getWidths();
+    let x = container * startOffset;
+    const end = -text - 200;
+    const textNode = marquee.querySelector('.announcement-text');
+
+    function step(ts) {
+      if (!paused) {
+        x -= speed / 60; // 60fps
+
+        bounding_rect = textNode.getBoundingClientRect();
+        if (bounding_rect.right < 0) {
+          x = isMobile ? container : container;
+        }
+        marquee.style.transform = `translateX(${x}px)`;
+      }
+      reqId = requestAnimationFrame(step);
+    }
+    reqId = requestAnimationFrame(step);
+  }
+
+  function start() {
+    marquee.style.willChange = 'transform';
+    marquee.style.position = 'relative';
+    marquee.style.left = '0';
+    marquee.style.transform = `translateX(${container.offsetWidth * startOffset}px)`;
+    animateMarquee();
+  }
+
+  marquee.addEventListener('mouseenter', function() { paused = true; });
+  marquee.addEventListener('mouseleave', function() { paused = false; });
+  window.addEventListener('resize', function() {
+    cancelAnimationFrame(reqId);
+    start();
+  });
+  start();
+})();
 </script>
 
 </body>
