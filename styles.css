@@ -68,7 +68,7 @@
     .container {
       max-width: 1350px;
       margin: 0 auto;
-      padding: 0 1rem;
+      padding: 0 0;
     }
 
     .navbar {
@@ -955,7 +955,7 @@ lav-logo {
         display: none;
       }
       .cert-gallery-strip img {
-        width: 140px;
+        width: 135px;
         margin: 0 auto 0 0;
       }
     }

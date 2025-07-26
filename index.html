@@ -244,7 +244,7 @@
         </div>
     </div>
 
-<div class="cert-gallery-strip" style="padding-right: 1.5em; padding-left: 3em;">
+<div class="cert-gallery-strip" style="padding-right: 0.0em; padding-left: 3em;">
         <img src="diploma_thumb1.jpg" onclick="openLightbox(0)" alt="Диплом 1">
         <img src="diploma_thumb2.jpg" onclick="openLightbox(1)" alt="Диплом 2">
         <img src="diploma_thumb3.jpg" onclick="openLightbox(2)" alt="Диплом 3">
@@ -987,10 +987,6 @@ function closeServiceModal() {
 
   marquee.addEventListener('mouseenter', function() { paused = true; });
   marquee.addEventListener('mouseleave', function() { paused = false; });
-  window.addEventListener('resize', function() {
-    cancelAnimationFrame(reqId);
-    start();
-  });
   start();
 })();
 </script>
