@@ -442,13 +442,19 @@ function openMenu() {
   menuOverlay.classList.add('active');
   hamburgerBtn.classList.add('hide');
   document.body.style.overflow = 'hidden';
+  // Hide announcement text when menu opens
   window.announcement_text_marquee_paused = true; // Pause marquee
+  var announcement = document.querySelector('.announcement-text');
+  if (announcement) announcement.style.visibility = 'hidden';
 }
 function closeMenu() {
   menuOverlay.classList.remove('active');
   hamburgerBtn.classList.remove('hide');
   document.body.style.overflow = '';
+  // Restore announcement text visibility when menu closes
   window.announcement_text_marquee_paused = false; // Resume marquee
+  var announcement = document.querySelector('.announcement-text');
+  if (announcement) announcement.style.visibility = '';
 }
 hamburgerBtn.addEventListener('click', openMenu);
 menuCloseBtn.addEventListener('click', closeMenu);
