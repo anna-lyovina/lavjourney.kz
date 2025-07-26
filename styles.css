@@ -1010,7 +1010,7 @@ lav-logo {
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
-  margin-right: 1em;
+  margin-right: 2em;
 }
 
 @media (min-width: 768px) {
