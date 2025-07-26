@@ -3,7 +3,22 @@
       --secondary-color: rgb(254,251,251);
       --accent-color: rgb(43, 156, 153);
       --font-main: 'Montserrat', sans-serif;
+      --fs24: 24px;
+      --fs20: 20px;
+      --fs18: 18px;
+      --fs36: 36px;
+      --fs30: 30px;
     }
+
+@media (max-width: 767px) {
+  :root {
+    --fs36: 28px;
+    --fs30: 24px;
+    --fs24: 20px;
+    --fs20: 17px;
+    --fs18: 15px;
+  }
+}
 
     * {
       margin: 0;
@@ -79,7 +94,7 @@
       text-decoration: none;
       color: var(--primary-color);
       font-weight: 600;
-      font-size: 18px;
+      font-size: var(--fs18);
     }
 
     .menu a:hover {
@@ -138,7 +153,7 @@
 
 .hero-paragraphs p {
   margin-bottom: 1rem;
-  font-size: 20px;
+  font-size: var(--fs20);
   color: rgb(68, 68, 68);
 }
 
@@ -149,7 +164,7 @@
   border-left: 4px solid var(--accent-color);
   margin: 1rem 0;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: var(--fs20);
   color: black;
 }
 
@@ -166,7 +181,7 @@
       border: none;
       border-radius: 8px;
       font-weight: 600;
-      font-size: 20px;
+      font-size: var(--fs20);
       text-decoration: none;
       display: inline-block;
       margin-top: 1rem;
@@ -309,7 +324,7 @@
     .card.service-card {
       border-top: 4px solid var(--accent-color);
       text-align: center;
-      font-size: 18px;
+      font-size: var(--fs18);
       color: rgb(68, 68, 68);
     }
     .card.service-card i {
@@ -319,7 +334,7 @@
     }
 
     .card.service-card h4 {
-      font-size: 24px;
+      font-size: var(--fs24);
       font-weight: bold;
     }
 
@@ -334,7 +349,7 @@
       border-left: 4px solid var(--accent-color);
       padding: 1.5rem;
       border-radius: 12px;
-      font-size: 20px;
+      font-size: var(--fs20);
       color: rgb(68, 68, 68);
       text-align: justify;
       hyphens: auto;
@@ -346,7 +361,7 @@
     }
 
     .about-panel h3 {
-      font-size: 24px;
+      font-size: var(--fs24);
       font-weight: bold;
     }
 
@@ -371,7 +386,7 @@
 
     .section-title {
       text-align: center;
-      font-size: clamp(1.8rem, 30px, 30px);
+      font-size: var(--fs30);
       font-weight: bold;
       color: var(--primary-color);
       margin-bottom: 1rem;
@@ -656,7 +671,7 @@ lav-logo {
       margin-top: 0.5rem;
       display: inline-block;
       transition: color 0.2s;
-      font-size: 20px;
+      font-size: var(--fs20);
       cursor: pointer;
     }
     .service-details-link:hover, .contact-link:hover {
@@ -726,7 +741,7 @@ lav-logo {
 }
 
 .hero-slogan {
-      font-size: clamp(1rem, 36px, 36px);
+      font-size: var(--fs36);
       color: black;
       text-align: center;
       font-weight: bold;
@@ -749,7 +764,7 @@ lav-logo {
   display: flex;
   flex-direction: column;
   text-align: center;
-  font-size: 24px;
+  font-size: var(--fs24);
   font-weight: bold;
   line-height: 1.1;
 }
@@ -783,7 +798,7 @@ lav-logo {
     color: var(--accent-color);
     letter-spacing: 0.01em;
     padding-right: 1.5rem;
-    font-size: 18px;
+    font-size: var(--fs18);
   }
   .footer-center {
     text-align: center;
@@ -803,7 +818,7 @@ lav-logo {
     text-decoration: none;
     color: var(--accent-color);
     font-weight: 600;
-    font-size: 18px;
+    font-size: var(--fs18);
     transition: color 0.3s, background 0.3s, border-radius 0.3s;
     border-radius: 8px;
     display: inline-block;
@@ -874,7 +889,7 @@ lav-logo {
       display: block;
     }
     .about-text-block {
-      padding: 0 1rem;
+      padding: 0 0;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -940,7 +955,7 @@ lav-logo {
         display: none;
       }
       .cert-gallery-strip img {
-        width: 150px;
+        width: 140px;
         margin: 0 auto 0 0;
       }
     }
@@ -1106,7 +1121,7 @@ lav-logo {
 }
 .menu-panel a {
   color: var(--accent-color);
-  font-size: 20px;
+  font-size: var(--fs24);
   font-weight: 700;
   text-decoration: none;
   padding: 0.2em 0.5em;
