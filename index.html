@@ -585,6 +585,7 @@ function openTestimonialLightbox(index) {
   // document.getElementById('testimonialLightboxClient').textContent = data.client;
   document.getElementById('testimonialLightbox').style.display = 'flex';
   document.body.style.overflow = 'hidden'; // Prevent background scroll
+  window.announcement_text_marquee_paused = true;
   document.addEventListener('keydown', testimonialLightboxKeyHandler);
   // Add touch event listeners for swipe navigation
   const lightbox = document.getElementById('testimonialLightbox');
@@ -626,6 +627,7 @@ function openTestimonialLightbox(index) {
 function closeTestimonialLightbox() {
   document.getElementById('testimonialLightbox').style.display = 'none';
   document.body.style.overflow = '';
+  window.announcement_text_marquee_paused = false;
   document.removeEventListener('keydown', testimonialLightboxKeyHandler);
   // Remove touch event listeners for swipe navigation
   const lightbox = document.getElementById('testimonialLightbox');
@@ -732,6 +734,7 @@ function openLightbox(index) {
   document.getElementById('lightbox-img').src = certImages[index];
   document.getElementById('lightbox').style.display = 'flex';
   document.body.style.overflow = 'hidden'; // Prevent background scroll
+  window.announcement_text_marquee_paused = true;
   // Add keyboard event listener for navigation
   document.addEventListener('keydown', lightboxKeyHandler);
   // Add touch event listeners for swipe navigation
@@ -774,6 +777,7 @@ function openLightbox(index) {
 function closeLightbox() {
   document.getElementById('lightbox').style.display = 'none';
   document.body.style.overflow = '';
+  window.announcement_text_marquee_paused = false;
   // Remove keyboard event listener when closing
   document.removeEventListener('keydown', lightboxKeyHandler);
   // Remove touch event listeners for swipe navigation
@@ -877,6 +881,7 @@ function openConsentModal() {
   `;
   document.getElementById('consentModalOverlay').style.display = 'flex';
   document.body.style.overflow = 'hidden'; // Prevent background scroll
+  window.announcement_text_marquee_paused = true;
   setTimeout(() => {
     const btn = document.getElementById('consentProceedBtn');
     const checkbox = document.getElementById('consentCheckbox');
@@ -933,6 +938,7 @@ function closeConsentModal() {
   if (checkbox) window._consentCheckboxChecked = checkbox.checked;
   document.getElementById('consentModalOverlay').style.display = 'none';
   document.body.style.overflow = '';
+  window.announcement_text_marquee_paused = false;
 }
 
 const services = [
@@ -1019,11 +1025,13 @@ function openServiceModal(index) {
   `;
   document.getElementById('serviceModalOverlay').style.display = 'flex';
   document.body.style.overflow = 'hidden';
+  window.announcement_text_marquee_paused = true;
 }
 
 function closeServiceModal() {
   document.getElementById('serviceModalOverlay').style.display = 'none';
   document.body.style.overflow = '';
+  window.announcement_text_marquee_paused = false;
 }
 
 </script>
