@@ -833,18 +833,26 @@ lav-logo {
     background: rgba(43,156,153,0.07);
     border-radius: 8px;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 767px) {
     .footer-columns {
       flex-direction: column;
       align-items: stretch;
       text-align: center;
     }
-    .footer-left, .footer-center, .footer-right {
+    .footer-left, .footer-center {
       margin-top: 1em;
       text-align: center !important;
       padding: 0 !important;
     }
-    .footer-center img{
+
+     .footer-right {
+     margin-top: 1em;
+      text-align: center !important;
+      padding: 0 !important;
+      margin-bottom: 1em;
+     }
+
+     .footer-center img{
     height: 80px;
   }
 
@@ -1158,7 +1166,7 @@ lav-logo {
 }
 
 /* Responsive adjustments */
-@media (max-width: 600px) {
+@media (max-width: 767px) {
   .menu-close-btn {
     left: 1.2rem;
     top: 1.2rem;

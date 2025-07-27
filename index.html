@@ -186,43 +186,43 @@
 
 @keyframes levitateWave {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0px) scale(0.9);
   }
   15% {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(0.9);
   }
   35% {
-    transform: translateY(0px);
+    transform: translateY(0px) scale(0.9);
   }
   60% {
-    transform: translateY(10px);
+    transform: translateY(10px) scale(0.9);
   }
   85% {
-    transform: translateY(0px);
+    transform: translateY(0px) scale(0.9);
   }
   100% {
-    transform: translateY(0px);
+    transform: translateY(0px) scale(0.9);
   }
 }
 
 @keyframes levitateWaveScaled {
   0% {
-    transform: translateY(0px) scale(1.05);
+    transform: translateY(0px) scale(0.95);
   }
   15% {
-    transform: translateY(-10px) scale(1.05);
+    transform: translateY(-10px) scale(0.95);
   }
   35% {
-    transform: translateY(0px) scale(1.05);
+    transform: translateY(0px) scale(0.95);
   }
   60% {
-    transform: translateY(10px) scale(1.05);
+    transform: translateY(10px) scale(0.95);
   }
   85% {
-    transform: translateY(0px) scale(1.05);
+    transform: translateY(0px) scale(0.95);
   }
   100% {
-    transform: translateY(0px) scale(1.05);
+    transform: translateY(0px) scale(0.95);
   }
 }
 
@@ -466,8 +466,8 @@
     <div class="testimonial-lightbox-content" onclick="closeTestimonialLightbox()" style="max-width: 95vw; max-height: 95vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
       <img id="testimonialLightboxImg" src="" alt="Фото отзыва" style="max-width: 90vw; max-height: 60vh; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.13); transition: transform 0.3s;">
       <div id="testimonialLightboxClient" style="margin-top: 1.2rem; font-size: 1.2rem; color: var(--accent-color); font-weight: 700;"></div>
-      <div class="nav prev" onclick="event.stopPropagation(); navigateTestimonial(-1);" style="position: absolute; left: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;display: none;">❮</div>
-      <div class="nav next" onclick="event.stopPropagation(); navigateTestimonial(1);" style="position: absolute; right: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;display: none;">❯</div>
+      <div class="nav prev desktop-only" onclick="event.stopPropagation(); navigateTestimonial(-1);" style="position: absolute; left: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;">❮</div>
+      <div class="nav next desktop-only" onclick="event.stopPropagation(); navigateTestimonial(1);" style="position: absolute; right: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;">❯</div>
     </div>
   </div>
   
