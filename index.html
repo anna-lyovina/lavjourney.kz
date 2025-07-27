@@ -802,6 +802,14 @@ function openTestimonialLightbox(index) {
   document.body.style.overflow = 'hidden'; // Prevent background scroll
   window.announcement_text_marquee_paused = true;
   document.addEventListener('keydown', testimonialLightboxKeyHandler);
+  // Add click event to image for next navigation
+  const img = document.getElementById('testimonialLightboxImg');
+  if (img) {
+    img.onclick = function(event) {
+      event.stopPropagation();
+      navigateTestimonial(1);
+    };
+  }
   // Add touch event listeners for swipe navigation
   const lightbox = document.getElementById('testimonialLightbox');
   let touchStartX = null;
@@ -952,6 +960,14 @@ function openLightbox(index) {
   window.announcement_text_marquee_paused = true;
   // Add keyboard event listener for navigation
   document.addEventListener('keydown', lightboxKeyHandler);
+  // Add click event to image for next navigation
+  const img = document.getElementById('lightbox-img');
+  if (img) {
+    img.onclick = function(event) {
+      event.stopPropagation();
+      navigate(1);
+    };
+  }
   // Add touch event listeners for swipe navigation
   const lightbox = document.getElementById('lightbox');
   let touchStartX = null;
