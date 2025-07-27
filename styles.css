@@ -2,12 +2,17 @@
       --primary-color: #1f2937;
       --secondary-color: rgb(254,251,251);
       --accent-color: rgb(43, 156, 153);
+      --second-accent-color: rgb(25, 116, 126);
+      --third-accent-color: rgb(238, 226, 231);
+      --mobile-menu-fg-color: rgb(68, 68, 68);
+      --milk-color: rgb(254, 251, 251);
       --font-main: 'Montserrat', sans-serif;
       --fs24: 24px;
       --fs20: 20px;
       --fs18: 18px;
       --fs36: 36px;
       --fs30: 30px;
+      --fs16: 16px;
     }
 
 @media (max-width: 767px) {
@@ -17,6 +22,7 @@
     --fs24: 20px;
     --fs20: 17px;
     --fs18: 15px;
+    --fs16: 14px;
   }
 }
 
@@ -53,7 +59,6 @@
 
 
     header {
-      background: white;
       position: sticky;
       top: 0;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -80,7 +85,7 @@
     .logo {
       font-weight: 700;
       font-size: 1.1rem;
-      color: var(--accent-color);
+      color: var(--second-accent-color);
     }
 
     .menu {
@@ -534,7 +539,7 @@
   text-align: center;
   font-size: 1.12rem;
   font-weight: 700;
-  color: #19747e;
+  color: var(--second-accent-color);
   letter-spacing: 0.02em;
   width: 80%;
 }
@@ -546,7 +551,7 @@
   min-width: 100%;
   font-size: 1.12rem;
   font-weight: 700;
-  color: #19747e;
+  color: var(--second-accent-color);
   padding: 0.2em 0;
   position: relative;
   left: 0;
@@ -564,7 +569,7 @@
 .announcement-text {
   font-size: 1.02rem;
   font-weight: 700;
-  color: #19747e;
+  color: var(--second-accent-color);
 }
 
 .announcement-text.mobile-only .contact-link {
@@ -601,7 +606,7 @@
 }
 
 .service-modal {
-  background: white;
+  background: var(--milk-color);
   padding: 2rem;
   max-width: 600px;
   width: 90%;
@@ -722,13 +727,9 @@ lav-logo {
 }
 
 .service-details-size {
-  font-size: 0.9em;
+  font-size: var(--fs18);
 }
-@media (min-width: 768px) {
-  .service-details-size {
-    font-size: 1em;
-  }
-}
+
 
 .subtitle {
   font-size: 1.05rem;
@@ -788,17 +789,17 @@ lav-logo {
     flex: 1 1 0;
     min-width: 180px;
     font-size: 1.08rem;
-    color: rgb(43, 156, 153);
+    color: var(--second-accent-color);
     line-height: 1.7;
     box-sizing: border-box;
   }
   .footer-left {
     text-align: left;
     font-weight: 600;
-    color: var(--accent-color);
+    color: var(--second-accent-color);
     letter-spacing: 0.01em;
     padding-right: 1.5rem;
-    font-size: var(--fs18);
+    font-size: var(--fs16);
   }
   .footer-center {
     text-align: center;
@@ -811,7 +812,7 @@ lav-logo {
     margin-bottom: 10px;
   }
   .footer-center img{
-    height: 110px;
+    height: 90px;
   }
   .footer-right {
     text-align: right;
@@ -821,9 +822,9 @@ lav-logo {
   }
   .footer-right a {
     text-decoration: none;
-    color: var(--accent-color);
+    color: var(--second-accent-color);
     font-weight: 600;
-    font-size: var(--fs18);
+    font-size: var(--fs16);
     transition: color 0.3s, background 0.3s, border-radius 0.3s;
     border-radius: 8px;
     display: inline-block;
@@ -846,14 +847,14 @@ lav-logo {
     }
 
      .footer-right {
-     margin-top: 1em;
+     margin-top: 0.5em;
       text-align: center !important;
       padding: 0 !important;
       margin-bottom: 1em;
      }
 
      .footer-center img{
-    height: 80px;
+    height: 65px;
   }
 
     /* .footer-right a {
@@ -1083,7 +1084,7 @@ lav-logo {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(237,246,241,0.97);
+  background: rgba(254, 251, 251, 0.97);
   z-index: 12000;
   display: flex;
   justify-content: flex-end;
@@ -1097,7 +1098,7 @@ lav-logo {
   pointer-events: auto;
 }
 .menu-panel {
-  background: white;
+  background: var(--third-accent-color);
   width: 70%;
   height: 100vh;
   box-shadow: -2px 0 24px rgba(43,156,153,0.13);
@@ -1132,7 +1133,7 @@ lav-logo {
   width: 100%;
 }
 .menu-panel a {
-  color: var(--accent-color);
+  color: var(--mobile-menu-fg-color);
   font-size: var(--fs24);
   font-weight: 700;
   text-decoration: none;
@@ -1153,7 +1154,7 @@ lav-logo {
   background: none;
   border: none;
   font-size: 3.0rem;
-  color: var(--accent-color);
+  color: var(--mobile-menu-fg-color);
   cursor: pointer;
   position: absolute;
   top: 1.2rem;

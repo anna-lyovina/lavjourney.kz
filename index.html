@@ -266,8 +266,8 @@
 
       <nav class="menu" id="mainMenu">
         <a href="#about">Обо мне</a>
-        <a href="#services">Услуги и цены</a>
         <a href="#how_i_work">Мой подход</a>
+        <a href="#services">Услуги и цены</a>
         <a href="#" onclick="openConsentModal(); return false;">Соглашение</a>
         <a href="#contact">Контакты</a>
       </nav>
@@ -288,8 +288,8 @@
         <nav>
           <ul>
             <li><a href="#about" class="menu-link">Обо мне</a></li>
-            <li><a href="#services" class="menu-link">Услуги и цены</a></li>
             <li><a href="#how_i_work" class="menu-link">Мой подход</a></li>
+            <li><a href="#services" class="menu-link">Услуги и цены</a></li>
             <li><a href="#" class="menu-link" onclick="openConsentModal(); return false;">Соглашение</a></li>
             <li><a href="#contact" class="menu-link">Контакты</a></li>
           </ul>
@@ -363,7 +363,7 @@
       
       <div style="margin-bottom:2rem">
         <div class="about-panel">
-          <p edicontent_id="v-svoey-rabote-ya-opirayus-na-dialog">В своей работе я опираюсь на диалог, живое человеческое присутствие и исследование. Для меня важно не только «что» происходит, но и «как» — в теле, в чувствах, в мыслях. Я использую элементы из разных направлений: НЛП, экзистенциальный и психодинамический подходы, символдрама. В моём понимании главное — не метод, а контакт. Всё, что происходит в процессе, рождается из доверия, внимания и совместного поиска. Моя задача — не помогать и спасать, а быть рядом, чтобы вместе увидеть то, что одному бывает трудно разглядеть. Когда то, что спрятано внутри, становится ясным, прожитым и осознаваемым, оно перестаёт незримо управлять жизнью — в этот момент становится комфортнее внутри, свободнее снаружи и появляется возможность выбирать и действовать иначе.</p>
+          <p edicontent_id="v-svoey-rabote-ya-opirayus-na-dialog">В своей работе я опираюсь на диалог, живое человеческое присутствие и исследование. Для меня важно не только «что» происходит, но и «как» — в теле, в чувствах, в мыслях. Я использую элементы из разных направлений: НЛП, экзистенциальный и психодинамический подходы, символдрама. В моём понимании главное — не метод, а контакт. Всё, что происходит в процессе, рождается из доверия, внимания и совместного поиска. Моя задача — не помогать и спасать, а быть рядом, чтобы вместе увидеть то, что одному бывает трудно разглядеть. <i style="color: black;">Когда то, что спрятано внутри, становится ясным, прожитым и осознаваемым, оно перестаёт незримо управлять жизнью</i> — в этот момент становится комфортнее внутри, свободнее снаружи и появляется возможность выбирать и действовать иначе.</p>
         </div>
       </div>
         
@@ -1075,7 +1075,7 @@ function openConsentModal() {
     <strong>3.&nbsp;&nbsp;&nbsp;&nbsp;Ответственность</strong><br>Каждый человек сам несёт ответственность за свою жизнь, принятые решения и поступки. Моя задача — быть рядом, чтобы вместе прояснять и осознавать, а не давать советы или готовые решения.<br><br>
     <strong>4.&nbsp;&nbsp;&nbsp;&nbsp;Конфиденциальность</strong><br>Всё, что происходит в процессе работы, остаётся конфиденциальным. Исключение — ситуации, когда есть прямая угроза жизни или здоровью — Вашему или других людей. В таких случаях я обязана действовать в рамках закона.<br><br>
     <strong>5.&nbsp;&nbsp;&nbsp;&nbsp;Условия для индивидуальных форматов</strong><br>
-    <br>5.1.&nbsp;&nbsp;&nbsp;&nbsp;Сессия бронируется по предварительной записи.
+    5.1.&nbsp;&nbsp;&nbsp;&nbsp;Сессия бронируется по предварительной записи.
     <br>5.2.&nbsp;&nbsp;&nbsp;&nbsp;Оплата производится в течение 12 часов после встречи. В случае систематического несоблюдения этого условия может быть введена предоплата.
     <br>5.3.&nbsp;&nbsp;&nbsp;&nbsp;Если Вам нужно отменить или перенести встречу, пожалуйста, предупредите не менее чем за 24 часа. При неоднократном несоблюдении данного условия может быть введена невозвратная предоплата.
     <br>5.4.&nbsp;&nbsp;&nbsp;&nbsp;Если я отменяю или переношу встречу и не предупреждаю об этом за 24 часа, за Вами сохраняется право на бесплатную сессию.
@@ -1286,7 +1286,7 @@ window.addEventListener('DOMContentLoaded', function() {
     <h4 style="text-align: center;" edicontent_id="${services[i].title_edicontent_id}">${services[i].title}</h4>
     <p style="text-align: center;" edicontent_id="${services[i].short_description_edicontent_id}">${services[i].short_description}</p>
     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.2rem;">
-      <a href="#" class="service-details-link service-details-size" style="color: var(--accent-color); font-weight: 600; text-decoration: underline; display: inline-block;" onclick="event.preventDefault(); openServiceModal(${i});">Подробнее</a>
+      <a href="#" class="service-details-link service-details-size" style="color: var(--accent-color); font-weight: 600; text-decoration: underline; display: inline-block; font-family: 'Poppins', sans-serif;" onclick="event.preventDefault(); openServiceModal(${i});">Подробнее</a>
       <span edicontent_id="${services[i].short_price_edicontent_id}" class="service-price" style="display: inline-flex; align-items: center; gap: 0.4em; background: #fff; color: var(--accent-color); font-weight: 700; border-radius: 999px; padding: 0.45em 1.2em; box-shadow: 0 2px 12px rgba(43,156,153,0.10); letter-spacing: 0.5px; border: 2px solid var(--accent-color); text-align: right; min-width: 90px; transition: box-shadow 0.2s;">
          ${services[i].short_price}
       </span>
