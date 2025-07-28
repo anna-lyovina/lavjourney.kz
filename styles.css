@@ -532,7 +532,7 @@
 }
 
 .announcement-content {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
