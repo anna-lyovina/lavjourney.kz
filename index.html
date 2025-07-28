@@ -69,7 +69,11 @@
     min-height: 420px;
   }
   .testimonial-card {
-    display: none;
+    display: flex;
+    align-items: center; /* Vertically centers the image */
+    justify-content: center; /* Optional: horizontally centers the image */
+    height: 100%; /* Ensure the container has a defined height */
+
     margin: 0 auto;
     transform: none !important;
     animation: none !important;
@@ -143,6 +147,11 @@
   height: 550px;
   flex: 0 0 300px;
 
+  display: flex;
+    align-items: center; /* Vertically centers the image */
+    justify-content: center; /* Optional: horizontally centers the image */
+    height: 100%; /* Ensure the container has a defined height */
+
   background: linear-gradient(135deg, rgba(254,251,251,0.95) 80%, rgba(43,156,153,0.07) 100%);
   border-radius: 16px;
   box-shadow: 0 6px 24px rgba(43,156,153,0.10), 0 1.5px 8px rgba(0,0,0,0.07);
@@ -181,6 +190,11 @@
   border-radius: 10px;
   object-fit: contain;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
 }
 
 
@@ -432,29 +446,22 @@
       </div>
       <div class="testimonials-board">
         <div class="testimonial-card" style="--levitate-delay: 0s;">
-          <div class="testimonial-client">Людмила</div>
-          <img src="testimonial1.jpeg" alt="Отзыв Людмилы">
+          <div class="testimonial-client">Ляззат, Алматы</div>
+          <img src="testimonial1.jpeg" alt="Отзыв Светланы">
         </div>
         <div class="testimonial-card" style="--levitate-delay: 0.3s;">
-          <div class="testimonial-client">Екатерина</div>
-          <img src="testimonial2.jpeg" alt="Отзыв Екатерины">
+          <div class="testimonial-client">Светлана, Москва</div>
+          <img src="testimonial2.jpeg" alt="Отзыв Светланы">
         </div>
         <div class="testimonial-card" style="--levitate-delay: 0.6s;">
-          <div class="testimonial-client">Надежда</div>
-          <img src="testimonial3.jpeg" alt="Отзыв Надежды">
+          <div class="testimonial-client">Айжан, Алматы</div>
+          <img src="testimonial3.jpeg" alt="Отзыв Ильи">
         </div>
         <div class="testimonial-card" style="--levitate-delay: 0.9s;">
-          <div class="testimonial-client">Анастасия</div>
-          <img src="testimonial4.jpeg" alt="Отзыв Анастасии">
+          <div class="testimonial-client">Илья, Алматы</div>
+          <img src="testimonial4.jpeg" alt="Отзыв Ильи">
         </div>
-        <div class="testimonial-card" style="--levitate-delay: 1.2s;">
-          <div class="testimonial-client">Анатолий</div>
-          <img src="testimonial5.jpeg" alt="Отзыв Анатолия">
-        </div>
-        <div class="testimonial-card" style="--levitate-delay: 1.5s;">
-          <div class="testimonial-client">Анна</div>
-          <img src="testimonial6.jpeg" alt="Отзыв Анны">
-        </div>
+
 
       </div>
       <div class="testimonial-dots"></div>
@@ -784,12 +791,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Testimonials Lightbox logic
 const testimonialData = [
-  { img: 'testimonial1.jpeg', client: 'Людмила' },
-  { img: 'testimonial2.jpeg', client: 'Екатерина' },
-  { img: 'testimonial3.jpeg', client: 'Надежда' },
-  { img: 'testimonial4.jpeg', client: 'Анастасия' },
-  { img: 'testimonial5.jpeg', client: 'Анатолий' },
-  { img: 'testimonial6.jpeg', client: 'Анна' }
+  { img: 'testimonial1.jpeg', client: '' },
+  { img: 'testimonial2.jpeg', client: '' },
+  { img: 'testimonial3.jpeg', client: '' },
+  { img: 'testimonial4.jpeg', client: '' },
+  // { img: 'testimonial5.jpeg', client: 'Анатолий' },
+  // { img: 'testimonial6.jpeg', client: 'Анна' }
 ];
 let currentTestimonialIndex = 0;
 
