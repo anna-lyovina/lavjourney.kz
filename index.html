@@ -244,18 +244,29 @@
   #testimonialLightboxImg {
     transform: scale(1.25);
   }
+
+  #consentSurnamePlaceholder span {
+    font-size: 0.75em;
+  }
 }
+
 @media (min-width: 768px) {
   #testimonialLightboxImg {
     transform: scale(1.4);
   }
-}
-@media (min-width: 768px) {
+
   .testimonial-card.shifted
   {
     margin-top: 6em;
   }
 }
+
+#consentName::placeholder {
+  color: gray;
+  opacity: 1; 
+}
+
+
 
 </style>
 
@@ -446,20 +457,20 @@
       </div>
       <div class="testimonials-board">
         <div class="testimonial-card" style="--levitate-delay: 0s;">
-          <div class="testimonial-client">Ляззат, Алматы</div>
+          <div class="testimonial-client">Светлана, Москва</div>
           <img src="testimonial1.jpeg" alt="Отзыв Светланы">
         </div>
         <div class="testimonial-card" style="--levitate-delay: 0.3s;">
-          <div class="testimonial-client">Светлана, Москва</div>
-          <img src="testimonial2.jpeg" alt="Отзыв Светланы">
+          <div class="testimonial-client">Айжан, Алматы</div>
+          <img src="testimonial2.jpeg" alt="Отзыв Айжан">
         </div>
         <div class="testimonial-card" style="--levitate-delay: 0.6s;">
-          <div class="testimonial-client">Айжан, Алматы</div>
-          <img src="testimonial3.jpeg" alt="Отзыв Ильи">
+          <div class="testimonial-client">Илья, Алматы</div>
+          <img src="testimonial3.jpeg" alt="Отзыв Айжан">
         </div>
         <div class="testimonial-card" style="--levitate-delay: 0.9s;">
-          <div class="testimonial-client">Илья, Алматы</div>
-          <img src="testimonial4.jpeg" alt="Отзыв Ильи">
+          <div class="testimonial-client">Ляззат, Алматы</div>
+          <img src="testimonial4.jpeg" alt="Отзыв Ляззат">
         </div>
 
 
@@ -471,7 +482,7 @@
   <!-- Testimonials Lightbox -->
   <div id="testimonialLightbox" class="lightbox" style="display:none; z-index: 10000;" onclick="closeTestimonialLightbox()">
     <div class="testimonial-lightbox-content" onclick="closeTestimonialLightbox()" style="max-width: 95vw; max-height: 95vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-      <img id="testimonialLightboxImg" src="" alt="Фото отзыва" style="max-width: 90vw; max-height: 60vh; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.13); transition: transform 0.3s;">
+      <img id="testimonialLightboxImg" src="" alt="Фото отзыва" style="max-width: 70%; max-height: 90vh; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.13); transition: transform 0.3s;">
       <div id="testimonialLightboxClient" style="margin-top: 1.2rem; font-size: 1.2rem; color: var(--accent-color); font-weight: 700;"></div>
       <div class="nav prev desktop-only" onclick="event.stopPropagation(); navigateTestimonial(-1);" style="position: absolute; left: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;">❮</div>
       <div class="nav next desktop-only" onclick="event.stopPropagation(); navigateTestimonial(1);" style="position: absolute; right: 2vw; top: 50%; transform: translateY(-50%); font-size: 2.5rem; cursor: pointer; user-select: none;">❯</div>
@@ -750,8 +761,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set different background for even-indexed testimonial cards
   testimonialCards.forEach((card, i) => {
     if (i % 2 === 1) {
-      card.style.background = 'linear-gradient(135deg, rgba(238,226,231,0.95) 80%, rgba(254,251,251,0.95) 100%)';
       card.classList.add('shifted');
+    }
+    else {
+      card.style.background = 'linear-gradient(135deg, rgba(238,226,231,0.95) 80%, rgba(254,251,251,0.95) 100%)';
     }
     // Add click event for lightbox only to the image
     const img = card.querySelector('img');
@@ -791,10 +804,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Testimonials Lightbox logic
 const testimonialData = [
-  { img: 'testimonial1.jpeg', client: '' },
-  { img: 'testimonial2.jpeg', client: '' },
-  { img: 'testimonial3.jpeg', client: '' },
-  { img: 'testimonial4.jpeg', client: '' },
+  { img: 'testimonial-full1.jpg', client: '' },
+  { img: 'testimonial-full2.jpg', client: '' },
+  { img: 'testimonial-full3.jpg', client: '' },
+  { img: 'testimonial-full4.jpg', client: '' },
   // { img: 'testimonial5.jpeg', client: 'Анатолий' },
   // { img: 'testimonial6.jpeg', client: 'Анна' }
 ];
@@ -1106,7 +1119,12 @@ function openConsentModal() {
     <form id="consentForm" autocomplete="off" style="margin-top: 1.5rem; text-align: center;">
       <div style="display: flex; flex-direction: column; gap: 0.7rem; align-items: center;">
         <input type="text" id="consentName" placeholder="Имя" value="${prevName.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
-        <input type="text" id="consentSurname" placeholder="Фамилия (можно не полностью)" value="${prevSurname.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
+        <div class="custom-placeholder-wrapper" style="position:relative;width:80%;max-width:320px;">
+          <input type="text" id="consentSurname" value="${prevSurname.replace(/\"/g, '&quot;')}" style="width:100%;padding:0.5em; border-radius:6px; border:1px solid #ccc; font-size:1rem; position:relative; z-index:1;" autocomplete="off">
+          <span id="consentSurnamePlaceholder" class="custom-placeholder" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:gray;transition:0.2s;font-size:1rem;z-index:2;">
+            Фамилия <span>(можно не полностью)</span>
+          </span>
+        </div>
       </div>
       <div style="margin-top: 1.2rem;">
         <label id="consentCheckboxLabel" style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;">
@@ -1117,6 +1135,20 @@ function openConsentModal() {
       <button type="button" id="consentProceedBtn" class="cta-button" style="font-size: 1.1rem; padding: 0.5rem 2rem; margin-top: 1.2rem;">Подписать</button>
     </form>
   `;
+
+ const input = document.getElementById('consentSurname');
+  var placeholder = document.getElementById('consentSurnamePlaceholder');
+  function togglePlaceholder() {
+    if (input.value.length > 0) {
+      placeholder.style.opacity = '0';
+    } else {
+      placeholder.style.opacity = '1';
+    }
+  }
+  input.addEventListener('input', togglePlaceholder);
+  // Initial state
+  togglePlaceholder();
+
   setupEditables(consentContent);
   document.getElementById('consentModalOverlay').style.display = 'flex';
   document.body.style.overflow = 'hidden'; // Prevent background scroll
@@ -1241,7 +1273,7 @@ const services = [
     price_edicontent_id: "transformacionnaya-igra-lila-50-000-teng-individualnaya-40-000-teng-chelovek-gruppovaya"
   },
   {
-    title: "Телесные шахматы",
+    title: "Расстановка Телесные шахматы",
     title_edicontent_id: "telesnye-shakhmaty",
     icon: "fas fa-chess",
     short_description: "Психологическая практика, в которой человек при помощи других участников разыгрывает свою жизненную ситуацию",

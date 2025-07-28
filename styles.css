@@ -4,7 +4,7 @@
       --accent-color: rgb(43, 156, 153);
       --second-accent-color: rgb(25, 116, 126);
       --third-accent-color: rgb(238, 226, 231);
-      --mobile-menu-fg-color: rgb(68, 68, 68);
+      --mobile-menu-fg-color: rgb(25, 116, 126);
       --milk-color: rgb(254, 251, 251);
       --font-main: 'Montserrat', sans-serif;
       --fs24: 24px;
@@ -85,7 +85,7 @@
     .logo {
       font-weight: 700;
       font-size: 1.1rem;
-      color: var(--second-accent-color);
+      color: var(--accent-color);
     }
 
     .menu {
@@ -789,14 +789,14 @@ lav-logo {
     flex: 1 1 0;
     min-width: 180px;
     font-size: 1.08rem;
-    color: var(--second-accent-color);
+    color: rgb(68, 68, 68);
     line-height: 1.7;
     box-sizing: border-box;
   }
   .footer-left {
     text-align: left;
     font-weight: 600;
-    color: var(--second-accent-color);
+    color: rgb(68, 68, 68);
     letter-spacing: 0.01em;
     padding-right: 1.5rem;
     font-size: var(--fs16);
@@ -822,7 +822,7 @@ lav-logo {
   }
   .footer-right a {
     text-decoration: none;
-    color: var(--second-accent-color);
+    color: rgb(68, 68, 68);
     font-weight: 600;
     font-size: var(--fs16);
     transition: color 0.3s, background 0.3s, border-radius 0.3s;
@@ -1084,7 +1084,7 @@ lav-logo {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(254, 251, 251, 0.97);
+  background: rgba(237,246,241, 0.97);
   z-index: 12000;
   display: flex;
   justify-content: flex-end;
@@ -1098,7 +1098,7 @@ lav-logo {
   pointer-events: auto;
 }
 .menu-panel {
-  background: var(--third-accent-color);
+  background: var(--milk-color);
   width: 70%;
   height: 100vh;
   box-shadow: -2px 0 24px rgba(43,156,153,0.13);
