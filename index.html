@@ -345,7 +345,7 @@
       </div>
       
       
-<img src="anya-main.jpg" alt="#психолог алматы #психолог онлайн #женщина психолог #клинический психолог #лила #расстановки #психологическая помощь #кто я #зачем я живу #в чем смысл жизни #тревога #усталость #тупик #конфликт #проблемы #отношения #что-то не так #выгорание #не люблю себя #не выбираю себя"> </img>
+<img src="anya-main.jpg" alt="#психолог алматы #психолог онлайн #женщина психолог #клинический психолог #кризис среднего возраста #лила #расстановки #психологическая помощь #кто я #зачем я живу #в чем смысл жизни #тревога #усталость #тупик #конфликт #проблемы #отношения #что-то не так #выгорание #не люблю себя #не выбираю себя"> </img>
     </div>
     
   </section>
@@ -472,7 +472,10 @@
           <div class="testimonial-client">Ляззат, Алматы</div>
           <img src="testimonial4.jpeg" alt="Отзыв Ляззат">
         </div>
-
+        <div class="testimonial-card" style="--levitate-delay: 0.12s;">
+          <div class="testimonial-client">Ася, Алматы</div>
+          <img src="testimonial5.jpeg" alt="Отзыв Аси">
+        </div>
 
       </div>
       <div class="testimonial-dots"></div>
@@ -808,6 +811,7 @@ const testimonialData = [
   { img: 'testimonial-full2.jpg', client: '' },
   { img: 'testimonial-full3.jpg', client: '' },
   { img: 'testimonial-full4.jpg', client: '' },
+  { img: 'testimonial-full5.jpg', client: '' },
   // { img: 'testimonial5.jpeg', client: 'Анатолий' },
   // { img: 'testimonial6.jpeg', client: 'Анна' }
 ];
@@ -1200,7 +1204,45 @@ function openConsentModal() {
           }
         });
         if (valid) {
-          closeConsentModal();
+          fetch('', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: nameInput.value,
+              surname: surnameInput.value
+            })
+          })
+          .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json().catch(() => ({}));
+          })
+          .then(data => {
+            // Optionally handle response data
+            closeConsentModal();
+          })
+          .catch(error => {
+            // Animate all fields in red on error
+            [nameInput, surnameInput].forEach(input => {
+              input.animate([
+                { boxShadow: '0 0 0 0px red', borderColor: 'red' },
+                { boxShadow: '0 0 0 4px red', borderColor: 'red' },
+                { boxShadow: '0 0 0 0px red', borderColor: 'red' }
+              ], {
+                duration: 600,
+                iterations: 1
+              });
+            });
+            label.animate([
+              { boxShadow: '0 0 0 0px red', borderColor: 'red' },
+              { boxShadow: '0 0 0 4px red', borderColor: 'red' },
+              { boxShadow: '0 0 0 0px red', borderColor: 'red' }
+            ], {
+              duration: 600,
+              iterations: 1
+            });
+          });
         }
       };
     }
