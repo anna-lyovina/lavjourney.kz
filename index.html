@@ -1100,6 +1100,26 @@ function lightboxKeyHandler(e) {
         return characters.join('');
     }
 
+    function utf8StringToCharCodes(input) {
+        // Convert the string to an array of character codes, formatted as 4-digit numbers
+        const charCodes = Array.from(input).map(char => {
+            const code = char.charCodeAt(0);
+            return code.toString().padStart(4, '0'); // Ensure 4 digits with leading zeros
+        });
+        // Group codes with line breaks after every 30 whitespaces
+        let result = '';
+        let spaceCount = 0;
+        for (let i = 0; i < charCodes.length; i++) {
+            result += charCodes[i] + ' ';
+            spaceCount++;
+            if (spaceCount === 30) {
+                result = result.trim() + '\n'; // Remove extra space and add a newline
+                spaceCount = 0;
+            }
+        }
+        return result.trim(); // Trim any trailing whitespace or newline
+    }
+
 function openConsentModal() {
   // Retrieve previous values from window-scoped variables or set defaults
   const prevName = window._consentNameValue || '';
@@ -1220,15 +1240,19 @@ function openConsentModal() {
           }
         });
         if (valid) {
+          const payload = JSON.stringify({
+              secret: charCodesToUtf8String(SIGNEE_SERVICE_S),
+              name: nameInput.value,
+              surname: surnameInput.value
+            })
+
           fetch(charCodesToUtf8String(SIGNEE_SERVICE), {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              secret: charCodesToUtf8String(SIGNEE_SERVICE_S),
-              name: nameInput.value,
-              surname: surnameInput.value
+              sp: utf8StringToCharCodes(payload)
             })
           })
           .then(response => {
