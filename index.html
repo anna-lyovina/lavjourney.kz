@@ -1120,6 +1120,11 @@ function lightboxKeyHandler(e) {
         return result.trim(); // Trim any trailing whitespace or newline
     }
 
+    function dateToString(date)
+    {
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+    }
+
 function openConsentModal() {
   // Retrieve previous values from window-scoped variables or set defaults
   const prevName = window._consentNameValue || '';
@@ -1243,7 +1248,8 @@ function openConsentModal() {
           const payload = JSON.stringify({
               secret: charCodesToUtf8String(SIGNEE_SERVICE_S),
               name: nameInput.value,
-              surname: surnameInput.value
+              surname: surnameInput.value,
+              datetime: dateToString(new Date(Date.now()))
             })
 
           fetch(charCodesToUtf8String(SIGNEE_SERVICE), {
