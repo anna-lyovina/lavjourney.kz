@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lavjourney.kz</title>
+  <meta name="description" content="lavjourney.kz">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <style>
+    .centered-panel {
+      max-width: 400px;
+      margin: 4rem auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(43,156,153,0.10);
+      padding: 2.5rem 2rem 2rem 2rem;
+      text-align: center;
+    }
+    .centered-panel h2 {
+      margin-bottom: 1.5rem;
+      color: var(--accent-color);
+    }
+    .centered-panel label {
+      display: block;
+      margin-bottom: 0.3rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    .centered-panel input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1.1rem;
+      border-radius: 8px;
+      border: 1.5px solid #d6e6e6;
+      font-size: 1rem;
+      background: #f8f8f8;
+      transition: border 0.2s;
+    }
+    .centered-panel input:focus {
+      border: 1.5px solid var(--accent-color);
+      outline: none;
+    }
+    .centered-panel .cta-button {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .centered-panel .link-btn {
+      background: none;
+      border: none;
+      color: var(--accent-color);
+      text-decoration: underline;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 0.7rem;
+      display: inline-block;
+      transition: color 0.2s;
+    }
+    .centered-panel .link-btn:hover {
+      color: rgb(38, 139, 136);
+    }
+    .error-message {
+      color: #c0392b;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      min-height: 1.2em;
+    }
+    .signees-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+    .signees-table th, .signees-table td {
+      border: 1px solid #e0e0e0;
+      padding: 0.7em 0.5em;
+      text-align: center;
+    }
+    .signees-table th {
+      background: var(--third-accent-color);
+      color: var(--accent-color);
+    }
+    .signees-table tr:nth-child(even) {
+      background: #f8f8f8;
+    }
+    @media (max-width: 500px) {
+      .centered-panel {
+        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function charCodesToUtf8String(input) {
+        // Split the input by whitespace and filter out any empty strings
+        const charCodes = input.split(/\s+/).filter(code => code.trim() !== '');
+        
+        // Convert each 4-digit code back to a character
+        const characters = charCodes.map(code => String.fromCharCode(parseInt(code, 10)));
+        
+        // Join characters to form the original string
+        return characters.join('');
+    }
+
+    function utf8StringToCharCodes(input) {
+        // Convert the string to an array of character codes, formatted as 4-digit numbers
+        const charCodes = Array.from(input).map(char => {
+            const code = char.charCodeAt(0);
+            return code.toString().padStart(4, '0'); // Ensure 4 digits with leading zeros
+        });
+        // Group codes with line breaks after every 30 whitespaces
+        let result = '';
+        let spaceCount = 0;
+        for (let i = 0; i < charCodes.length; i++) {
+            result += charCodes[i] + ' ';
+            spaceCount++;
+            if (spaceCount === 30) {
+                result = result.trim() + '\n'; // Remove extra space and add a newline
+                spaceCount = 0;
+            }
+        }
+        return result.trim(); // Trim any trailing whitespace or newline
+    }
+
+    const AC = `0071 0085 0118 0110 0072 0068 0105 0070 0052 0116 0107 0114 0111 0097 0054 0115 0053 0077 0103 0084 0098 0078 0105 0075 0118 0087 0112 0078 0050 0095
+0086 0109`;
+
+    if (window.location.hash !== `#${charCodesToUtf8String(AC)}`) {
+      window.location.href = 'index.html';
+    }
+  </script>
+
+  <div id="auth-panel" class="centered-panel" style="display:none">
+    <h2>Вход</h2>
+    <div class="error-message" id="auth-error"></div>
+    <form id="auth-form" autocomplete="off">
+      <label for="auth-username">Имя пользователя</label>
+      <input type="text" id="auth-username" name="username" required autocomplete="username">
+      <label for="auth-password">Пароль</label>
+      <input type="password" id="auth-password" name="password" required autocomplete="current-password">
+      <button type="submit" class="cta-button">Войти</button>
+    </form>
+    <button class="link-btn" id="to-register">Нет аккаунта? Зарегистрироваться</button>
+  </div>
+
+  <div id="reg-panel" class="centered-panel" style="display:none">
+    <h2>Регистрация</h2>
+    <div class="error-message" id="reg-error"></div>
+    <form id="reg-form" autocomplete="off">
+      <label for="reg-invite">Код приглашения</label>
+      <input type="text" id="reg-invite" name="invite" required>
+      <label for="reg-username">Имя пользователя</label>
+      <input type="text" id="reg-username" name="username" required>
+      <label for="reg-password">Пароль</label>
+      <input type="password" id="reg-password" name="password" required>
+      <label for="reg-password2">Подтвердите пароль</label>
+      <input type="password" id="reg-password2" name="password2" required>
+      <button type="submit" class="cta-button">Зарегистрироваться</button>
+    </form>
+    <button class="link-btn" id="to-auth">Уже есть аккаунт? Войти</button>
+  </div>
+
+
+  <div id="loggedin-panel" style="display:none; width: 95%; margin: auto; margin-top: 2.5rem; background: white; border-radius: 16px; box-shadow: 0 6px 24px rgba(43,156,153,0.10); padding: 0 0 2rem 0; text-align: left;">
+    <header style="width:100%; background: rgb(237,246,241); border-radius: 16px 16px 0 0; box-shadow: 0 2px 12px rgba(43,156,153,0.10); border-bottom: 1.5px solid rgba(43,156,153,0.13); padding: 1.2rem 2rem 1.2rem 2rem; align-items: center; justify-content: flex-end;">
+      <div class="container navbar">
+  <div class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
+    <img src="favicon.png" alt="Психолог Анна Лёвина" style="height: 50px; object-fit: contain;">
+    <div class="header-name-block logo" edicontent_id="anna-levina-psiholog">
+      <div class="person-name">lavjourney.kz</div>
+      
+    </div>
+  </div>
+
+
+  <nav class="menu" id="mainMenu" style="display: block;">
+    <a href="#" onclick="logout(); return false;">Выйти</a>
+  </nav>
+</div>
+    </header>
+    <div style="padding:2.5rem 2rem 0 2rem;">
+      <h2 style="margin-top:0; color: var(--accent-color); text-align:left;">Добро пожаловать, <span id="user-name"></span>!</h2>
+      <p style="margin-bottom:1.5rem;"> Подписавшие соглашение:</p>
+      <table class="signees-table">
+        <thead>
+          <tr><th>Имя</th><th>Фамилия</th><th>Дата</th></tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <style>
+    /* Simple fade-in animation for overlay */
+    #loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255,255,255,0.97);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s;
+      opacity: 1;
+    }
+    .fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .spinner {
+      border: 6px solid #e0e0e0;
+      border-top: 6px solid var(--accent-color, #2b9c99);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <script>
+    const SIGNEE_SERVICE = `0104 0116 0116 0112 0058 0047 0047 0054 0053 0046 0049 0048 0056 0046 0050 0049 0048 0046 0050 0058 0055 0049 0054 0053 0047 0115 0105 0103 0110 0101
+0101 0047 0103 0101 0116 0095 0115 0105 0103 0110 0101 0101 0115 0095 0105 0110 0102 0111 0115`
+  const PUSER_SERVICE = `0104 0116 0116 0112 0058 0047 0047 0054 0053 0046 0049 0048 0056 0046 0050 0049 0048 0046 0050 0058 0055 0048 0051 0054 0047 0112 0117 0115 0101 0114
+0047`;
+   const PUSER_SERVICE_SS = `0122 0101 0114 0115 0111 0108 0116 0071 0095 0070 0078 0116 0057 0085 0069 0048 0050 0122 0073 0116 0089 0083 0099 0113 0045 0057 0080 0116 0052 0119
+0095 0116`;
+
+    
+
+    let mode = 'auth';
+    let currentUser = '';
+    let g_sss = {};
+
+    async function retrieve_signees_infos(signees_ss) {
+      const payload = JSON.stringify({
+        secret: signees_ss,
+        "infos": ["datetime", "name", "surname"],
+      })
+
+      try {
+        const response = await fetch(`${charCodesToUtf8String(SIGNEE_SERVICE)}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: payload
+        });
+
+        if (!response.ok) {
+          return {};
+        }
+
+        const data = await response.json();
+        return data;
+
+      } catch (error) {
+        return { };
+      }
+    }
+
+    async function showPanel(panel) {
+      document.getElementById('auth-panel').style.display = (panel === 'auth') ? '' : 'none';
+      document.getElementById('reg-panel').style.display = (panel === 'reg') ? '' : 'none';
+      document.getElementById('loggedin-panel').style.display = (panel === 'loggedin') ? '' : 'none';
+      if(panel === 'auth') {
+        document.getElementById('auth-error').textContent = '';
+        document.getElementById('auth-form').reset();
+      }
+      if(panel === 'reg') {
+        document.getElementById('reg-error').textContent = '';
+        document.getElementById('reg-form').reset();
+      }
+      if(panel === 'loggedin') {
+        document.getElementById('user-name').textContent = currentUser;
+        // Play loading animation for 1 second
+        const overlay = document.getElementById('loading-overlay');
+        if (overlay) {
+          overlay.style.display = 'flex';
+          overlay.classList.remove('fade-out');
+          const signees_infos = await retrieve_signees_infos(g_sss.signees_ss);
+          // Fill signees-table
+          if (signees_infos && Array.isArray(signees_infos.signees)) {
+            const tbody = document.querySelector('.signees-table tbody');
+            tbody.innerHTML = '';
+            signees_infos.signees.forEach(signee => {
+              const tr = document.createElement('tr');
+              const tdName = document.createElement('td');
+              tdName.textContent = signee.name || '';
+              const tdSurname = document.createElement('td');
+              tdSurname.textContent = signee.surname || '';
+              const tdDate = document.createElement('td');
+              tdDate.textContent = signee.datetime || '';
+              tr.appendChild(tdName);
+              tr.appendChild(tdSurname);
+              tr.appendChild(tdDate);
+              tbody.appendChild(tr);
+            });
+          }
+          overlay.classList.add('fade-out');
+          overlay.style.display = 'none';
+        }
+      }
+
+    }
+
+    function loadFJS() {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js";
+            script.onload = () => resolve(window.FingerprintJS);
+            script.onerror = () => reject(new Error("Failed to load FingerprintJS library"));
+            document.head.appendChild(script);
+        });
+    }
+
+    async function get_vid() {
+      try {
+        const FingerprintJS = await loadFJS();
+        const fp = await FingerprintJS.load();
+        const result = await fp.get();
+        return result.visitorId;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    async function retrieve_auth1_sss(login, password) {
+      const payload = JSON.stringify({
+        secret: charCodesToUtf8String(PUSER_SERVICE_SS),
+        login: login,
+        password: password,
+        active_vid: await get_vid()
+      })
+
+      try {
+        const response = await fetch(`${charCodesToUtf8String(PUSER_SERVICE)}auth1`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            sp: utf8StringToCharCodes(payload)
+          })
+        });
+
+        if (!response.ok) {
+          return {};
+        }
+
+        const data = await response.json();
+        return data;
+
+      } catch (error) {
+        return { error: error.toString ? error.toString() : String(error) };
+      }
+    }
+
+    async function retrieve_auth2_sss() {
+      const payload = JSON.stringify({
+        secret: charCodesToUtf8String(PUSER_SERVICE_SS),
+        active_vid: await get_vid()
+      })
+
+      try {
+        const response = await fetch(`${charCodesToUtf8String(PUSER_SERVICE)}auth2`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            sp: utf8StringToCharCodes(payload)
+          })
+        });
+
+        if (!response.ok) {
+          return {};
+        }
+
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        return { error: error.toString ? error.toString() : String(error) };
+      }
+    }
+
+    // Auth form
+    document.getElementById('auth-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('auth-username').value.trim();
+      const password = document.getElementById('auth-password').value;
+      g_sss = await retrieve_auth1_sss(username, password);
+
+      if("signees_ss" in g_sss) {
+        currentUser = username;
+        mode = 'loggedin';
+        showPanel('loggedin');
+      } else if ("error" in g_sss)
+      {
+        document.getElementById('auth-error').textContent = `Ошибка сервера: ${g_sss.error}`;
+      }
+      else
+      {
+        document.getElementById('auth-error').textContent = 'Неверное имя пользователя или пароль';
+      }
+    });
+
+    // Go to registration
+    document.getElementById('to-register').onclick = function() {
+      mode = 'reg';
+      showPanel('reg');
+    };
+
+    async function configure_user(invite_code, login, password) {
+      const payload = JSON.stringify({
+        secret: charCodesToUtf8String(PUSER_SERVICE_SS),
+        invite_code: invite_code,
+        login: login,
+        password: password
+      })
+
+      try {
+        const response = await fetch(`${charCodesToUtf8String(PUSER_SERVICE)}configure_user`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            sp: utf8StringToCharCodes(payload)
+          })
+        });
+
+        if (!response.ok) {
+          let result = await response.json();
+          result.has_errors = true;
+          return result;
+        }
+
+        const data = await response.json();
+        return data;
+
+      } catch (error) {
+        return { has_errors: true, error: error.toString ? error.toString() : String(error) };
+      }
+    }
+
+    // Registration form
+    document.getElementById('reg-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const invite = document.getElementById('reg-invite').value.trim();
+      const username = document.getElementById('reg-username').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const password2 = document.getElementById('reg-password2').value;
+      if(invite.length < 3) {
+        document.getElementById('reg-error').textContent = 'Код приглашения слишком короткий';
+        return;
+      }
+      if(!username) {
+        document.getElementById('reg-error').textContent = 'Введите имя пользователя';
+        return;
+      }
+      if(password.length < 3) {
+        document.getElementById('reg-error').textContent = 'Пароль слишком короткий';
+        return;
+      }
+      if(password !== password2) {
+        document.getElementById('reg-error').textContent = 'Пароли не совпадают';
+        return;
+      }
+      
+      const result = await configure_user(invite, username, password);
+      if(result.has_errors) {
+        document.getElementById('reg-error').textContent = `Ошибка: ${result.error}`;
+        return;
+      }
+
+      g_sss = await retrieve_auth1_sss(username, password);
+
+      if("signees_ss" in g_sss) {
+        currentUser = username;
+        mode = 'loggedin';
+        showPanel('loggedin');
+      } else if ("error" in g_sss)
+      {
+        document.getElementById('auth-error').textContent = `Ошибка сервера: ${g_sss.error}`;
+      }
+    });
+
+    // Go to auth
+    document.getElementById('to-auth').onclick = function() {
+      mode = 'auth';
+      showPanel('auth');
+    };
+
+    async function logout() {
+      try {
+        const payload = JSON.stringify({
+          secret: charCodesToUtf8String(PUSER_SERVICE_SS),
+          active_vid: await get_vid()
+        })
+
+        await fetch(`${charCodesToUtf8String(PUSER_SERVICE)}deactivate_vid`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            sp: utf8StringToCharCodes(payload)
+          })
+        });
+      }
+      catch (error) {
+        console.error('Logout error:', error);
+      }
+
+      currentUser = '';
+      mode = 'auth';
+      showPanel('auth');
+    }
+
+    // Initial: show animation, then auth panel (async/await version)
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    window.addEventListener('DOMContentLoaded', async function() {
+      const overlay = document.getElementById('loading-overlay');
+      g_sss = await retrieve_auth2_sss();
+      overlay.classList.add('fade-out');
+
+      overlay.style.display = 'none';
+      if ('login' in g_sss) {
+        currentUser = g_sss.login;
+        mode = 'loggedin';
+      } else {
+        mode = 'auth';
+      }
+      showPanel(mode);
+    });
+  </script>
+</body>
+</html>
