@@ -1173,3 +1173,254 @@ lav-logo {
     top: 1.2rem;
   }
 }
+
+.testimonials-section {
+  margin-top: 3rem;
+}
+.testimonials-scroll-btns {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+}
+.testimonial-scroll-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(43,156,153,0.10);
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.testimonial-scroll-btn:hover {
+  background: rgb(38, 139, 136);
+  transform: scale(1.08);
+}
+.testimonials-board {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.5rem;
+  scroll-behavior: smooth;
+  cursor: grab;
+  /* Hide scrollbar for Webkit browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.testimonials-board::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile carousel for testimonials */
+@media (max-width: 767px) {
+  .testimonials-board {
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    position: relative;
+    min-height: 420px;
+  }
+  .testimonial-card {
+    display: flex;
+    align-items: center; /* Vertically centers the image */
+    justify-content: center; /* Optional: horizontally centers the image */
+    height: 100%; /* Ensure the container has a defined height */
+
+    margin: 0 auto;
+    transform: none !important;
+    animation: none !important;
+    width: 90vw;
+    max-width: 350px;
+    min-width: 0;
+    height: auto;
+    box-shadow: 0 6px 24px rgba(43,156,153,0.10), 0 1.5px 8px rgba(0,0,0,0.07);
+  }
+
+  .testimonial-card.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    animation: fadeInTestimonial 0.5s;
+  }
+  .testimonials-scroll-btns {
+    margin-top: 2em;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    z-index: 2;
+    transform: translateY(-50%);
+  }
+  .testimonial-scroll-btn {
+    pointer-events: auto;
+    background: rgba(43,156,153,0.85);
+    box-shadow: 0 2px 8px rgba(43,156,153,0.18);
+    font-size: 1.7rem;
+    width: 48px;
+    height: 48px;
+    opacity: 0.95;
+    border: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .testimonial-scroll-btn:active {
+    background: rgb(38, 139, 136);
+    transform: scale(1.08);
+  }
+  .testimonial-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+  }
+  .testimonial-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d1e6e5;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .testimonial-dot.active {
+    background: var(--accent-color);
+    transform: scale(1.2);
+  }
+}
+
+@keyframes fadeInTestimonial {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.testimonial-card {
+  width: 300px;
+  height: 550px;
+  flex: 0 0 300px;
+
+  display: flex;
+    align-items: center; /* Vertically centers the image */
+    justify-content: center; /* Optional: horizontally centers the image */
+    height: 100%; /* Ensure the container has a defined height */
+
+  background: linear-gradient(135deg, rgba(254,251,251,0.95) 80%, rgba(43,156,153,0.07) 100%);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(43,156,153,0.10), 0 1.5px 8px rgba(0,0,0,0.07);
+  border: 1.5px solid rgba(43,156,153,0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.2rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  /* Animation for levitating and waving */
+  animation: levitateWave 7s  infinite;
+  animation-delay: var(--levitate-delay, 0s);
+  will-change: transform;
+}
+
+
+
+.testimonial-card:hover {
+  animation: levitateWaveScaled 7s infinite;
+  box-shadow: 0 16px 40px rgba(43,156,153,0.18), 0 2px 12px rgba(0,0,0,0.10);
+  z-index: 2;
+}
+.testimonial-client {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: var(--fs20);
+  margin-bottom: 0.7rem;
+  align-self: flex-start;
+}
+.testimonial-card img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  object-fit: contain;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+
+@keyframes levitateWave {
+  0% {
+    transform: translateY(0px) scale(0.9);
+  }
+  15% {
+    transform: translateY(-10px) scale(0.9);
+  }
+  35% {
+    transform: translateY(0px) scale(0.9);
+  }
+  60% {
+    transform: translateY(10px) scale(0.9);
+  }
+  85% {
+    transform: translateY(0px) scale(0.9);
+  }
+  100% {
+    transform: translateY(0px) scale(0.9);
+  }
+}
+
+@keyframes levitateWaveScaled {
+  0% {
+    transform: translateY(0px) scale(0.95);
+  }
+  15% {
+    transform: translateY(-10px) scale(0.95);
+  }
+  35% {
+    transform: translateY(0px) scale(0.95);
+  }
+  60% {
+    transform: translateY(10px) scale(0.95);
+  }
+  85% {
+    transform: translateY(0px) scale(0.95);
+  }
+  100% {
+    transform: translateY(0px) scale(0.95);
+  }
+}
+
+@media (max-width: 767px) {
+  #testimonialLightboxImg {
+    transform: scale(1.25);
+  }
+
+  #consentSurnamePlaceholder span {
+    font-size: 0.65em;
+  }
+}
+
+@media (min-width: 768px) {
+  #testimonialLightboxImg {
+    transform: scale(1.4);
+  }
+
+  .testimonial-card.shifted
+  {
+    margin-top: 6em;
+  }
+}
+
+#consentName::placeholder {
+  color: gray;
+  opacity: 1; 
+}
