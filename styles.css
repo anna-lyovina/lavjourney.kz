@@ -718,8 +718,27 @@ lav-logo {
 }
 
 .service-price {
+  display: inline-flex;
+  align-items: right;
+  justify-content: center;
+  background: linear-gradient(90deg, #fff 80%, #eafaf9 100%);
+  color: var(--accent-color);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.45em 1.2em;
+  box-shadow: 0 2px 12px rgba(43,156,153,0.08);
+  letter-spacing: 0.5px;
+  min-width: 90px;
+  text-align: center;
+  transition: box-shadow 0.2s;
+  border: none;
   font-size: 0.9em;
 }
+.service-price:hover {
+  box-shadow: 0 4px 18px rgba(43,156,153,0.15);
+}
+
 @media (min-width: 768px) {
   .service-price {
     font-size: 1em;
@@ -820,6 +839,28 @@ lav-logo {
     letter-spacing: 0.01em;
     padding-left: 1.5rem;
   }
+
+.services-group {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 1rem;
+  border-radius: 18px;
+  background: #f8f8fa;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.services-group-title {
+  text-align: center;
+  font-size: var(--fs24);
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.02em;
+}
+@media (max-width: 700px) {
+  .services-group {
+    padding: 1rem 0.2rem;
+  }
+}
+
   .footer-right a {
     text-decoration: none;
     color: rgb(68, 68, 68);
@@ -834,6 +875,21 @@ lav-logo {
     background: rgba(43,156,153,0.07);
     border-radius: 8px;
   }
+    
+    .note-block {
+      display: flex;
+      align-items: flex-start;
+      background: #fffbe6;
+      border-left: 4px solid var(--accent-color);
+      padding: 0.75em 1em;
+      margin: 1.5em 0 0.5em 0;
+      font-size: var(--fs18);
+      font-style: italic;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      text-align: justify;
+      hyphens: auto;
+    }
   @media (max-width: 767px) {
     .footer-columns {
       flex-direction: column;
@@ -913,7 +969,7 @@ lav-logo {
       display: flex;
       gap: 1.2rem;
       margin-top: 2rem;
-      justify-content: flex-end;
+      justify-content: flex-start;
       align-items: center;
       overflow: hidden;
       padding-bottom: 0.5rem;
@@ -942,6 +998,8 @@ lav-logo {
         justify-content: center;
         align-items: stretch;
         height: auto;
+        grid-row: 1;
+        order: -1;
       }
       .about-lotus-img {
         max-width: 300px;
@@ -1217,84 +1275,6 @@ lav-logo {
   display: none;
 }
 
-/* Mobile carousel for testimonials */
-@media (max-width: 767px) {
-  .testimonials-board {
-    overflow: hidden;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-    position: relative;
-    min-height: 420px;
-  }
-  .testimonial-card {
-    display: flex;
-    align-items: center; /* Vertically centers the image */
-    justify-content: center; /* Optional: horizontally centers the image */
-    height: 100%; /* Ensure the container has a defined height */
-
-    margin: 0 auto;
-    transform: none !important;
-    animation: none !important;
-    width: 90vw;
-    max-width: 350px;
-    min-width: 0;
-    height: auto;
-    box-shadow: 0 6px 24px rgba(43,156,153,0.10), 0 1.5px 8px rgba(0,0,0,0.07);
-  }
-
-  .testimonial-card.active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    animation: fadeInTestimonial 0.5s;
-  }
-  .testimonials-scroll-btns {
-    margin-top: 2em;
-    left: 0;
-    right: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    pointer-events: none;
-    z-index: 2;
-    transform: translateY(-50%);
-  }
-  .testimonial-scroll-btn {
-    pointer-events: auto;
-    background: rgba(43,156,153,0.85);
-    box-shadow: 0 2px 8px rgba(43,156,153,0.18);
-    font-size: 1.7rem;
-    width: 48px;
-    height: 48px;
-    opacity: 0.95;
-    border: none;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .testimonial-scroll-btn:active {
-    background: rgb(38, 139, 136);
-    transform: scale(1.08);
-  }
-  .testimonial-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1.2rem;
-  }
-  .testimonial-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #d1e6e5;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .testimonial-dot.active {
-    background: var(--accent-color);
-    transform: scale(1.2);
-  }
-}
 
 @keyframes fadeInTestimonial {
   from { opacity: 0; transform: translateY(30px); }
@@ -1302,9 +1282,9 @@ lav-logo {
 }
 
 .testimonial-card {
-  width: 300px;
+  width: 400px;
   height: 550px;
-  flex: 0 0 300px;
+  flex: 0 0 400px;
 
   display: flex;
     align-items: center; /* Vertically centers the image */
@@ -1326,7 +1306,6 @@ lav-logo {
   animation-delay: var(--levitate-delay, 0s);
   will-change: transform;
 }
-
 
 
 .testimonial-card:hover {
@@ -1352,10 +1331,64 @@ lav-logo {
 
   margin-left: auto;
   margin-right: auto;
-  margin-top: 1.2rem;
   margin-bottom: 1.2rem;
 }
 
+/* Mobile carousel for testimonials */
+@media (max-width: 767px) {
+  .testimonials-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    overflow-x: unset;
+    padding: 0.5rem;
+    min-height: unset;
+    justify-content: center;
+    align-items: stretch;
+    position: relative;
+    cursor: default;
+  }
+  .testimonial-card {
+    width: 175px;
+    height: 90px;
+    min-width: unset;
+    max-width: 100%;
+    box-shadow: 0 2px 8px rgba(43,156,153,0.10);
+    border-radius: 12px;
+    transition: box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.5rem;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .testimonial-card:nth-child(4n+1), .testimonial-card:nth-child(4n+4) {
+    background: linear-gradient(135deg, rgba(238,226,231,0.95) 80%, rgba(254,251,251,0.95) 100%);
+  }
+
+  /* .testimonial-card img {
+    max-width: none;
+  } */
+
+  .testimonials-scroll-btns,
+  .testimonial-dots {
+    display: none !important;
+  }
+  .testimonial-client {
+    font-size: 10px;
+    margin-bottom: 0.1rem;
+    /* display: none !important; */
+  }
+}
+
+@media (min-width: 768px) {
+  .testimonial-card:nth-child(odd) {
+    background: linear-gradient(135deg, rgba(238,226,231,0.95) 80%, rgba(254,251,251,0.95) 100%);
+  }
+}
 
 @keyframes levitateWave {
   0% {
@@ -1424,3 +1457,19 @@ lav-logo {
   color: gray;
   opacity: 1; 
 }
+
+.service-format {
+  background: rgba(43,156,153,0.07);
+  color: var(--accent-color);
+  font-size: var(--fs16);
+  font-style: italic;
+  border-radius: 8px;
+  padding: 0.35em 1em;
+  display: inline-block;
+  margin: 0.5em auto 0.2em auto;
+}
+.service-format i {
+  margin-right: 0.4em;
+  opacity: 0.7;
+}
+

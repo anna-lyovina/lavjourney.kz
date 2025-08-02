@@ -49,46 +49,11 @@ function setupTestimonialsScrollButtonLogic(document) {
     const btnLeft = document.querySelector('.testimonial-scroll-btn.left');
     const btnRight = document.querySelector('.testimonial-scroll-btn.right');
     const testimonialCards = Array.from(document.querySelectorAll('.testimonial-card'));
-    const dotsContainer = document.querySelector('.testimonial-dots');
+
     let currentMobileIndex = 0;
 
     function isMobile() {
         return window.innerWidth <= 767;
-    }
-
-    function updateMobileCarousel(index) {
-        testimonialCards.forEach((card, i) => {
-        if (isMobile()) {
-            card.classList.toggle('active', i === index);
-            card.style.display = i === index ? 'flex' : 'none';
-        } else {
-            card.classList.remove('active');
-            card.style.display = '';
-        }
-        });
-        // Update dots
-        if (dotsContainer) {
-        dotsContainer.innerHTML = '';
-        testimonialCards.forEach((_, i) => {
-            const dot = document.createElement('span');
-            dot.className = 'testimonial-dot' + (i === index ? ' active' : '');
-            dot.setAttribute('aria-label', 'Показать отзыв ' + (i+1));
-            dot.tabIndex = 0;
-            dot.addEventListener('click', function(e) {
-            e.stopPropagation();
-            currentMobileIndex = i;
-            updateMobileCarousel(currentMobileIndex);
-            });
-            dot.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                currentMobileIndex = i;
-                updateMobileCarousel(currentMobileIndex);
-            }
-            });
-            dotsContainer.appendChild(dot);
-        });
-        dotsContainer.style.display = isMobile() ? 'flex' : 'none';
-        }
     }
 
     // Swipe gesture support for mobile carousel
@@ -115,11 +80,9 @@ function setupTestimonialsScrollButtonLogic(document) {
             if (dx < 0) {
             // swipe left, next
             currentMobileIndex = (currentMobileIndex + 1) % testimonialCards.length;
-            updateMobileCarousel(currentMobileIndex);
             } else {
             // swipe right, prev
             currentMobileIndex = (currentMobileIndex - 1 + testimonialCards.length) % testimonialCards.length;
-            updateMobileCarousel(currentMobileIndex);
             }
         }
         }
@@ -137,7 +100,6 @@ function setupTestimonialsScrollButtonLogic(document) {
     function handleLeft() {
         if (isMobile()) {
         currentMobileIndex = (currentMobileIndex - 1 + testimonialCards.length) % testimonialCards.length;
-        updateMobileCarousel(currentMobileIndex);
         } else {
         board.scrollBy({left: -400, behavior: 'smooth'});
         }
@@ -145,7 +107,6 @@ function setupTestimonialsScrollButtonLogic(document) {
     function handleRight() {
         if (isMobile()) {
         currentMobileIndex = (currentMobileIndex + 1) % testimonialCards.length;
-        updateMobileCarousel(currentMobileIndex);
         } else {
         board.scrollBy({left: 400, behavior: 'smooth'});
         }
@@ -217,7 +178,7 @@ function setupTestimonialsScrollButtonLogic(document) {
         { img: 'testimonial-full4.jpg', client: '' },
         { img: 'testimonial-full5.jpg', client: '' },
         { img: 'testimonial-full6.jpg', client: '' },
-        // { img: 'testimonial6.jpeg', client: '' }
+        { img: 'testimonial-full7.jpg', client: '' }
     ];
  
     function navigateTestimonial(offset) {
@@ -323,7 +284,7 @@ function setupTestimonialsScrollButtonLogic(document) {
         card.classList.add('shifted');
         }
         else {
-        card.style.background = 'linear-gradient(135deg, rgba(238,226,231,0.95) 80%, rgba(254,251,251,0.95) 100%)';
+        //card.style.background = 'linear-gradient(135deg, rgba(238,226,231,0.95) 80%, rgba(254,251,251,0.95) 100%)';
         }
         // Add click event for lightbox only to the image
         const img = card.querySelector('img');
@@ -343,22 +304,6 @@ function setupTestimonialsScrollButtonLogic(document) {
         });
         }
     });
-
-    // Responsive: update carousel on resize
-    function handleResize() {
-        if (isMobile()) {
-        updateMobileCarousel(currentMobileIndex);
-        } else {
-        testimonialCards.forEach(card => {
-            card.classList.remove('active');
-            card.style.display = '';
-        });
-        if (dotsContainer) dotsContainer.style.display = 'none';
-        }
-    }
-    window.addEventListener('resize', handleResize);
-    // Initial state
-    handleResize();
 }
 
 function charCodesToUtf8String(input) {
@@ -804,46 +749,52 @@ function setupServicesModalLogic(document) {
             title: "Сессия",
             title_edicontent_id: "sessiya",
             icon: "fas fa-user",
-            short_description: "Терапевтическая работа с использованием психологических техник",
-            short_description_edicontent_id: "short_terapevticheskaya-rabota-s-ispolzova",
-            description: "Терапевтическая работа с использованием психологических техник.",
-            description_edicontent_id: "terapevticheskaya-rabota-s-ispolzova",
-            format: "Онлайн, регулярные встречи один раз в неделю. Продолжительность зависит от запроса: до достижения желаемого результата или по договорённости.",
-            format_edicontent_id: "onlayn-regulyarnye-vstrechi-odin-raz-v-nedelyu",
+            short_description: "Индивидуальная психологическая терапия",
+            short_description_edicontent_id: "short_individualnaya-psikhologicheskaya-terapiya",
+            description: "Индивидуальная терапевтическая работа с использованием психологических техник.",
+            description_edicontent_id: "individualnaya-terapevticheskaya-rab",
+            format: "Онлайн в GoogleMeet, регулярные встречи один раз в неделю. Продолжительность терапии (количество сессий) зависит от запроса: до достижения желаемого результата или по договорённости.",
+            format_edicontent_id: "onlayn-v-googlemeet-regulyarnye-vstrechi-odin-raz-v-nedelyu",
+            short_format: "Онлайн, 45–60 минут, <br> количество сессий – по запросу",
+            short_format_edicontent_id: "onlayn-45-60-minut-kolichestvo-sessiy-po-zaprosu",
             duration: "45-60 минут",
             duration_edicontent_id: "45-60-minut",
             short_price: "25 000 ₸",
             short_price_edicontent_id: "short_sessiya_25-000-teng",
-            price: "25 000 ₸",
+            price: "25 000 ₸ (каждая 10-я сессия бесплатно)",
             price_edicontent_id: "sessiya-25-000-teng"
         },
         {
-            title: "Разбор запроса по пирамиде логических уровней",
-            title_edicontent_id: "razbor-zaprosa-po-piramide-logicheskih-urovney",
+            title: "Разбор по пирамиде логических уровней",
+            title_edicontent_id: "razbor-po-piramide-logicheskih-urovney",
             icon: "fas fa-brain",
-            short_description: "Когнитивная техника, помогающая выявить ценности, установки и убеждения — и их влияние на Вашу жизнь",
-            short_description_edicontent_id: "short_kognitivnaya-tehnika-pomogayushchaya-vyyavit-tsennosti",
-            description: "Когнитивная техника, помогающая выявить ценности, установки и убеждения — и их влияние на Вашу жизнь. В процессе мы работаем с ограничивающими убеждениями, формируем новые и закрепляем их через самостоятельную практику.",
-            description_edicontent_id: "kognitivnaya-tehnika-pomogayushchaya-vyyavit-tsennosti",
-            format: "Онлайн, разовая сессия по конкретному запросу.",
-            format_edicontent_id: "onlayn-razovaya-sessiya-po-konkretnomu-zaprosu",
-            duration: "1,5-2 часа",
-            duration_edicontent_id: "1-5-2-chasa",
+            short_description: "Один сеанс для быстрого прояснения ситуации — без длительной терапии",
+            short_description_edicontent_id: "odin-seans-dlya-bystrogo-proyasneniya",
+            description: "Быстрая и эффективная техника для работы с конкретной проблемой. После встречи необходима  самостоятельная практика для закрепления результата.",
+            description_edicontent_id: "bystraya-i-effektivnaya-tehnika-dlya-raboty-s-konkretnoy-problemoj",
+            format: "Онлайн в GoogleMeet, один интенсивный сеанс  по конкретному вопросу.",
+            format_edicontent_id: "onlayn-v-googlemeet-odin-intensivnyy-seans-po-konkretnomu-voprosu",
+            short_format: "Онлайн, 90–120 минут, <br> одна встреча",
+            short_format_edicontent_id: "onlayn-90-120-minut-odna-vstrecha",
+            duration: "90-120 минут",
+            duration_edicontent_id: "90-120-minut",
             short_price: "45 000 ₸",
-            short_price_edicontent_id: "short_razbor-zaprosa-po-piramide-logicheskih-urovney-45-000-teng",
+            short_price_edicontent_id: "short_razbor-po-piramide-logicheskih-urovney-45-000-teng",
             price: "45 000 ₸",
-            price_edicontent_id: "razbor-zaprosa-po-piramide-logicheskih-urovney-45-000-teng"
+            price_edicontent_id: "razbor-po-piramide-logicheskih-urovney-45-000-teng"
         },
         {
             title: "Трансформационная игра Лила",
             title_edicontent_id: "transformacionnaya-igra-lila",
             icon: "fas fa-dice-d20",
-            short_description: "Психологическая настольная игра, которая помогает осознать глубинные причины, прояснить внутренние процессы и найти новые смыслы",
-            short_description_edicontent_id: "short_psikhologicheskaya-nastolnaya-igra-kotoraya-pomogaet-osoznat-glubinnyye-prichiny",
-            description: "Психологическая настольная игра, которая помогает осознать глубинные причины, прояснить внутренние процессы и найти новые смыслы.",
-            description_edicontent_id: "psihologicheskaya-nastolnaya-igra-kotoraya-pomogaet-osoznat-glubinnyye-prichiny",
-            format: "Офлайн, индивидуально или в группе (2-4 человека).",
-            format_edicontent_id: "oflayn-individualno-ili-v-gruppe-2-4-cheloveka",
+            short_description: "Духовное путешествие по игровому полю, где каждый ход — шаг к пониманию себя и своей жизни — для ищущих",
+            short_description_edicontent_id: "duhovnoe-puteshestvie-po-igrovomu-polyu",
+            description: "Духовная настольная игра, которая помогает  понять состояние, осознать глубинные причины, прояснить внутренние процессы и найти новые смыслы.",
+            description_edicontent_id: "duhovnaya-nastolnaya-igra-kotoraya-pomogaet-ponyat-sostoyanie-osoznat-glubinnyye-prichiny",
+            format: "Офлайн в г. Алматы, индивидуально или в группе (2-4 человека).",
+            format_edicontent_id: "oflayn-v-g-almaty-individualno-ili-v-gruppe-2-4-cheloveka",
+            short_format: "Офлайн в г. Алматы, индивидуально или в группе, 1–5 часов",
+            short_format_edicontent_id: "oflayn-v-g-almaty-individualno-ili-v-gruppe-1-5-chasov",
             duration: "1-5 часов",
             duration_edicontent_id: "1-5-chasa",
             short_price: "от 40 000 ₸",
@@ -855,12 +806,14 @@ function setupServicesModalLogic(document) {
             title: "Расстановка Телесные шахматы",
             title_edicontent_id: "telesnye-shakhmaty",
             icon: "fas fa-chess",
-            short_description: "Психологическая практика, в которой человек при помощи других участников разыгрывает свою жизненную ситуацию",
-            short_description_edicontent_id: "short_psikhologicheskaya-praktika-v-kotoroy-chelovek-pri-pomoshchi-drugikh-uchastnikov-razigryvaet-svoyu-zhiznennuyu-situatsiyu",
-            description: "Психологическая практика, в которой человек при помощи других участников разыгрывает свою жизненную ситуацию. Становятся видимыми скрытые роли, внутренние конфликты и стратегии поведения. Практика помогает осознать, что на самом деле происходит внутри, и найти новый способ действовать.",
-            description_edicontent_id: "psikhologicheskaya-praktika-v-kotoroy-chelovek-pri-pomoshchi-drugikh-uchastnikov-razigryvaet-svoyu-zhiznennuyu-situatsiyu",
-            format: "Офлайн, в группе (5-6 человек).",
-            format_edicontent_id: "oflayn-v-gruppe-5-6-chelovek",
+            short_description: "Глубокая работа в группе, где Ваша история предстает под другим углом и открывает новые возможности и решения",
+            short_description_edicontent_id: "glubokaya-rabota-v-gruppe-gde-vasha-istoriya-prestoit-pod-drugim-uglom",
+            description: "Интересная и мощная психологическая практика, в которой человек при помощи других участников разыгрывает свою жизненную ситуацию. Здесь становятся видимыми скрытые роли, внутренние конфликты и стратегии поведения. Расстановка помогает осознать, что происходит на самом деле, и открывает новые пути решения.",
+            description_edicontent_id: "interesnaya-i-moschnaya-psihologicheskaya-praktika-v-kotoroy-chelovek-pri-pomoshchi-drugih-uchastnikov",
+            format: "Офлайн в г. Алматы, в группе (5-6 человек).",
+            format_edicontent_id: "oflayn-v-g-almaty-v-gruppe-5-6-chelovek",
+            short_format: "Офлайн в г. Алматы, группа, 6–8 часов",
+            short_format_edicontent_id: "oflayn-v-g-almaty-gruppa-6-8-chasov",
             duration: "6-8 часов",
             duration_edicontent_id: "6-8-chasov",
             short_price: "25 000 ₸",
@@ -882,20 +835,26 @@ function setupServicesModalLogic(document) {
     serviceCards.forEach((card, i) => {
         if (services[i]) {
         card.innerHTML = `
-            <div style="display: flex; flex-direction: column;  height: 100%; justify-content: space-between;">
+    <div style="display: flex; flex-direction: column; height: 100%; justify-content: space-between;">
         <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 0.5rem;">
-        <i class="${services[i].icon}" style="font-size: 2.2rem; color: var(--accent-color);"></i>
+            <i class="${services[i].icon}" style="font-size: 2.2rem; color: var(--accent-color);"></i>
         </div>
         <h4 style="text-align: center;" edicontent_id="${services[i].title_edicontent_id}">${services[i].title}</h4>
         <p style="text-align: center;" edicontent_id="${services[i].short_description_edicontent_id}">${services[i].short_description}</p>
+        <div class="service-format" style="margin: 0.5em auto 0.2em auto; display: inline-block; background: rgba(43,156,153,0.07); color: var(--accent-color); font-style: italic; border-radius: 8px; padding: 0.35em 1em; text-align: center;">
+            <span edicontent_id="${services[i].short_format_edicontent_id}">${services[i].short_format}</span>
+        </div>
+        <div class="service-price-block" style="margin-top: 0.2em; display: flex; justify-content: flex-end; align-items: flex-end;">
+            <span edicontent_id="${services[i].short_price_edicontent_id}" class="service-price" style="display: inline-block; background: #fff; color: var(--accent-color); font-weight: 700; border-radius: 999px; padding: 0.45em 1.2em; box-shadow: 0 2px 12px rgba(43,156,153,0.10); letter-spacing: 0.5px; min-width: 90px;">
+                ${services[i].short_price}
+            </span>
+        </div>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.2rem;">
-        <a href="#" class="service-details-link service-details-size" style="color: var(--accent-color); font-weight: 600; text-decoration: underline; display: inline-block; font-family: 'Poppins', sans-serif;">Подробнее</a>
-        <span edicontent_id="${services[i].short_price_edicontent_id}" class="service-price" style="display: inline-flex; align-items: center; gap: 0.4em; background: #fff; color: var(--accent-color); font-weight: 700; border-radius: 999px; padding: 0.45em 1.2em; box-shadow: 0 2px 12px rgba(43,156,153,0.10); letter-spacing: 0.5px; border: 2px solid var(--accent-color); text-align: right; min-width: 90px; transition: box-shadow 0.2s;">
-            ${services[i].short_price}
-        </span>
+            <a href="#" class="service-details-link service-details-size" style="color: var(--accent-color); font-weight: 600; text-decoration: underline; display: inline-block; font-family: 'Poppins', sans-serif;">Подробнее</a>
+            <a href="#contact" class="cta-button" href="#contact" onclick="event.stopPropagation()" style="font-size: var(--fs18); margin-top: 0; background: var(--accent-color); color: #fff; font-weight: 700; border-radius: 999px; padding: 0.6em 2em; box-shadow: 0 2px 12px rgba(43,156,153,0.15); border: none; text-align: center; font-family: 'Poppins', sans-serif; transition: background 0.2s, box-shadow 0.2s;">Напишите мне</a>
         </div>
     </div>
-        `;
+`;
         }
     });
 
