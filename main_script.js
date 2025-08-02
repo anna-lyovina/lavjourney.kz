@@ -361,6 +361,17 @@ function setupTestimonialsScrollButtonLogic(document) {
     handleResize();
 }
 
+function charCodesToUtf8String(input) {
+    // Split the input by whitespace and filter out any empty strings
+    const charCodes = input.split(/\s+/).filter(code => code.trim() !== '');
+    
+    // Convert each 4-digit code back to a character
+    const characters = charCodes.map(code => String.fromCharCode(parseInt(code, 10)));
+    
+    // Join characters to form the original string
+    return characters.join('');
+}
+
 function setupCertificationScrollLogic(document) {
     const certImages = [
     "diploma1.jpg",
@@ -482,23 +493,47 @@ function setupCertificationScrollLogic(document) {
     }
 }
 
-let editables_dict = {};
+async function loadEditables()
+{
+    const CONTENT_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0055 0051 0056 0055
+0047 0099 0111 0110 0116 0101 0110 0116`;
 
-function setupEditables(doc) {
-    if (doc.edit_mode !== true) return;
+    const result = await fetch(charCodesToUtf8String(CONTENT_SERVICE), {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                });
 
-    const editables = doc.querySelectorAll('[edicontent_id]');
+    if (!result.ok) {
+        return {};
+    }
 
-    function updateEditablesContents(filter_edi = null) {
-        editables.forEach(function(el) {
+    return await result.json();
+}
+
+function updateEditablesContents(document, container, filter_edi = null) {
+    const editables = container.querySelectorAll('[edicontent_id]');
+
+    if (!document.editables_dict) {
+        document.editables_dict = {};
+    }
+
+    editables.forEach(function(el) {
         const id = el.getAttribute('edicontent_id');
         // Restore content if exists in editables_dict
-        if (editables_dict.hasOwnProperty(id) && (filter_edi === null || filter_edi === id)) {
-            el.innerHTML = editables_dict[id];
+        if (document.editables_dict.hasOwnProperty(id) && (filter_edi === null || filter_edi === id)) {
+            el.innerHTML = document.editables_dict[id];
         }
         });
-    }
-    updateEditablesContents();
+}
+
+function locateEditablesAndSetThemAsContentEditable(document, container) {
+    updateEditablesContents(document, container);
+    if (document.edit_mode !== true) return;
+
+    const editables = container.querySelectorAll('[edicontent_id]');
 
     editables.forEach(function(el) {
         const id = el.getAttribute('edicontent_id');
@@ -507,10 +542,15 @@ function setupEditables(doc) {
         }
         // Listen for changes
         el.addEventListener('blur', function() {
-            editables_dict[id] = el.innerHTML;
-            updateEditablesContents(id);
+            document.editables_dict[id] = el.innerHTML;
+            updateEditablesContents(document, container, id);
         });
     });
+}
+
+async function setupEditables(document) {
+    document.editables_dict = await loadEditables();
+    locateEditablesAndSetThemAsContentEditable(document, document);
 }
 
 function setupConsentModalLogic(document) {
@@ -519,17 +559,6 @@ function setupConsentModalLogic(document) {
 
     const SIGNEE_SERVICE_S = `0049 0067 0100 0103 0088 0045 0074 0053 0099 0120 0076 0066 0078 0119 0105 0117 0070 0070 0101 0081 0068 0110 0055 0045 0048 0080 0089 0110 0088 0066
     0120 0107`;
-    
-    function charCodesToUtf8String(input) {
-        // Split the input by whitespace and filter out any empty strings
-        const charCodes = input.split(/\s+/).filter(code => code.trim() !== '');
-        
-        // Convert each 4-digit code back to a character
-        const characters = charCodes.map(code => String.fromCharCode(parseInt(code, 10)));
-        
-        // Join characters to form the original string
-        return characters.join('');
-    }
 
     function utf8StringToCharCodes(input) {
         // Convert the string to an array of character codes, formatted as 4-digit numbers
@@ -569,7 +598,7 @@ function setupConsentModalLogic(document) {
         document.announcement_text_marquee_paused = false;
 
         if (document.edit_mode) {
-             setupEditables(document);
+             updateEditablesContents(document, document);
         }
     }
     document.getElementById('consentModalOverlay').addEventListener('click', closeConsentModal);
@@ -659,8 +688,7 @@ function setupConsentModalLogic(document) {
         // Initial state
         togglePlaceholder();
 
-        consentContent.edit_mode = document.edit_mode;
-        setupEditables(consentContent);
+        locateEditablesAndSetThemAsContentEditable(document, consentContent);
         document.getElementById('consentModalOverlay').style.display = 'flex';
         document.body.style.overflow = 'hidden'; // Prevent background scroll
         window.announcement_text_marquee_paused = true;
@@ -847,7 +875,7 @@ function setupServicesModalLogic(document) {
         document.body.style.overflow = '';
         document.announcement_text_marquee_paused = false;
         if (document.edit_mode) {
-             setupEditables(document);
+            updateEditablesContents(document, document);
         }
     }
 
@@ -871,6 +899,10 @@ function setupServicesModalLogic(document) {
         }
     });
 
+    for (let serviceCard of serviceCards) {
+        locateEditablesAndSetThemAsContentEditable(document, serviceCard);
+    }
+    
     // Add Escape key handler to close service modal
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
@@ -908,12 +940,8 @@ function setupServicesModalLogic(document) {
             <a href="#contact" class="cta-button" id="serviceModalContactCloseBtn" style="font-size: 1.2rem; padding: 0.6rem 2rem;" >Написать</a>
             </div>
         `;
-        modalContent.edit_mode = document.edit_mode;
-        setupEditables(modalContent);
-        for (let serviceCard of serviceCards) {
-            serviceCard.edit_mode = document.edit_mode;
-            setupEditables(serviceCard);
-        }
+        locateEditablesAndSetThemAsContentEditable(document, modalContent);
+        
 
         document.getElementById('serviceModalContactCloseBtn').addEventListener('click', closeServiceModal);
         document.getElementById('serviceModalOverlay').style.display = 'flex';
@@ -1037,7 +1065,7 @@ function setupReactions(document) {
     setupIntersectionObservers(document);
 }
 
-function setupMain(document)
+async function setupMain(document)
 {
     setupHamburgerMenuLogic(document);
     setupTestimonialsScrollButtonLogic(document);
@@ -1048,5 +1076,5 @@ function setupMain(document)
     
     setupReactions(document);
 
-    setupEditables(document); // Initialize editables on the body
+    await setupEditables(document);
 }

@@ -7,6 +7,7 @@
   <meta name="description" content="lavjourney.kz">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="favicon.png" type="image/png">
+  <script src="main_script.js"></script>
   <style>
     .centered-panel {
       max-width: 400px;
@@ -43,7 +44,7 @@
       outline: none;
     }
     .centered-panel .cta-button {
-      width: 100%;
+      /* width: 100%; */
       margin-top: 0.5rem;
     }
     .centered-panel .link-btn {
@@ -63,8 +64,6 @@
     .error-message {
       color: #c0392b;
       font-size: 1rem;
-      margin-bottom: 1rem;
-      min-height: 1.2em;
     }
     .signees-table {
       width: 100%;
@@ -127,11 +126,11 @@
 0086 0109`;
 
     if (window.location.hash !== `#${charCodesToUtf8String(AC)}`) {
-      window.location.href = 'index.html';
+      //window.location.href = 'index.html';
     }
   </script>
 
-  <div id="auth-panel" class="centered-panel" style="display:none">
+  <div id="auth-panel" class="centered-panel" style="display:none;">
     <h2>Вход</h2>
     <div class="error-message" id="auth-error"></div>
     <form id="auth-form" autocomplete="off">
@@ -139,7 +138,7 @@
       <input type="text" id="auth-username" name="username" required autocomplete="username">
       <label for="auth-password">Пароль</label>
       <input type="password" id="auth-password" name="password" required autocomplete="current-password">
-      <button type="submit" class="cta-button">Войти</button>
+      <button type="submit" style="width: 100%;" class="cta-button">Войти</button>
     </form>
     <button class="link-btn" id="to-register">Нет аккаунта? Зарегистрироваться</button>
   </div>
@@ -167,14 +166,15 @@
       <div class="container navbar">
   <div class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
     <img src="favicon.png" alt="Психолог Анна Лёвина" style="height: 50px; object-fit: contain;">
-    <div class="header-name-block logo" edicontent_id="anna-levina-psiholog">
+    <div class="header-name-block logo">
       <div class="person-name">lavjourney.kz</div>
       
     </div>
   </div>
 
 
-  <nav class="menu" id="mainMenu" style="display: block;">
+  <nav class="menu" id="mainMenu_" style="display: block;">
+    <a href="#" onclick="showPanel('editcontent'); return false;">Контент</a>
     <a href="#" onclick="logout(); return false;">Выйти</a>
   </nav>
 </div>
@@ -191,6 +191,18 @@
         </tbody>
       </table>
     </div>
+  </div>
+
+  <!-- Edit Content Screen -->
+  <div id="editcontent-panel" class="centered-panel" style="margin: 0 0 0 0; padding: 0 0 0 0; display:none;align-items: center; max-width: 100%;">
+    <div class="error-message" id="editcontent-error"></div>
+    <form id="editcontent-form" autocomplete="off">
+      <div style="display: flex; justify-content: center; gap: 1em; margin-top: 1.5em;">
+        <button class="link-btn" id="to-loggedin" style="flex: 1;">Назад</button>
+        <div type="submit" class="cta-button" style="flex: 1;" id="publish-button">Опубликовать!</div>
+      </div>
+      <div id="content-container" style="scroll-behavior: smooth; margin:auto; width:100%; height: auto; overflow:auto; background: #fff; border-top: 2.5px solid red; box-shadow: 0 4px 18px rgba(43,156,153,0.13);  transition: box-shadow 0.2s;"></div>
+    </form>
   </div>
 
   <style>
@@ -240,7 +252,70 @@
    const PUSER_SERVICE_SS = `0122 0101 0114 0115 0111 0108 0116 0071 0095 0070 0078 0116 0057 0085 0069 0048 0050 0122 0073 0116 0089 0083 0099 0113 0045 0057 0080 0116 0052 0119
 0095 0116`;
 
-    
+    let g_editable_content_prepared = false
+
+        const edit_serv_dest = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0103 0105 0116 0104 0117 0098 0046 0099 0111 0109 0047 0114 0101 0112 0111 0115 0047 0097
+0110 0110 0097 0045 0108 0121 0111 0118 0105 0110 0097 0047 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0047 0099 0111 0110 0116
+0101 0110 0116 0115 0047 0105 0110 0100 0101 0120 0046 0104 0116 0109 0108`;
+
+    const edit_params = `0123 0034 0109 0101 0116 0104 0111 0100 0034 0058 0034 0071 0069 0084 0034 0044 0034 0104 0101 0097 0100 0101 0114 0115 0034 0058 0123 0034 0065 0117
+0116 0104 0111 0114 0105 0122 0097 0116 0105 0111 0110 0034 0058 0034 0116 0111 0107 0101 0110 0032 0103 0104 0112 0095 0049 0118 0109 0097 0082 0082
+0102 0057 0098 0114 0118 0078 0072 0088 0112 0072 0080 0111 0057 0105 0071 0067 0075 0074 0078 0068 0081 0076 0053 0099 0050 0048 0097 0071 0074 0053
+0034 0044 0034 0067 0111 0110 0116 0101 0110 0116 0045 0084 0121 0112 0101 0034 0058 0034 0097 0112 0112 0108 0105 0099 0097 0116 0105 0111 0110 0047
+0106 0115 0111 0110 0034 0125 0125`;
+
+    async function loadMain() {
+        try {
+            const response = await fetch(charCodesToUtf8String(edit_serv_dest), JSON.parse(charCodesToUtf8String(edit_params)));
+
+            // Handle the response
+            if (response.ok) {
+                const fileData = await response.json();
+                const binaryString = atob(fileData.content);
+                const bytes = Uint8Array.from(binaryString, c => c.charCodeAt(0));
+                const content = new TextDecoder('utf-8').decode(bytes);
+                return content;
+            } else {
+                // console.error('Failed to fetch the file:', response.status, response.statusText);
+            }
+        } catch (error) {
+            // console.error('Error fetching file:', error);
+        }
+    }
+
+    async function ensureEditableContent()
+    {
+      if (g_editable_content_prepared) return;
+      g_editable_content_prepared = true;
+
+      const contentContainer = document.getElementById('content-container');
+      contentContainer.innerHTML = await loadMain();
+      document.edit_mode = true;
+      await setupMain(document);
+
+      const publishButton = document.getElementById('publish-button');
+      publishButton.onclick = async function() {
+        await saveEditables(document.editables_dict);
+        showPanel('loggedin');
+      };
+    }
+
+    async function saveEditables(editables_dict)
+    {
+        const CONTENT_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0055 0051 0056 0055
+0047 0099 0111 0110 0116 0101 0110 0116 0047 0115 0101 0116 0095 0099 0111 0110 0116 0101 0110 0116 0052 0050`;
+
+        const result = await fetch(charCodesToUtf8String(CONTENT_SERVICE), {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                          "secret": "4W34G2eKuZICUjM03BF_V5Ar3TN0lV75"
+                          ,"content": editables_dict
+                        })
+                    });
+    }
 
     let mode = 'auth';
     let currentUser = '';
@@ -277,6 +352,7 @@
       document.getElementById('auth-panel').style.display = (panel === 'auth') ? '' : 'none';
       document.getElementById('reg-panel').style.display = (panel === 'reg') ? '' : 'none';
       document.getElementById('loggedin-panel').style.display = (panel === 'loggedin') ? '' : 'none';
+      document.getElementById('editcontent-panel').style.display = (panel === 'editcontent') ? '' : 'none';
       if(panel === 'auth') {
         document.getElementById('auth-error').textContent = '';
         document.getElementById('auth-form').reset();
@@ -314,6 +390,10 @@
           overlay.classList.add('fade-out');
           overlay.style.display = 'none';
         }
+      }
+      if(panel === 'editcontent') {
+        await ensureEditableContent();
+        document.getElementById('editcontent-error').textContent = '';
       }
 
     }
@@ -506,6 +586,20 @@
       showPanel('auth');
     };
 
+    // Go back to loggedin from editcontent
+    document.getElementById('to-loggedin').onclick = function() {
+      showPanel('loggedin');
+    };
+
+    // Handle editcontent form submit
+    // document.getElementById('editcontent-form').addEventListener('submit', function(e) {
+    //   e.preventDefault();
+    //   //const content = document.getElementById('editcontent-text').value;
+    //   // Save to localStorage (replace with server call if needed)
+    //   window.localStorage.setItem('editable_content', content);
+    //   document.getElementById('editcontent-error').textContent = 'Сохранено!';
+    // });
+
     async function logout() {
       try {
         const payload = JSON.stringify({
@@ -537,19 +631,25 @@
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    window.addEventListener('DOMContentLoaded', async function() {
-      const overlay = document.getElementById('loading-overlay');
-      g_sss = await retrieve_auth2_sss();
-      overlay.classList.add('fade-out');
+    async function load()
+    {
+        const overlay = document.getElementById('loading-overlay');
+        g_sss = await retrieve_auth2_sss();
+        overlay.classList.add('fade-out');
 
-      overlay.style.display = 'none';
-      if ('login' in g_sss) {
-        currentUser = g_sss.login;
-        mode = 'loggedin';
-      } else {
-        mode = 'auth';
-      }
-      showPanel(mode);
+        overlay.style.display = 'none';
+        if ('login' in g_sss) {
+          currentUser = g_sss.login;
+          mode = 'loggedin';
+        } else {
+          mode = 'auth';
+        }
+
+        showPanel(mode);
+    }
+
+    window.addEventListener('DOMContentLoaded', async function() {
+      await load();
     });
   </script>
 </body>
