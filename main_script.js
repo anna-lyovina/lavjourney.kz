@@ -502,7 +502,7 @@ function setupEditables(doc) {
 
     editables.forEach(function(el) {
         const id = el.getAttribute('edicontent_id');
-        if (!el.hasAttribute('href')) {
+        if (!el.hasAttribute('href') && el.tagName.toLowerCase() !== 'a') {
             el.setAttribute('contenteditable', 'true');
         }
         // Listen for changes
@@ -574,6 +574,16 @@ function setupConsentModalLogic(document) {
     }
     document.getElementById('consentModalOverlay').addEventListener('click', closeConsentModal);
     document.getElementById('consentModalCloseBtn').addEventListener('click', closeConsentModal);
+
+    // Add Escape key handler to close consent modal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const overlay = document.getElementById('consentModalOverlay');
+            if (overlay && overlay.style.display !== 'none') {
+                closeConsentModal();
+            }
+        }
+    });
 
     function openConsentModal() {
         // Retrieve previous values from window-scoped variables or set defaults
@@ -858,6 +868,16 @@ function setupServicesModalLogic(document) {
         </div>
     </div>
         `;
+        }
+    });
+
+    // Add Escape key handler to close service modal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const overlay = document.getElementById('serviceModalOverlay');
+            if (overlay && overlay.style.display !== 'none') {
+                closeServiceModal();
+            }
         }
     });
 
