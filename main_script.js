@@ -287,10 +287,9 @@ function setupTestimonialsScrollButtonLogic(document) {
         //card.style.background = 'linear-gradient(135deg, rgba(238,226,231,0.95) 80%, rgba(254,251,251,0.95) 100%)';
         }
         // Add click event for lightbox only to the image
-        const img = card.querySelector('img');
-        if (img) {
-        img.style.cursor = 'pointer';
-        img.addEventListener('click', function(e) {
+
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function(e) {
             // Prevent accidental click after drag: only allow if not just dragged
             const board = document.querySelector('.testimonials-board');
             const now = Date.now();
@@ -302,7 +301,6 @@ function setupTestimonialsScrollButtonLogic(document) {
             }
             openTestimonialLightbox(i);
         });
-        }
     });
 }
 
