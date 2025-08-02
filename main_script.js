@@ -8,7 +8,8 @@ function setupHamburgerMenuLogic(document) {
     const menuCloseBtn = document.getElementById('hamburgerClose');
     const menuLinks = document.querySelectorAll('.menu-link');
 
-    function openMenu() {
+    function openMenu(e) {
+        e.stopPropagation(); // Prevent event bubbling
         menuOverlay.classList.add('active');
         hamburgerBtn.classList.add('hide');
         document.body.style.overflow = 'hidden';
@@ -29,6 +30,7 @@ function setupHamburgerMenuLogic(document) {
     }
 
     hamburgerBtn.addEventListener('click', openMenu);
+
     menuCloseBtn.addEventListener('click', closeMenu);
     menuOverlay.addEventListener('click', function(e) {
         if (e.target === menuOverlay) closeMenu();
@@ -483,22 +485,32 @@ function setupCertificationScrollLogic(document) {
 let editables_dict = {};
 
 function setupEditables(doc) {
-  if (doc.edit_mode !== true) return;
+    if (doc.edit_mode !== true) return;
 
-  const editables = doc.querySelectorAll('[edicontent_id]');
+    const editables = doc.querySelectorAll('[edicontent_id]');
 
-  editables.forEach(function(el) {
-    const id = el.getAttribute('edicontent_id');
-    // Restore content if exists in editables_dict
-    if (editables_dict.hasOwnProperty(id)) {
-      el.innerHTML = editables_dict[id];
+    function updateEditablesContents(filter_edi = null) {
+        editables.forEach(function(el) {
+        const id = el.getAttribute('edicontent_id');
+        // Restore content if exists in editables_dict
+        if (editables_dict.hasOwnProperty(id) && (filter_edi === null || filter_edi === id)) {
+            el.innerHTML = editables_dict[id];
+        }
+        });
     }
-    el.setAttribute('contenteditable', 'true');
-    // Listen for changes
-    el.addEventListener('input', function() {
-      editables_dict[id] = el.innerHTML;
+    updateEditablesContents();
+
+    editables.forEach(function(el) {
+        const id = el.getAttribute('edicontent_id');
+        if (!el.hasAttribute('href')) {
+            el.setAttribute('contenteditable', 'true');
+        }
+        // Listen for changes
+        el.addEventListener('blur', function() {
+            editables_dict[id] = el.innerHTML;
+            updateEditablesContents(id);
+        });
     });
-  });
 }
 
 function setupConsentModalLogic(document) {
@@ -555,6 +567,10 @@ function setupConsentModalLogic(document) {
         document.getElementById('consentModalOverlay').style.display = 'none';
         document.body.style.overflow = '';
         document.announcement_text_marquee_paused = false;
+
+        if (document.edit_mode) {
+             setupEditables(document);
+        }
     }
     document.getElementById('consentModalOverlay').addEventListener('click', closeConsentModal);
     document.getElementById('consentModalCloseBtn').addEventListener('click', closeConsentModal);
@@ -567,7 +583,7 @@ function setupConsentModalLogic(document) {
 
         const consentContent = document.getElementById('consentModalContent');
         consentContent.innerHTML = `
-            <h3>Соглашение</h3>
+            <h3 edicontent_id="soglashenie">Соглашение</h3>
             <p edicontent_id="1-harakter-raboty-psihologicheskaya-" style="text-align: justify;hyphens: auto;">
             <strong>1.&nbsp;&nbsp;&nbsp;&nbsp;Характер работы</strong><br>Психологическая работа не является медицинской или психиатрической помощью. Я не ставлю диагнозов и не назначаю медикаментозного лечения. Моя задача — это сопровождение, исследование внутренних процессов и поддержка в поиске смысла, ясности и новых стратегий поведения.<br><br>
             <strong>2.&nbsp;&nbsp;&nbsp;&nbsp;Ощущения в процессе</strong><br>Наша совместная работа может вызывать разные переживания — облегчение, тревогу, раздражение, сомнение, усталость, внутренние открытия. Это естественно, особенно если затрагиваются глубинные темы. Всё это — часть живого процесса изменений.<br><br>
@@ -633,6 +649,7 @@ function setupConsentModalLogic(document) {
         // Initial state
         togglePlaceholder();
 
+        consentContent.edit_mode = document.edit_mode;
         setupEditables(consentContent);
         document.getElementById('consentModalOverlay').style.display = 'flex';
         document.body.style.overflow = 'hidden'; // Prevent background scroll
@@ -819,6 +836,9 @@ function setupServicesModalLogic(document) {
         document.getElementById('serviceModalOverlay').style.display = 'none';
         document.body.style.overflow = '';
         document.announcement_text_marquee_paused = false;
+        if (document.edit_mode) {
+             setupEditables(document);
+        }
     }
 
     serviceCards.forEach((card, i) => {
@@ -841,21 +861,22 @@ function setupServicesModalLogic(document) {
         }
     });
 
-    if (document.edit_mode !== true) {
-        serviceCards.forEach((card, idx) => {
-            card.addEventListener('click', function(event) {
-                event.preventDefault(); 
-                openServiceModal(idx);
-            });
+    const serviceCardsInfoLinks = document.querySelectorAll('.card.service-card.fancy-service .service-details-link');
+    let linkables = document.edit_mode ? serviceCardsInfoLinks : serviceCards;
+
+    linkables.forEach((card, idx) => {
+        card.addEventListener('click', function(event) {
+            event.preventDefault(); 
+            openServiceModal(idx);
         });
-    }
+    });
 
     
 
     function openServiceModal(index) {
         const modalContent = document.getElementById('serviceModalContent');
         modalContent.innerHTML = `
-            <h3><i class="${services[index].icon}" style="margin-right: 0.5rem;"></i>${services[index].title}</h3>
+            <h3><i class="${services[index].icon}" style="margin-right: 0.5rem;"></i><em edicontent_id="${services[index].title_edicontent_id}" style="font-style: normal">${services[index].title}</em></h3>
             <p edicontent_id="${services[index].description_edicontent_id}" style="text-align: justify;hyphens: auto;">${services[index].description}</p>
             <h3>Формат</h3>
             <p edicontent_id="${services[index].format_edicontent_id}" style="text-align: justify;hyphens: auto;">${services[index].format}</p>
@@ -867,20 +888,18 @@ function setupServicesModalLogic(document) {
             <a href="#contact" class="cta-button" id="serviceModalContactCloseBtn" style="font-size: 1.2rem; padding: 0.6rem 2rem;" >Написать</a>
             </div>
         `;
+        modalContent.edit_mode = document.edit_mode;
         setupEditables(modalContent);
+        for (let serviceCard of serviceCards) {
+            serviceCard.edit_mode = document.edit_mode;
+            setupEditables(serviceCard);
+        }
+
         document.getElementById('serviceModalContactCloseBtn').addEventListener('click', closeServiceModal);
         document.getElementById('serviceModalOverlay').style.display = 'flex';
         document.body.style.overflow = 'hidden';
         document.announcement_text_marquee_paused = true;
     }
-
-     serviceCards.forEach((card, idx) => {
-        card.addEventListener('click', function(e) {
-            e.preventDefault();
-            openServiceModal(idx);
-        });
-    });
-
     
     document.getElementById('serviceModalOverlay').addEventListener('click', closeServiceModal);
     document.getElementById('serviceModalCloseBtn').addEventListener('click', closeServiceModal);
@@ -942,6 +961,8 @@ function setupMarqueeLogic(document) {
 }
 
 function setupMenuReactions(document) {
+    if (document.edit_mode) return;
+
     const menuLinks = document.querySelectorAll('.menu a[href^="#"], .footer-right a[href^="#"], .menu-overlay .menu-link[href^="#"]');
     menuLinks.forEach(link => {
         link.addEventListener('click', async function(e) {
