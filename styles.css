@@ -1422,12 +1422,12 @@ lav-logo {
   }
   .testimonial-card {
     flex: 0 0 350px;
-    width: 350px;
+    width: 330px;
     height: 290px;
   }
 
   .testimonial-card img {
-    width: 330px;
+    width: 310px;
     height: 999px; 
     object-fit: contain;
 }
