@@ -49,11 +49,48 @@ function setupTestimonialsScrollButtonLogic(document) {
     const btnLeft = document.querySelector('.testimonial-scroll-btn.left');
     const btnRight = document.querySelector('.testimonial-scroll-btn.right');
     const testimonialCards = Array.from(document.querySelectorAll('.testimonial-card'));
+    const dotsContainer = document.querySelector('.testimonial-dots');
 
     let currentMobileIndex = 0;
 
     function isMobile() {
         return window.innerWidth <= 767;
+    }
+
+
+    function updateMobileCarousel(index) {
+        testimonialCards.forEach((card, i) => {
+        if (isMobile()) {
+            card.classList.toggle('active', i === index);
+            card.style.display = i === index ? 'flex' : 'none';
+        } else {
+            card.classList.remove('active');
+            card.style.display = '';
+        }
+        });
+        // Update dots
+        if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        testimonialCards.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.className = 'testimonial-dot' + (i === index ? ' active' : '');
+            dot.setAttribute('aria-label', 'Показать отзыв ' + (i+1));
+            dot.tabIndex = 0;
+            dot.addEventListener('click', function(e) {
+            e.stopPropagation();
+            currentMobileIndex = i;
+            updateMobileCarousel(currentMobileIndex);
+            });
+            dot.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                currentMobileIndex = i;
+                updateMobileCarousel(currentMobileIndex);
+            }
+            });
+            dotsContainer.appendChild(dot);
+        });
+        dotsContainer.style.display = isMobile() ? 'flex' : 'none';
+        }
     }
 
     // Swipe gesture support for mobile carousel
@@ -80,9 +117,11 @@ function setupTestimonialsScrollButtonLogic(document) {
             if (dx < 0) {
             // swipe left, next
             currentMobileIndex = (currentMobileIndex + 1) % testimonialCards.length;
+            updateMobileCarousel(currentMobileIndex);
             } else {
             // swipe right, prev
             currentMobileIndex = (currentMobileIndex - 1 + testimonialCards.length) % testimonialCards.length;
+            updateMobileCarousel(currentMobileIndex);
             }
         }
         }
@@ -100,14 +139,16 @@ function setupTestimonialsScrollButtonLogic(document) {
     function handleLeft() {
         if (isMobile()) {
         currentMobileIndex = (currentMobileIndex - 1 + testimonialCards.length) % testimonialCards.length;
-        } else {
+        updateMobileCarousel(currentMobileIndex);
+    } else {
         board.scrollBy({left: -400, behavior: 'smooth'});
         }
     }
     function handleRight() {
         if (isMobile()) {
         currentMobileIndex = (currentMobileIndex + 1) % testimonialCards.length;
-        } else {
+        updateMobileCarousel(currentMobileIndex);
+    } else {
         board.scrollBy({left: 400, behavior: 'smooth'});
         }
     }
@@ -302,6 +343,24 @@ function setupTestimonialsScrollButtonLogic(document) {
             openTestimonialLightbox(i);
         });
     });
+
+
+    // Responsive: update carousel on resize
+    function handleResize() {
+        if (isMobile()) {
+        updateMobileCarousel(currentMobileIndex);
+        } else {
+        testimonialCards.forEach(card => {
+            card.classList.remove('active');
+            card.style.display = '';
+        });
+        if (dotsContainer) dotsContainer.style.display = 'none';
+        }
+    }
+    window.addEventListener('resize', handleResize);
+    // Initial state
+    handleResize();
+
 }
 
 function charCodesToUtf8String(input) {
@@ -753,7 +812,7 @@ function setupServicesModalLogic(document) {
             description_edicontent_id: "individualnaya-terapevticheskaya-rab",
             format: "Онлайн в GoogleMeet, регулярные встречи один раз в неделю. Продолжительность терапии (количество сессий) зависит от запроса: до достижения желаемого результата или по договорённости.",
             format_edicontent_id: "onlayn-v-googlemeet-regulyarnye-vstrechi-odin-raz-v-nedelyu",
-            short_format: "Онлайн, 45–60 минут, <br> количество сессий – по запросу",
+            short_format: "Онлайн, 45–60 минут, количество сессий – по запросу",
             short_format_edicontent_id: "onlayn-45-60-minut-kolichestvo-sessiy-po-zaprosu",
             duration: "45-60 минут",
             duration_edicontent_id: "45-60-minut",
@@ -772,7 +831,7 @@ function setupServicesModalLogic(document) {
             description_edicontent_id: "bystraya-i-effektivnaya-tehnika-dlya-raboty-s-konkretnoy-problemoj",
             format: "Онлайн в GoogleMeet, один интенсивный сеанс  по конкретному вопросу.",
             format_edicontent_id: "onlayn-v-googlemeet-odin-intensivnyy-seans-po-konkretnomu-voprosu",
-            short_format: "Онлайн, 90–120 минут, <br> одна встреча",
+            short_format: "Онлайн, 90–120 минут, одна встреча",
             short_format_edicontent_id: "onlayn-90-120-minut-odna-vstrecha",
             duration: "90-120 минут",
             duration_edicontent_id: "90-120-minut",
@@ -839,18 +898,21 @@ function setupServicesModalLogic(document) {
         </div>
         <h4 style="text-align: center;" edicontent_id="${services[i].title_edicontent_id}">${services[i].title}</h4>
         <p style="text-align: center;" edicontent_id="${services[i].short_description_edicontent_id}">${services[i].short_description}</p>
-        <div class="service-format" style="margin: 0.5em auto 0.2em auto; display: inline-block; background: rgba(43,156,153,0.07); color: var(--accent-color); font-style: italic; border-radius: 8px; padding: 0.35em 1em; text-align: center;">
+        <div class="service-format" style="margin: 0.5em auto 0.2em auto; display: inline-block; font-style: italic; border-radius: 8px; padding: 0.35em 1em; text-align: center;">
             <span edicontent_id="${services[i].short_format_edicontent_id}">${services[i].short_format}</span>
         </div>
-        <div class="service-price-block" style="margin-top: 0.2em; display: flex; justify-content: flex-end; align-items: flex-end;">
-            <span edicontent_id="${services[i].short_price_edicontent_id}" class="service-price" style="display: inline-block; background: #fff; color: var(--accent-color); font-weight: 700; border-radius: 999px; padding: 0.45em 1.2em; box-shadow: 0 2px 12px rgba(43,156,153,0.10); letter-spacing: 0.5px; min-width: 90px;">
+        <div style="margin-top: 0.2em; display: flex; justify-content: flex-start; align-items: flex-start;">
+            <a href="#" class="service-details-link service-details-size" style=" font-weight: 600; text-decoration: underline; display: inline-block; font-family: 'Poppins', sans-serif; font-size: var(--fs14);">Подробнее</a>
+        </div>
+        <div style="margin-top: 0.7em; display: flex; justify-content: flex-end; align-items: flex-end;">
+            <div style="display: flex; justify-content: center; align-items: center;">
+            <span edicontent_id="${services[i].short_price_edicontent_id}" class="service-price" style="font-size: var(--fs16); display: inline-block; background: #fff; color: var(--accent-color); font-weight: 700; border-radius: 999px; padding: 0.45em 1.2em; box-shadow: 0 2px 12px rgba(43,156,153,0.10); letter-spacing: 0.5px; min-width: 90px; margin-right: 0.5rem;">
                 ${services[i].short_price}
             </span>
+            <a href="#contact" class="cta-button" href="#contact" onclick="event.stopPropagation()" style="font-size: var(--fs16); margin-top: 0; background: var(--accent-color); color: #fff; font-weight: 700; padding: 0.6em 2em; box-shadow: 0 2px 12px rgba(43,156,153,0.15); border: none; text-align: center; font-family: 'Poppins', sans-serif; transition: background 0.2s, box-shadow 0.2s;">Написать</a>
+            </div>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.2rem;">
-            <a href="#" class="service-details-link service-details-size" style="color: var(--accent-color); font-weight: 600; text-decoration: underline; display: inline-block; font-family: 'Poppins', sans-serif;">Подробнее</a>
-            <a href="#contact" class="cta-button" href="#contact" onclick="event.stopPropagation()" style="font-size: var(--fs18); margin-top: 0; background: var(--accent-color); color: #fff; font-weight: 700; border-radius: 999px; padding: 0.6em 2em; box-shadow: 0 2px 12px rgba(43,156,153,0.15); border: none; text-align: center; font-family: 'Poppins', sans-serif; transition: background 0.2s, box-shadow 0.2s;">Напишите мне</a>
-        </div>
+
     </div>
 `;
         }
