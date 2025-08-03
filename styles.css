@@ -1421,13 +1421,13 @@ lav-logo {
     min-height: 420px;
   }
   .testimonial-card {
-    flex: 0 0 350px;
-    width: 330px;
+    flex: 0 0 340px;
+    width: 340px;
     height: 290px;
   }
 
   .testimonial-card img {
-    width: 310px;
+    width: 320px;
     height: 999px; 
     object-fit: contain;
 }
