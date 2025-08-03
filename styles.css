@@ -1309,7 +1309,7 @@ lav-logo {
 .testimonial-client {
   font-weight: 700;
   color: var(--primary-color);
-  font-size: var(--fs20);
+  font-size: var(--fs24);
   margin-bottom: 0.7rem;
   align-self: flex-start;
 }
@@ -1336,7 +1336,7 @@ lav-logo {
   display: flex;
     align-items: center; /* Vertically centers the image */
     justify-content: center; /* Optional: horizontally centers the image */
-    height: 300px;
+    height: 360px;
 
   background: linear-gradient(135deg, rgba(254,251,251,0.95) 80%, rgba(43,156,153,0.07) 100%);
   border-radius: 16px;
