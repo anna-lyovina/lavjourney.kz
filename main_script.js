@@ -229,8 +229,8 @@ function setupTestimonialsScrollButtonLogic(document) {
         document.getElementById('testimonialLightboxImg').src = data.img;
     }
 
-    document.querySelector('.nav.prev.desktop-only').addEventListener('click', function(event) { event.stopPropagation(); navigateTestimonial(-1); });
-    document.querySelector('.nav.next.desktop-only').addEventListener('click', function(event) { event.stopPropagation(); navigateTestimonial(1); });
+    document.querySelector('.nav.prev').addEventListener('click', function(event) { event.stopPropagation(); navigateTestimonial(-1); });
+    document.querySelector('.nav.next').addEventListener('click', function(event) { event.stopPropagation(); navigateTestimonial(1); });
 
     function closeTestimonialLightbox() {
         document.getElementById('testimonialLightbox').style.display = 'none';
@@ -262,7 +262,6 @@ function setupTestimonialsScrollButtonLogic(document) {
     }
 
     document.getElementById('testimonialLightbox').addEventListener('click', closeTestimonialLightbox);
-    document.querySelector('.nav.prev.desktop-only').addEventListener('click', closeTestimonialLightbox);
     document.addEventListener('keydown', testimonialLightboxKeyHandler);
 
     function openTestimonialLightbox(index) {

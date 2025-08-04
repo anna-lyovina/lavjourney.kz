@@ -1406,7 +1406,7 @@ lav-logo {
 
 @media (max-width: 767px) {
   #testimonialLightboxImg {
-    transform: scale(1.25);
+    transform: scale(1.1);
   }
 
   #consentSurnamePlaceholder span {
