@@ -213,13 +213,13 @@ function setupTestimonialsScrollButtonLogic(document) {
     let currentTestimonialIndex = 0;
 
     const testimonialData = [
-        { img: 'testimonial-full1.jpg', client: '' },
-        { img: 'testimonial-full2.jpg', client: '' },
-        { img: 'testimonial-full3.jpg', client: '' },
-        { img: 'testimonial-full4.jpg', client: '' },
-        { img: 'testimonial-full5.jpg', client: '' },
-        { img: 'testimonial-full6.jpg', client: '' },
-        { img: 'testimonial-full7.jpg', client: '' }
+        { img: 'testimonial-full1.webp', client: '' },
+        { img: 'testimonial-full2.webp', client: '' },
+        { img: 'testimonial-full3.webp', client: '' },
+        { img: 'testimonial-full4.webp', client: '' },
+        { img: 'testimonial-full5.webp', client: '' },
+        { img: 'testimonial-full6.webp', client: '' },
+        { img: 'testimonial-full7.webp', client: '' }
     ];
  
     function navigateTestimonial(offset) {
