@@ -1,5 +1,14 @@
 
 
+const testimonialData = [
+        { img: 'testimonial-full1.webp', client: '' },
+        { img: 'testimonial-full2.webp', client: '' },
+        { img: 'testimonial-full3.webp', client: '' },
+        { img: 'testimonial-full4.webp', client: '' },
+        { img: 'testimonial-full5.webp', client: '' },
+        { img: 'testimonial-full6.webp', client: '' },
+        { img: 'testimonial-full7.webp', client: '' }
+    ];
 
 function setupHamburgerMenuLogic(document) {
     // Hamburger menu logic
@@ -212,15 +221,7 @@ function setupTestimonialsScrollButtonLogic(document) {
 
     let currentTestimonialIndex = 0;
 
-    const testimonialData = [
-        { img: 'testimonial-full1.webp', client: '' },
-        { img: 'testimonial-full2.webp', client: '' },
-        { img: 'testimonial-full3.webp', client: '' },
-        { img: 'testimonial-full4.webp', client: '' },
-        { img: 'testimonial-full5.webp', client: '' },
-        { img: 'testimonial-full6.webp', client: '' },
-        { img: 'testimonial-full7.webp', client: '' }
-    ];
+    
  
     function navigateTestimonial(offset) {
         currentTestimonialIndex = (currentTestimonialIndex + offset + testimonialData.length) % testimonialData.length;
@@ -1083,6 +1084,38 @@ function setupReactions(document) {
     setupIntersectionObservers(document);
 }
 
+async function loadFullTestimonials() {
+    return new Promise((resolve) => {
+        let loadedCount = 0;
+        const totalImages = testimonialData.length;
+        
+        if (totalImages === 0) {
+            resolve();
+            return;
+        }
+        
+        testimonialData.forEach((testimonial, index) => {
+            const img = new Image();
+            
+            img.onload = () => {
+                loadedCount++;
+                if (loadedCount === totalImages) {
+                    resolve();
+                }
+            };
+            
+            img.onerror = () => {
+                loadedCount++;
+                if (loadedCount === totalImages) {
+                    resolve();
+                }
+            };
+            
+            img.src = testimonial.img;
+        });
+    });
+};
+
 async function setupMain(document)
 {
     setupHamburgerMenuLogic(document);
@@ -1095,4 +1128,5 @@ async function setupMain(document)
     setupReactions(document);
 
     await setupEditables(document);
+    await loadFullTestimonials();
 }
