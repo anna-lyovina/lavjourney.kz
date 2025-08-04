@@ -965,7 +965,7 @@ lav-logo {
 /* --- About Me Redesign --- */
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 0.9fr 2.1fr;
       align-items: center;
     }
     .about-image-block {
@@ -1521,3 +1521,17 @@ lav-logo {
   opacity: 0.7;
 }
 
+.force-justify {
+  text-align: justify;
+  hyphens: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+}
+
+@media (max-width: 767px) {
+  .force-justify {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+  }
+}

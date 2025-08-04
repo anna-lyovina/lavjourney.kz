@@ -1115,17 +1115,39 @@ async function loadFullTestimonials() {
     });
 };
 
+
+function applyForcedJustifications(document) {
+    const justifiedElements = document.querySelectorAll('.force-justify');
+    justifiedElements.forEach(element => {
+    // Apply enhanced justification styles
+    element.style.textAlign = 'justify';
+    element.style.wordSpacing = '0.05em';
+    element.style.letterSpacing = '0.01em';
+    element.style.lineHeight = '1.6';
+
+    // Add soft hyphens for better breaking
+    const text = element.innerHTML;
+    const enhancedText = text.replace(/(\w{6,})/g, (match) => {
+      // Add soft hyphens to long words
+      return match.replace(/(.{3})/g, '$1­'); // ­ is a soft hyphen
+    });
+    element.innerHTML = enhancedText;
+  });
+}
+
 async function setupMain(document)
 {
+    setupMarqueeLogic(document);
+    applyForcedJustifications(document);
+
     setupHamburgerMenuLogic(document);
     setupTestimonialsScrollButtonLogic(document);
     setupCertificationScrollLogic(document);
     setupConsentModalLogic(document);
     setupServicesModalLogic(document);
-    setupMarqueeLogic(document);
     
     setupReactions(document);
+    await loadFullTestimonials();
 
     await setupEditables(document);
-    await loadFullTestimonials();
 }
