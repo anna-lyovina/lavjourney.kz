@@ -23,7 +23,7 @@
     --fs30: 24px;
     --fs24: 20px;
     --fs20: 17px;
-    --fs18: 15px;
+    --fs18: 16px;
     --fs16: 14px;
     --fs14: 12px;
     --fs13: 11px;
@@ -1330,7 +1330,7 @@ lav-logo {
 }
 
 .testimonial-card {
-  width: 530px;
+  width: 340px;
   flex: 0 0 530px;
 
   display: flex;
