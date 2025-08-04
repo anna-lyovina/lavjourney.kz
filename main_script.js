@@ -673,8 +673,7 @@ function setupConsentModalLogic(document) {
         `;
 
         document.getElementById('consentModalContactCloseBtn').addEventListener('click', function() {
-            window.location.href='#contact';
-            closeConsentModal();
+            window.open('https://bit.ly/lavjourney-contact-wa', '_blank');
         });
 
         const input = document.getElementById('consentSurname');
