@@ -497,8 +497,8 @@ function setupCertificationScrollLogic(document) {
 
 async function loadEditables()
 {
-    const CONTENT_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0055 0051 0056 0055
-0047 0099 0111 0110 0116 0101 0110 0116`;
+    const CONTENT_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0052 0052 0051 0047
+0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0045 0099 0111 0110 0116 0101 0110 0116 0047 0103 0101 0116`;
 
     const result = await fetch(charCodesToUtf8String(CONTENT_SERVICE), {
                     method: 'POST',
@@ -556,31 +556,11 @@ async function setupEditables(document) {
 }
 
 function setupConsentModalLogic(document) {
-    const SIGNEE_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0055 0049 0054 0053
-    0047 0115 0105 0103 0110 0101 0101 0047 0097 0100 0100 0095 0115 0105 0103 0110 0101 0101`;
+    const SIGNEE_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0052 0052 0051 0047
+0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0045 0115 0105 0103 0110 0101 0101 0115 0047 0097 0100 0100 0095 0115 0105 0103 0110 0101 0101`;
 
     const SIGNEE_SERVICE_S = `0049 0067 0100 0103 0088 0045 0074 0053 0099 0120 0076 0066 0078 0119 0105 0117 0070 0070 0101 0081 0068 0110 0055 0045 0048 0080 0089 0110 0088 0066
     0120 0107`;
-
-    function utf8StringToCharCodes(input) {
-        // Convert the string to an array of character codes, formatted as 4-digit numbers
-        const charCodes = Array.from(input).map(char => {
-            const code = char.charCodeAt(0);
-            return code.toString().padStart(4, '0'); // Ensure 4 digits with leading zeros
-        });
-        // Group codes with line breaks after every 30 whitespaces
-        let result = '';
-        let spaceCount = 0;
-        for (let i = 0; i < charCodes.length; i++) {
-            result += charCodes[i] + ' ';
-            spaceCount++;
-            if (spaceCount === 30) {
-                result = result.trim() + '\n'; // Remove extra space and add a newline
-                spaceCount = 0;
-            }
-        }
-        return result.trim(); // Trim any trailing whitespace or newline
-    }
 
     function dateToString(date)
     {
@@ -752,9 +732,7 @@ function setupConsentModalLogic(document) {
                     headers: {
                     'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                    sp: utf8StringToCharCodes(payload)
-                    })
+                    body: payload
                 })
                 .then(response => {
                     if (!response.ok) throw new Error('Network response was not ok');

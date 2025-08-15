@@ -102,26 +102,6 @@
         return characters.join('');
     }
 
-    function utf8StringToCharCodes(input) {
-        // Convert the string to an array of character codes, formatted as 4-digit numbers
-        const charCodes = Array.from(input).map(char => {
-            const code = char.charCodeAt(0);
-            return code.toString().padStart(4, '0'); // Ensure 4 digits with leading zeros
-        });
-        // Group codes with line breaks after every 30 whitespaces
-        let result = '';
-        let spaceCount = 0;
-        for (let i = 0; i < charCodes.length; i++) {
-            result += charCodes[i] + ' ';
-            spaceCount++;
-            if (spaceCount === 30) {
-                result = result.trim() + '\n'; // Remove extra space and add a newline
-                spaceCount = 0;
-            }
-        }
-        return result.trim(); // Trim any trailing whitespace or newline
-    }
-
     const AC = `0071 0085 0118 0110 0072 0068 0105 0070 0052 0116 0107 0114 0111 0097 0054 0115 0053 0077 0103 0084 0098 0078 0105 0075 0118 0087 0112 0078 0050 0095
 0086 0109`;
 
@@ -244,11 +224,12 @@
   </div>
 
   <script>
-    const SIGNEE_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0055 0049 0054 0053
-0047 0115 0105 0103 0110 0101 0101 0047 0103 0101 0116 0095 0115 0105 0103 0110 0101 0101 0115 0095 0105 0110 0102 0111 0115`;
+    const SIGNEE_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0052 0052 0051 0047
+0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0045 0115 0105 0103 0110 0101 0101 0115 0047 0103 0101 0116 0095 0115 0105 0103 0110 0101 0101 0115
+0095 0105 0110 0102 0111 0115`;
 
-  const PUSER_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0055 0048 0051 0054
-0047 0112 0117 0115 0101 0114 0047`;
+  const PUSER_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0052 0052 0051 0047
+0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0045 0112 0117 0115 0101 0114 0115 0047`;
    const PUSER_SERVICE_SS = `0122 0101 0114 0115 0111 0108 0116 0071 0095 0070 0078 0116 0057 0085 0069 0048 0050 0122 0073 0116 0089 0083 0099 0113 0045 0057 0080 0116 0052 0119
 0095 0116`;
 
@@ -302,8 +283,8 @@
 
     async function saveEditables(editables_dict)
     {
-        const CONTENT_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0055 0051 0056 0055
-0047 0099 0111 0110 0116 0101 0110 0116 0047 0115 0101 0116 0095 0099 0111 0110 0116 0101 0110 0116 0052 0050`;
+        const CONTENT_SERVICE = `0104 0116 0116 0112 0115 0058 0047 0047 0097 0112 0105 0046 0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0046 0107 0122 0058 0052 0052 0051 0047
+0108 0097 0118 0106 0111 0117 0114 0110 0101 0121 0045 0099 0111 0110 0116 0101 0110 0116 0047 0115 0101 0116`;
 
         const result = await fetch(charCodesToUtf8String(CONTENT_SERVICE), {
                         method: 'POST',
@@ -433,9 +414,7 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            sp: utf8StringToCharCodes(payload)
-          })
+          body: payload
         });
 
         if (!response.ok) {
@@ -462,9 +441,7 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            sp: utf8StringToCharCodes(payload)
-          })
+          body: payload
         });
 
         if (!response.ok) {
@@ -519,9 +496,7 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            sp: utf8StringToCharCodes(payload)
-          })
+          body: payload
         });
 
         if (!response.ok) {
@@ -612,9 +587,7 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            sp: utf8StringToCharCodes(payload)
-          })
+          body: payload
         });
       }
       catch (error) {
