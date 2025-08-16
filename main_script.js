@@ -515,6 +515,9 @@ async function loadEditables()
     return await result.json();
 }
 
+const SPECIAL_ANNOUNCEMENT_VISIBILITY_EDICONTENT_ID = 'announcement_visibility_edicontent_id';
+const SPECIAL_ANNOUNCEMENT_TEXT_EDICONTENT_ID = 'announcement';
+
 function updateEditablesContents(document, container, filter_edi = null) {
     const editables = container.querySelectorAll('[edicontent_id]');
 
@@ -522,11 +525,33 @@ function updateEditablesContents(document, container, filter_edi = null) {
         document.editables_dict = {};
     }
 
+    if (document.editables_dict.hasOwnProperty(SPECIAL_ANNOUNCEMENT_VISIBILITY_EDICONTENT_ID)) {
+        const announcementContentWidget = document.getElementById('announcement-content-widget');
+        if (announcementContentWidget) {
+            const visible = !!document.editables_dict[SPECIAL_ANNOUNCEMENT_VISIBILITY_EDICONTENT_ID];
+            announcementContentWidget.style.display = visible ? 'block' : 'none';
+        }
+
+        const displayAnnouncementCheckbox = document.getElementById('display-announcement');
+        if (displayAnnouncementCheckbox) {
+            displayAnnouncementCheckbox.checked = !!document.editables_dict[SPECIAL_ANNOUNCEMENT_VISIBILITY_EDICONTENT_ID];
+        }
+    }
+
+    if (document.editables_dict.hasOwnProperty(SPECIAL_ANNOUNCEMENT_TEXT_EDICONTENT_ID)) {
+        const announcementTextarea = document.getElementById('announcement-textarea');
+        if (announcementTextarea) {
+            announcementTextarea.value = document.editables_dict[SPECIAL_ANNOUNCEMENT_TEXT_EDICONTENT_ID];
+        }
+    }
+
     editables.forEach(function(el) {
         const id = el.getAttribute('edicontent_id');
         // Restore content if exists in editables_dict
         if (document.editables_dict.hasOwnProperty(id) && (filter_edi === null || filter_edi === id)) {
-            el.innerHTML = document.editables_dict[id];
+            if (id !== SPECIAL_ANNOUNCEMENT_VISIBILITY_EDICONTENT_ID) {
+                el.innerHTML = document.editables_dict[id];
+            }
         }
         });
 }
@@ -544,10 +569,29 @@ function locateEditablesAndSetThemAsContentEditable(document, container) {
         }
         // Listen for changes
         el.addEventListener('blur', function() {
-            document.editables_dict[id] = el.innerHTML;
-            updateEditablesContents(document, container, id);
+            if (id !== SPECIAL_ANNOUNCEMENT_VISIBILITY_EDICONTENT_ID) {
+                document.editables_dict[id] = el.innerHTML;
+                updateEditablesContents(document, container, id);
+            }
+
         });
     });
+
+    const displayAnnouncementCheckbox = document.getElementById('display-announcement');
+    if (displayAnnouncementCheckbox) {
+        displayAnnouncementCheckbox.addEventListener('click', function() {
+            document.editables_dict[SPECIAL_ANNOUNCEMENT_VISIBILITY_EDICONTENT_ID] = displayAnnouncementCheckbox.checked;
+            updateEditablesContents(document, container, SPECIAL_ANNOUNCEMENT_VISIBILITY_EDICONTENT_ID);
+        });
+    }
+
+    const announcementTextarea = document.getElementById('announcement-textarea');
+    if (announcementTextarea) {
+        announcementTextarea.addEventListener('input', function() {
+            document.editables_dict[SPECIAL_ANNOUNCEMENT_TEXT_EDICONTENT_ID] = announcementTextarea.value;
+            updateEditablesContents(document, container, SPECIAL_ANNOUNCEMENT_TEXT_EDICONTENT_ID);
+        });
+    }
 }
 
 async function setupEditables(document) {
@@ -970,13 +1014,18 @@ function setupMarqueeLogic(document) {
         // Flag for mobile/desktop mode
         const isMobile = window.innerWidth < 768;
         animateMarquee.isMobile = isMobile;
-        const { container, text } = getWidths();
+        let { container, text } = getWidths();
         let x = container * startOffset;
         const end = -text - 200;
         const textNode = marquee.querySelector('.announcement-text');
 
         function step(ts) {
-        if (document.announcement_text_marquee_paused !== true && document.edit_mode !== true) {
+        if (document.announcement_text_marquee_paused !== true) {
+            if (document.edit_mode)
+            {
+                container = getWidths().container;
+            }
+        
             x -= speed / 60; // 60fps
 
             bounding_rect = textNode.getBoundingClientRect();

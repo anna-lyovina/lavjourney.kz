@@ -32,7 +32,6 @@
     .centered-panel input {
       width: 100%;
       padding: 0.6rem;
-      margin-bottom: 1.1rem;
       border-radius: 8px;
       border: 1.5px solid #d6e6e6;
       font-size: 1rem;
@@ -105,9 +104,9 @@
     const AC = `0071 0085 0118 0110 0072 0068 0105 0070 0052 0116 0107 0114 0111 0097 0054 0115 0053 0077 0103 0084 0098 0078 0105 0075 0118 0087 0112 0078 0050 0095
 0086 0109`;
 
-    if (window.location.hash !== `#${charCodesToUtf8String(AC)}`) {
-      window.location.href = 'index.html';
-    }
+    // if (window.location.hash !== `#${charCodesToUtf8String(AC)}`) {
+    //   window.location.href = 'index.html';
+    // }
   </script>
 
   <div id="auth-panel" class="centered-panel" style="display:none;">
@@ -181,6 +180,15 @@
         <button class="link-btn" id="to-loggedin" style="flex: 1;">Назад</button>
         <div type="submit" class="cta-button" style="flex: 1;" id="publish-button">Опубликовать!</div>
       </div>
+        <div style="margin: 1em 0; padding: 0.5em; border: 1px solid #eee; border-radius: 6px; background: #fafafa;">
+          <div style="display: flex; align-items: center; gap: 1em;">
+            <label style="display: flex; align-items: center; gap: 0.5em; margin: 0; font-size: 1rem; color: #333;">
+              <input type="checkbox" id="display-announcement" name="display-announcement" style="width: 18px; height: 18px; accent-color: #2b9c99;">
+              <span>Аннонс</span>
+            </label>
+              <textarea id="announcement-textarea" name="announcement-text" placeholder="Введите текст объявления..." style="flex: 1; min-width: 180px; min-height: 2.5em; max-height: 12em; resize: vertical; padding: 0.5em 0.75em; border-radius: 4px; border: 1px solid #2b9c99; font-size: 1rem; color: #222; background: #fff; box-shadow: 0 1px 4px rgba(43,156,153,0.07);" rows="2">Приглашаю Вас на Расстановки в г. Алматы, 12 сентября в 20:00</textarea>
+          </div>
+        </div>
       <div id="content-container" style="scroll-behavior: smooth; margin:auto; width:100%; height: auto; overflow:auto; background: #fff; border-top: 2.5px solid red; box-shadow: 0 4px 18px rgba(43,156,153,0.13);  transition: box-shadow 0.2s;"></div>
     </form>
   </div>
@@ -264,12 +272,21 @@
         }
     }
 
+    const announcement_textarea = document.getElementById('announcement-textarea');
+
+    function autoResizeTextarea(el) {
+      el.style.height = 'auto';
+      el.style.height = (el.scrollHeight) + 'px';
+    }
+
     async function ensureEditableContent()
     {
       if (g_editable_content_prepared) return;
       g_editable_content_prepared = true;
 
+
       const contentContainer = document.getElementById('content-container');
+      autoResizeTextarea(announcement_textarea);
       contentContainer.innerHTML = await loadMain();
       document.edit_mode = true;
       await setupMain(document);
@@ -617,6 +634,10 @@
         } else {
           mode = 'auth';
         }
+
+        announcement_textarea.addEventListener('input', function() {
+          autoResizeTextarea(this);
+        });
 
         showPanel(mode);
     }
