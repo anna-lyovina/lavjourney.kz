@@ -22,7 +22,7 @@
       margin-bottom: 1.5rem;
       color: var(--accent-color);
     }
-    .centered-panel label {
+    .centered-panel label.pimpl {
       display: block;
       margin-bottom: 0.3rem;
       text-align: left;
@@ -113,9 +113,9 @@
     <h2>Вход</h2>
     <div class="error-message" id="auth-error"></div>
     <form id="auth-form" autocomplete="off">
-      <label for="auth-username">Имя пользователя</label>
+      <label for="auth-username" class="pimpl">Имя пользователя</label>
       <input type="text" id="auth-username" name="username" required autocomplete="username">
-      <label for="auth-password">Пароль</label>
+      <label for="auth-password" class="pimpl">Пароль</label>
       <input type="password" id="auth-password" name="password" required autocomplete="current-password">
       <button type="submit" style="width: 100%;" class="cta-button">Войти</button>
     </form>
@@ -126,13 +126,13 @@
     <h2>Регистрация</h2>
     <div class="error-message" id="reg-error"></div>
     <form id="reg-form" autocomplete="off">
-      <label for="reg-invite">Код приглашения</label>
+      <label for="reg-invite" class="pimpl">Код приглашения</label>
       <input type="text" id="reg-invite" name="invite" required>
-      <label for="reg-username">Имя пользователя</label>
+      <label for="reg-username" class="pimpl">Имя пользователя</label>
       <input type="text" id="reg-username" name="username" required>
-      <label for="reg-password">Пароль</label>
+      <label for="reg-password" class="pimpl">Пароль</label>
       <input type="password" id="reg-password" name="password" required>
-      <label for="reg-password2">Подтвердите пароль</label>
+      <label for="reg-password2" class="pimpl">Подтвердите пароль</label>
       <input type="password" id="reg-password2" name="password2" required>
       <button type="submit" class="cta-button">Зарегистрироваться</button>
     </form>
@@ -182,7 +182,7 @@
       </div>
         <div style="margin: 1em 0; padding: 0.5em; border: 1px solid #eee; border-radius: 6px; background: #fafafa;">
           <div style="display: flex; align-items: center; gap: 1em;">
-            <label style="display: flex; align-items: center; gap: 0.5em; margin: 0; font-size: 1rem; color: #333;">
+            <label class="pimpl" style="display: flex; align-items: center; gap: 0.5em; margin: 0; font-size: 1rem; color: #333;">
               <input type="checkbox" id="display-announcement" name="display-announcement" style="width: 18px; height: 18px; accent-color: #2b9c99;">
               <span>Аннонс</span>
             </label>
@@ -286,9 +286,11 @@
 
 
       const contentContainer = document.getElementById('content-container');
+
       autoResizeTextarea(announcement_textarea);
       contentContainer.innerHTML = await loadMain();
       document.edit_mode = true;
+
       await setupMain(document);
 
       const publishButton = document.getElementById('publish-button');

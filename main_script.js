@@ -676,7 +676,7 @@ function setupConsentModalLogic(document) {
             </button>
             </div>
             <p style="text-align: justify;hyphens: auto;" edicontent_id="esli-voprosov-net" > Если вопросов нет, пожалуйста, заполните поля и нажмите на кнопку ниже. </p>
-            <form id="consentForm" autocomplete="off" style="margin-top: 1.5rem; text-align: center;">
+            <div id="consentForm_" autocomplete="off" style="margin-top: 1.5rem; text-align: center;">
             <div style="display: flex; flex-direction: column; gap: 0.7rem; align-items: center;">
                 <input type="text" id="consentName" placeholder="Имя" value="${prevName.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
                 <div class="custom-placeholder-wrapper" style="position:relative;width:80%;max-width:320px;">
@@ -693,7 +693,7 @@ function setupConsentModalLogic(document) {
                 </label>
             </div>
             <button type="button" id="consentProceedBtn" class="cta-button" style="font-size: 1.1rem; padding: 0.5rem 2rem; margin-top: 1.2rem;">Подписать</button>
-            </form>
+            </div>
         `;
 
         document.getElementById('consentModalContactCloseBtn').addEventListener('click', function() {
