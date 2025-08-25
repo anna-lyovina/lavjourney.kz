@@ -64,26 +64,312 @@
       color: #c0392b;
       font-size: 1rem;
     }
+    /* Desktop Table Styles */
     .signees-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 1.5rem;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(43,156,153,0.08);
     }
     .signees-table th, .signees-table td {
-      border: 1px solid #e0e0e0;
-      padding: 0.7em 0.5em;
+      border: 1px solid #e8f4f3;
+      padding: 0.9em 0.7em;
       text-align: center;
+      font-size: var(--fs16);
     }
     .signees-table th {
-      background: var(--third-accent-color);
+      background: linear-gradient(135deg, var(--third-accent-color) 0%, rgba(43,156,153,0.08) 100%);
       color: var(--accent-color);
+      font-weight: 600;
+      font-size: var(--fs18);
+      letter-spacing: 0.02em;
     }
     .signees-table tr:nth-child(even) {
-      background: #f8f8f8;
+      background: #f8fcfb;
+    }
+    .signees-table tr:hover {
+      background: rgba(43,156,153,0.05);
+      transition: background 0.2s;
+    }
+    .signees-table td {
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+    
+    /* Mobile Card Layout */
+    .signees-cards-container {
+      display: none;
+      margin-top: 1.5rem;
+    }
+    
+    .signees-search {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 3rem;
+      border: 2px solid #e8f4f3;
+      border-radius: 12px;
+      font-size: var(--fs16);
+      background: #f8fcfb url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236b7280" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>') no-repeat 1rem center;
+      background-size: 16px 16px;
+      margin-bottom: 1rem;
+      transition: all 0.2s;
+    }
+    
+    .signees-search:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      background-color: white;
+      box-shadow: 0 0 0 3px rgba(43,156,153,0.1);
+    }
+    
+    .signees-search::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+    
+    .signees-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .signees-cards-enter {
+      animation: slideInCard 0.3s ease-out forwards;
+    }
+    
+    @keyframes slideInCard {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .signee-card {
+      background: linear-gradient(135deg, rgba(254,251,251,0.95) 80%, rgba(43,156,153,0.05) 100%);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 20px rgba(43,156,153,0.08);
+      border: 1.5px solid rgba(43,156,153,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .signee-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(43,156,153,0.12);
+      border-color: rgba(43,156,153,0.2);
+    }
+    
+    .signee-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-color) 0%, var(--second-accent-color) 100%);
+    }
+    
+    .signee-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    
+    .signee-name {
+      font-size: var(--fs20);
+      font-weight: 700;
+      color: var(--primary-color);
+      line-height: 1.3;
+    }
+    
+    .signee-date {
+      font-size: var(--fs14);
+      color: var(--accent-color);
+      font-weight: 600;
+      background: rgba(43,156,153,0.1);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    
+    .signee-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    
+    .signee-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .signee-detail-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .signee-detail-icon::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+    }
+    
+    .signee-detail-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      flex-grow: 1;
+    }
+    
+    .signee-detail-label {
+      font-size: var(--fs13);
+      color: #666;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .signee-detail-value {
+      font-size: var(--fs16);
+      color: var(--primary-color);
+      font-weight: 600;
+      word-break: break-word;
+    }
+    
+    .signee-phone {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .signee-phone:hover, .signee-phone:focus {
+      color: var(--second-accent-color);
+      transform: translateX(2px);
+    }
+    
+    .signee-email {
+      color: var(--second-accent-color);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .signee-email:hover, .signee-email:focus {
+      color: var(--accent-color);
+      transform: translateX(2px);
+    }
+    
+    .signees-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .signees-count {
+      font-size: var(--fs14);
+      color: var(--accent-color);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    
+    .search-clear-btn {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #999;
+      cursor: pointer;
+      padding: 0.2rem;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    
+    .search-clear-btn:hover {
+      background: rgba(43,156,153,0.1);
+      color: var(--accent-color);
     }
     @media (max-width: 500px) {
       .centered-panel {
         padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+      }
+    }
+    
+    /* Mobile Responsive Table */
+    @media (max-width: 768px) {
+      .signees-table {
+        display: none;
+      }
+      
+      .signees-cards-container {
+        display: block;
+      }
+      
+      .signee-card {
+        margin: 0 0.5rem;
+      }
+      
+      .signee-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+      
+      .signee-date {
+        align-self: flex-end;
+        margin-top: -0.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .signee-card {
+        padding: 1.2rem;
+        margin: 0 0.2rem;
+      }
+      
+      .signee-details {
+        gap: 0.6rem;
+      }
+      
+      .signee-detail {
+        gap: 0.6rem;
+      }
+      
+      .signee-detail-label {
+        font-size: var(--fs12);
+      }
+      
+      .signee-detail-value {
+        font-size: var(--fs14);
+      }
+      
+      .signee-name {
+        font-size: var(--fs18);
       }
     }
   </style>
@@ -161,14 +447,31 @@
     <div style="padding:2.5rem 2rem 0 2rem;">
       <h2 style="margin-top:0; color: var(--accent-color); text-align:left;">Добро пожаловать, <span id="user-name"></span>!</h2>
       <p style="margin-bottom:1.5rem;"> Подписавшие соглашение:</p>
+      
+      <!-- Desktop Table -->
       <table class="signees-table">
         <thead>
-          <tr><th>Имя</th><th>Фамилия</th><th>Дата</th></tr>
+          <tr><th>Имя</th><th>Фамилия</th><th>Телефон</th><th>Email</th><th>Дата</th></tr>
         </thead>
-        <tbody>
+        <tbody id="signees-table-body">
 
         </tbody>
       </table>
+      
+      <!-- Mobile Cards -->
+      <div class="signees-cards-container">
+        <div style="position: relative;">
+          <input type="text" class="signees-search" placeholder="Поиск по имени, телефону или email..." id="signees-search">
+          <button type="button" class="search-clear-btn" id="search-clear-btn" style="display: none;" title="Очистить поиск">×</button>
+        </div>
+        <div class="signees-count" id="signees-count"></div>
+        <div class="signees-cards" id="signees-cards">
+          <!-- Cards will be populated by JavaScript -->
+        </div>
+        <div class="signees-empty" id="signees-empty" style="display:none;">
+          Нет результатов
+        </div>
+      </div>
     </div>
   </div>
 
@@ -320,11 +623,12 @@
     let mode = 'auth';
     let currentUser = '';
     let g_sss = {};
+    let allSignees = []; // Store all signees for search functionality
 
     async function retrieve_signees_infos(signees_ss) {
       const payload = JSON.stringify({
         secret: signees_ss,
-        "infos": ["datetime", "name", "surname"],
+        "infos": ["datetime", "name", "surname", "phone", "email"],
       })
 
       try {
@@ -348,6 +652,181 @@
       }
     }
 
+    function fillSigneesData(signees) {
+      allSignees = signees;
+      fillSigneesTable(signees);
+      fillSigneesCards(signees);
+      updateSigneesCount(signees.length);
+      setupSearchFunctionality();
+    }
+
+    function fillSigneesTable(signees) {
+      const tbody = document.getElementById('signees-table-body');
+      tbody.innerHTML = '';
+      
+      signees.forEach(signee => {
+        const tr = document.createElement('tr');
+        const tdName = document.createElement('td');
+        tdName.textContent = signee.name || '';
+        const tdSurname = document.createElement('td');
+        tdSurname.textContent = signee.surname || '';
+        const tdPhone = document.createElement('td');
+        tdPhone.textContent = signee.phone || '';
+        const tdEmail = document.createElement('td');
+        tdEmail.textContent = signee.email || '';
+        const tdDate = document.createElement('td');
+        tdDate.textContent = formatDate(signee.datetime) || '';
+        tr.appendChild(tdName);
+        tr.appendChild(tdSurname);
+        tr.appendChild(tdPhone);
+        tr.appendChild(tdEmail);
+        tr.appendChild(tdDate);
+        tbody.appendChild(tr);
+      });
+    }
+
+    function fillSigneesCards(signees) {
+      const cardsContainer = document.getElementById('signees-cards');
+      const emptyContainer = document.getElementById('signees-empty');
+      
+      cardsContainer.innerHTML = '';
+      
+      if (signees.length === 0) {
+        emptyContainer.style.display = 'block';
+        return;
+      }
+      
+      emptyContainer.style.display = 'none';
+      
+      signees.forEach((signee, index) => {
+        const card = document.createElement('div');
+        card.className = 'signee-card signees-cards-enter';
+        card.style.animationDelay = `${index * 0.1}s`;
+        
+        const fullName = `${signee.name || ''} ${signee.surname || ''}`.trim();
+        const phone = signee.phone || '';
+        const email = signee.email || '';
+        const date = formatDate(signee.datetime) || '';
+        
+        card.innerHTML = `
+          <div class="signee-card-header">
+            <div class="signee-name">${fullName}</div>
+            <div class="signee-date">${date}</div>
+          </div>
+          <div class="signee-details">
+            ${phone ? `
+              <div class="signee-detail">
+                <div class="signee-detail-icon"></div>
+                <div class="signee-detail-content">
+                  <div class="signee-detail-label">Телефон</div>
+                  <a href="tel:${phone}" class="signee-detail-value signee-phone">${phone}</a>
+                </div>
+              </div>
+            ` : ''}
+            ${email ? `
+              <div class="signee-detail">
+                <div class="signee-detail-icon"></div>
+                <div class="signee-detail-content">
+                  <div class="signee-detail-label">Email</div>
+                  <a href="mailto:${email}" class="signee-detail-value signee-email">${email}</a>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+        
+        cardsContainer.appendChild(card);
+      });
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('ru-RU', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      } catch (e) {
+        return dateString;
+      }
+    }
+
+    function updateSigneesCount(count) {
+      const countElement = document.getElementById('signees-count');
+      if (count === 0) {
+        countElement.textContent = 'Нет подписавших';
+      } else if (count === 1) {
+        countElement.textContent = '1 человек';
+      } else if (count < 5) {
+        countElement.textContent = `${count} человека`;
+      } else {
+        countElement.textContent = `${count} человек`;
+      }
+    }
+
+    function setupSearchFunctionality() {
+      const searchInput = document.getElementById('signees-search');
+      const clearButton = document.getElementById('search-clear-btn');
+      if (!searchInput || !clearButton) return;
+      
+      // Remove any existing event listeners
+      searchInput.removeEventListener('input', handleSearch);
+      clearButton.removeEventListener('click', clearSearch);
+      
+      searchInput.addEventListener('input', handleSearch);
+      clearButton.addEventListener('click', clearSearch);
+    }
+
+    function handleSearch(event) {
+      const searchTerm = event.target.value.toLowerCase().trim();
+      const clearButton = document.getElementById('search-clear-btn');
+      
+      // Show/hide clear button
+      if (clearButton) {
+        clearButton.style.display = searchTerm ? 'flex' : 'none';
+      }
+      
+      if (!searchTerm) {
+        fillSigneesCards(allSignees);
+        updateSigneesCount(allSignees.length);
+        return;
+      }
+      
+      const filteredSignees = allSignees.filter(signee => {
+        const fullName = `${signee.name || ''} ${signee.surname || ''}`.toLowerCase();
+        const phone = (signee.phone || '').toLowerCase();
+        const email = (signee.email || '').toLowerCase();
+        
+        return fullName.includes(searchTerm) || 
+               phone.includes(searchTerm) || 
+               email.includes(searchTerm);
+      });
+      
+      fillSigneesCards(filteredSignees);
+      updateSigneesCount(filteredSignees.length);
+    }
+    
+    function clearSearch() {
+      const searchInput = document.getElementById('signees-search');
+      const clearButton = document.getElementById('search-clear-btn');
+      
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+      }
+      
+      if (clearButton) {
+        clearButton.style.display = 'none';
+      }
+      
+      fillSigneesCards(allSignees);
+      updateSigneesCount(allSignees.length);
+    }
+
     async function showPanel(panel) {
       document.getElementById('auth-panel').style.display = (panel === 'auth') ? '' : 'none';
       document.getElementById('reg-panel').style.display = (panel === 'reg') ? '' : 'none';
@@ -369,23 +848,9 @@
           overlay.style.display = 'flex';
           overlay.classList.remove('fade-out');
           const signees_infos = await retrieve_signees_infos(g_sss.signees_ss);
-          // Fill signees-table
+          // Fill signees data
           if (signees_infos && Array.isArray(signees_infos.signees)) {
-            const tbody = document.querySelector('.signees-table tbody');
-            tbody.innerHTML = '';
-            signees_infos.signees.forEach(signee => {
-              const tr = document.createElement('tr');
-              const tdName = document.createElement('td');
-              tdName.textContent = signee.name || '';
-              const tdSurname = document.createElement('td');
-              tdSurname.textContent = signee.surname || '';
-              const tdDate = document.createElement('td');
-              tdDate.textContent = signee.datetime || '';
-              tr.appendChild(tdName);
-              tr.appendChild(tdSurname);
-              tr.appendChild(tdDate);
-              tbody.appendChild(tr);
-            });
+            fillSigneesData(signees_infos.signees);
           }
           overlay.classList.add('fade-out');
           overlay.style.display = 'none';

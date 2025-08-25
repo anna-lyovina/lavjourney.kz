@@ -644,6 +644,8 @@ function setupConsentModalLogic(document) {
         // Retrieve previous values from window-scoped variables or set defaults
         const prevName = document._consentNameValue || '';
         const prevSurname = document._consentSurnameValue || '';
+        const prevPhone = document._consentPhoneValue || '';
+        const prevEmail = document._consentEmailValue || '';
         const prevChecked = document._consentCheckboxChecked || false;
 
         const consentContent = document.getElementById('consentModalContent');
@@ -685,6 +687,8 @@ function setupConsentModalLogic(document) {
                     Фамилия <span>(можно не полностью)</span>
                 </span>
                 </div>
+                <input type="tel" id="consentPhone" placeholder="Телефон (необязательно)" value="${prevPhone.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
+                <input type="email" id="consentEmail" placeholder="Email (необязательно)" value="${prevEmail.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
             </div>
             <div style="margin-top: 1.2rem;">
                 <label id="consentCheckboxLabel" style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;">
@@ -723,6 +727,8 @@ function setupConsentModalLogic(document) {
             const label = document.getElementById('consentCheckboxLabel');
             const nameInput = document.getElementById('consentName');
             const surnameInput = document.getElementById('consentSurname');
+            const phoneInput = document.getElementById('consentPhone');
+            const emailInput = document.getElementById('consentEmail');
 
             if (document.edit_mode)
             {
@@ -730,11 +736,15 @@ function setupConsentModalLogic(document) {
             checkbox.disabled = true;
             nameInput.disabled = true;
             surnameInput.disabled = true;
+            phoneInput.disabled = true;
+            emailInput.disabled = true;
             }
-            else if (btn && checkbox && label && nameInput && surnameInput) {
+            else if (btn && checkbox && label && nameInput && surnameInput && phoneInput && emailInput) {
             // Save values on input/change
             nameInput.addEventListener('input', () => { document._consentNameValue = nameInput.value; });
             surnameInput.addEventListener('input', () => { document._consentSurnameValue = surnameInput.value; });
+            phoneInput.addEventListener('input', () => { document._consentPhoneValue = phoneInput.value; });
+            emailInput.addEventListener('input', () => { document._consentEmailValue = emailInput.value; });
             checkbox.addEventListener('change', () => { document._consentCheckboxChecked = checkbox.checked; });
             // Button click logic
             btn.onclick = function() {
@@ -763,11 +773,42 @@ function setupConsentModalLogic(document) {
                     valid = false;
                 }
                 });
+                
+                // Validate phone number (optional but must be valid if provided)
+                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                if (phoneInput.value.trim() && !phoneRegex.test(phoneInput.value.replace(/[\s\-\(\)]/g, ''))) {
+                    phoneInput.animate([
+                        { boxShadow: '0 0 0 0px red', borderColor: 'red' },
+                        { boxShadow: '0 0 0 4px red', borderColor: 'red' },
+                        { boxShadow: '0 0 0 0px red', borderColor: 'red' }
+                    ], {
+                        duration: 600,
+                        iterations: 1
+                    });
+                    valid = false;
+                }
+                
+                // Validate email (optional but must be valid if provided)
+                const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+                if (emailInput.value.trim() && !emailRegex.test(emailInput.value.trim())) {
+                    emailInput.animate([
+                        { boxShadow: '0 0 0 0px red', borderColor: 'red' },
+                        { boxShadow: '0 0 0 4px red', borderColor: 'red' },
+                        { boxShadow: '0 0 0 0px red', borderColor: 'red' }
+                    ], {
+                        duration: 600,
+                        iterations: 1
+                    });
+                    valid = false;
+                }
+                
                 if (valid) {
                 const payload = JSON.stringify({
                     secret: charCodesToUtf8String(SIGNEE_SERVICE_S),
                     name: nameInput.value,
                     surname: surnameInput.value,
+                    phone: phoneInput.value.trim(),
+                    email: emailInput.value.trim(),
                     datetime: dateToString(new Date(Date.now()))
                     })
 
@@ -788,7 +829,7 @@ function setupConsentModalLogic(document) {
                 })
                 .catch(error => {
                     // Animate all fields in red on error
-                    [nameInput, surnameInput].forEach(input => {
+                    [nameInput, surnameInput, phoneInput, emailInput].forEach(input => {
                     input.animate([
                         { boxShadow: '0 0 0 0px red', borderColor: 'red' },
                         { boxShadow: '0 0 0 4px red', borderColor: 'red' },
