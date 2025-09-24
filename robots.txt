@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Allow: /articles.html
+Allow: /existential-crisis.html
 
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Important pages
 Sitemap: https://lavjourney.kz/sitemap.xml
