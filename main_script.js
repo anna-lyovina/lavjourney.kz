@@ -10,6 +10,34 @@ const testimonialData = [
         { img: 'testimonial-full7.webp', client: '' }
     ];
 
+function setupCTAButtonAnimation(document) {
+    // CTA Button Animation - triggers on page load and every 10 seconds
+    const ctaButtons = document.querySelectorAll('.cta-button');
+    
+    function animateCTAButtons() {
+        ctaButtons.forEach((button, index) => {
+            // Stagger the animation slightly for multiple buttons
+            setTimeout(() => {
+                button.classList.add('animate');
+                // Remove class after animation completes
+                setTimeout(() => {
+                    button.classList.remove('animate');
+                }, 1500);
+            }, index * 200); // 200ms stagger between buttons
+        });
+    }
+    
+    // Initial animation after page load (with 1 second delay)
+    setTimeout(() => {
+        animateCTAButtons();
+    }, 1000);
+    
+    // Repeat animation every 10 seconds
+    setInterval(() => {
+        animateCTAButtons();
+    }, 10000);
+}
+
 function setupHamburgerMenuLogic(document) {
     // Hamburger menu logic
     const hamburgerBtn = document.getElementById('hamburgerOpen');
@@ -674,21 +702,44 @@ function setupConsentModalLogic(document) {
             </div>
             <div style="text-align:center; margin-bottom:1.2rem;">
             <button type="button" id="consentModalContactCloseBtn" class="cta-button" style="font-size:1.08rem; padding:0.5rem 2rem;">
-                Задать вопрос
+                 Написать в WhatsApp
             </button>
             </div>
-            <p style="text-align: justify;hyphens: auto;" edicontent_id="esli-voprosov-net" > Если вопросов нет, пожалуйста, заполните поля и нажмите на кнопку ниже. </p>
+            <p style="text-align: justify;hyphens: auto;" edicontent_id="esli-voprosov-net-pozhalujsta-zapolnite-polya" > Если вопросов нет, пожалуйста, заполните поля и нажмите на кнопку ниже. </p>
+            
+            <div style="background:rgba(43,156,153,0.07); border-radius:10px; padding:1.2rem 1rem; margin-bottom:1.2rem; display:flex; align-items:center; gap:0.8rem;">
+            <i class="fas fa-info-circle" style="color:var(--accent-color); font-size:1.5rem;"></i>
+            <span style="text-align: justify;hyphens: auto;font-size:var(--fs16);font-weight: bold;" edicontent_id="eta-forma-ne-yavlaytsya-sposobom-svyazi">
+                Эта форма не является способом связи, она служит только для подтверждения ознакомления с условиями.
+            </span>
+            </div>
+            
             <div id="consentForm_" autocomplete="off" style="margin-top: 1.5rem; text-align: center;">
             <div style="display: flex; flex-direction: column; gap: 0.7rem; align-items: center;">
-                <input type="text" id="consentName" placeholder="Имя" value="${prevName.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
+                <div class="custom-placeholder-wrapper" style="position:relative;width:80%;max-width:320px;">
+                <input type="text" id="consentName" value="${prevName.replace(/\"/g, '&quot;')}" style="width:100%;padding:0.5em; border-radius:6px; border:1px solid #ccc; font-size:1rem; position:relative; z-index:1;" autocomplete="off">
+                <span id="consentNamePlaceholder" class="custom-placeholder" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:gray;transition:0.2s;font-size:1rem;z-index:2;">
+                    Имя
+                </span>
+                </div>
                 <div class="custom-placeholder-wrapper" style="position:relative;width:80%;max-width:320px;">
                 <input type="text" id="consentSurname" value="${prevSurname.replace(/\"/g, '&quot;')}" style="width:100%;padding:0.5em; border-radius:6px; border:1px solid #ccc; font-size:1rem; position:relative; z-index:1;" autocomplete="off">
                 <span id="consentSurnamePlaceholder" class="custom-placeholder" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:gray;transition:0.2s;font-size:1rem;z-index:2;">
                     Фамилия <span>(можно не полностью)</span>
                 </span>
                 </div>
-                <input type="tel" id="consentPhone" placeholder="Телефон (необязательно)" value="${prevPhone.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
-                <input type="email" id="consentEmail" placeholder="Email (необязательно)" value="${prevEmail.replace(/"/g, '&quot;')}" style="width: 80%; max-width: 320px; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
+                <div class="custom-placeholder-wrapper" style="position:relative;width:80%;max-width:320px;">
+                <input type="tel" id="consentPhone" value="${prevPhone.replace(/\"/g, '&quot;')}" style="width:100%;padding:0.5em; border-radius:6px; border:1px solid #ccc; font-size:1rem; position:relative; z-index:1;" autocomplete="off">
+                <span id="consentPhonePlaceholder" class="custom-placeholder" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:gray;transition:0.2s;font-size:1rem;z-index:2;">
+                    Телефон <span>(необязательно)</span>
+                </span>
+                </div>
+                <div class="custom-placeholder-wrapper" style="position:relative;width:80%;max-width:320px;">
+                <input type="email" id="consentEmail" value="${prevEmail.replace(/\"/g, '&quot;')}" style="width:100%;padding:0.5em; border-radius:6px; border:1px solid #ccc; font-size:1rem; position:relative; z-index:1;" autocomplete="off">
+                <span id="consentEmailPlaceholder" class="custom-placeholder" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:gray;transition:0.2s;font-size:1rem;z-index:2;">
+                    Email <span>(необязательно)</span>
+                </span>
+                </div>
             </div>
             <div style="margin-top: 1.2rem;">
                 <label id="consentCheckboxLabel" style="display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;">
@@ -696,7 +747,7 @@ function setupConsentModalLogic(document) {
                 <span edicontent_id="ya-prinimayu-usloviya-soglasheniya">Я принимаю условия соглашения</span>
                 </label>
             </div>
-            <button type="button" id="consentProceedBtn" class="cta-button" style="font-size: 1.1rem; padding: 0.5rem 2rem; margin-top: 1.2rem;">Подписать</button>
+            <button type="button" id="consentProceedBtn" class="cta-button" style="font-size: 1.1rem; padding: 0.5rem 2rem; margin-top: 1.2rem;">Ознакомлен (-а)</button>
             </div>
         `;
 
@@ -704,18 +755,26 @@ function setupConsentModalLogic(document) {
             window.open('contact-wa.html', '_blank');
         });
 
-        const input = document.getElementById('consentSurname');
-        var placeholder = document.getElementById('consentSurnamePlaceholder');
-        function togglePlaceholder() {
-            if (input.value.length > 0) {
-            placeholder.style.opacity = '0';
-            } else {
-            placeholder.style.opacity = '1';
+        // Setup custom placeholders for all inputs
+        const inputs = [
+            { input: document.getElementById('consentName'), placeholder: document.getElementById('consentNamePlaceholder') },
+            { input: document.getElementById('consentSurname'), placeholder: document.getElementById('consentSurnamePlaceholder') },
+            { input: document.getElementById('consentPhone'), placeholder: document.getElementById('consentPhonePlaceholder') },
+            { input: document.getElementById('consentEmail'), placeholder: document.getElementById('consentEmailPlaceholder') }
+        ];
+
+        inputs.forEach(({ input, placeholder }) => {
+            function togglePlaceholder() {
+                if (input.value.length > 0) {
+                    placeholder.style.opacity = '0';
+                } else {
+                    placeholder.style.opacity = '1';
+                }
             }
-        }
-        input.addEventListener('input', togglePlaceholder);
-        // Initial state
-        togglePlaceholder();
+            input.addEventListener('input', togglePlaceholder);
+            // Initial state
+            togglePlaceholder();
+        });
 
         locateEditablesAndSetThemAsContentEditable(document, consentContent);
         document.getElementById('consentModalOverlay').style.display = 'flex';
@@ -865,22 +924,22 @@ function setupServicesModalLogic(document) {
 
     const services = [
         {
-            title: "Сессия",
+            title: "Психологическая сессия",
             title_edicontent_id: "sessiya",
             icon: "fas fa-user",
-            short_description: "Индивидуальная психологическая терапия",
+            short_description: "Индивидуальная терапия",
             short_description_edicontent_id: "short_individualnaya-psikhologicheskaya-terapiya",
-            description: "Индивидуальная терапевтическая работа с использованием психологических техник.",
+            description: "Индивидуальная терапия – глубинная работа с вашей жизненной ситуацией.",
             description_edicontent_id: "individualnaya-terapevticheskaya-rab",
-            format: "Онлайн в GoogleMeet, регулярные встречи один раз в неделю. Продолжительность терапии (количество сессий) зависит от запроса: до достижения желаемого результата или по договорённости.",
+            format: "Онлайн по видеосвязи или офлайн в г. Алматы (старый центр), встречи один раз в неделю. Продолжительность работы (количество сессий) зависит от запроса: до достижения желаемого результата или по договорённости.",
             format_edicontent_id: "onlayn-v-googlemeet-regulyarnye-vstrechi-odin-raz-v-nedelyu",
-            short_format: "Онлайн, 45–60 минут, количество сессий – по запросу",
+            short_format: "Онлайн и офлайн, 60 минут, количество сессий – по запросу",
             short_format_edicontent_id: "onlayn-45-60-minut-kolichestvo-sessiy-po-zaprosu",
-            duration: "45-60 минут",
+            duration: "60 минут",
             duration_edicontent_id: "45-60-minut",
-            short_price: "25 000 ₸",
+            short_price: "от 25 000 ₸",
             short_price_edicontent_id: "short_sessiya_25-000-teng",
-            price: "25 000 ₸ (каждая 10-я сессия бесплатно)",
+            price: "25 000 ₸ – онлайн<br>30 000 ₸ – офлайн<br>Предоплата 100%",
             price_edicontent_id: "sessiya-25-000-teng"
         },
         {
@@ -901,6 +960,44 @@ function setupServicesModalLogic(document) {
             short_price_edicontent_id: "short_razbor-po-piramide-logicheskih-urovney-45-000-teng",
             price: "45 000 ₸",
             price_edicontent_id: "razbor-po-piramide-logicheskih-urovney-45-000-teng"
+        },
+                {
+            title: "Пакет из 5 сессий",
+            title_edicontent_id: "paket-5-sessiy",
+            icon: "fas fa-layer-group",
+            short_description: "Индивидуальная терапия с выгодой",
+            short_description_edicontent_id: "short_paket-5-sessiy",
+            description: "Пакет из 5 индивидуальных терапевтических сессий – оптимальный вариант для систематической работы над конкретным запросом. Подходит для решения четко обозначенной проблемы или достижения определенной цели.",
+            description_edicontent_id: "paket-5-sessiy-opisanie",
+            format: "Онлайн по видеосвязи или офлайн в г. Алматы (старый центр), встречи один раз в неделю. Срок действия пакета – 6 недель с момента первой сессии.",
+            format_edicontent_id: "paket-5-sessiy-format",
+            short_format: "Онлайн и офлайн, 60 минут, 5 сессий",
+            short_format_edicontent_id: "short_paket-5-sessiy-format",
+            duration: "60 минут каждая сессия",
+            duration_edicontent_id: "paket-5-sessiy-duration",
+            short_price: "115 000 ₸",
+            short_price_edicontent_id: "short_paket-5-sessiy-price",
+            price: "115 000 ₸ – онлайн (экономия 10 000 ₸)<br>140 000 ₸ – офлайн (экономия 10 000 ₸)<br>Предоплата 100%",
+            price_edicontent_id: "paket-5-sessiy-price"
+        },
+        {
+            title: "Пакет из 10 сессий",
+            title_edicontent_id: "paket-10-sessiy",
+            icon: "fas fa-cubes",
+            short_description: "Индивидуальная терапия с максимальной выгодой",
+            short_description_edicontent_id: "short_paket-10-sessiy",
+            description: "Пакет из 10 индивидуальных терапевтических сессий – лучший выбор для глубинной проработки сложных жизненных ситуаций и достижения устойчивых изменений. Максимальная экономия при длительной работе.",
+            description_edicontent_id: "paket-10-sessiy-opisanie",
+            format: "Онлайн по видеосвязи или офлайн в г. Алматы (старый центр), встречи один раз в неделю. Срок действия пакета – 12 недель с момента первой сессии.",
+            format_edicontent_id: "paket-10-sessiy-format",
+            short_format: "Онлайн и офлайн, 60 минут, 10 сессий",
+            short_format_edicontent_id: "short_paket-10-sessiy-format",
+            duration: "60 минут каждая сессия",
+            duration_edicontent_id: "paket-10-sessiy-duration",
+            short_price: "215 000 ₸",
+            short_price_edicontent_id: "short_paket-10-sessiy-price",
+            price: "215 000 ₸ – онлайн (экономия 35 000 ₸)<br>260 000 ₸ – офлайн (экономия 40 000 ₸)<br>Предоплата 100%",
+            price_edicontent_id: "paket-10-sessiy-price"
         },
         {
             title: "Трансформационная игра Лила",
@@ -1205,6 +1302,7 @@ function applyForcedJustifications(document) {
 
 async function setupMain(document)
 {
+    setupCTAButtonAnimation(document);
     setupMarqueeLogic(document);
     applyForcedJustifications(document);
 
