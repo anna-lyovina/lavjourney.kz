@@ -257,8 +257,8 @@ function setupTestimonialsScrollButtonLogic(document) {
         document.getElementById('testimonialLightboxImg').src = data.img;
     }
 
-    document.querySelector('.nav.prev').addEventListener('click', function(event) { event.stopPropagation(); navigateTestimonial(-1); });
-    document.querySelector('.nav.next').addEventListener('click', function(event) { event.stopPropagation(); navigateTestimonial(1); });
+    document.querySelector('#testimonialLightbox .nav.prev').addEventListener('click', function(event) { event.stopPropagation(); navigateTestimonial(-1); });
+    document.querySelector('#testimonialLightbox .nav.next').addEventListener('click', function(event) { event.stopPropagation(); navigateTestimonial(1); });
 
     function closeTestimonialLightbox() {
         document.getElementById('testimonialLightbox').style.display = 'none';
