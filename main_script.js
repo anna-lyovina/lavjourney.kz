@@ -355,7 +355,7 @@ function setupTestimonialsScrollButtonLogic(document) {
         else {
         //card.style.background = 'linear-gradient(135deg, rgba(238,226,231,0.95) 80%, rgba(254,251,251,0.95) 100%)';
         }
-        // Add click event for lightbox only to the image
+        // Add click event for lightbox - card now displays text but can show screenshot
 
         card.style.cursor = 'pointer';
         card.addEventListener('click', function(e) {
@@ -368,7 +368,9 @@ function setupTestimonialsScrollButtonLogic(document) {
             e.stopPropagation();
             return;
             }
-            openTestimonialLightbox(i);
+            // Get the index from data attribute if available, otherwise use loop index
+            const index = card.hasAttribute('data-index') ? parseInt(card.getAttribute('data-index')) : i;
+            openTestimonialLightbox(index);
         });
     });
 
@@ -701,7 +703,7 @@ function setupConsentModalLogic(document) {
             </span>
             </div>
             <div style="text-align:center; margin-bottom:1.2rem;">
-            <button type="button" id="consentModalContactCloseBtn" class="cta-button" style="font-size:1.08rem; padding:0.5rem 2rem;">
+            <button type="button" id="consentModalContactCloseBtn" class="cta-button" style="font-size:1.08rem; padding:0.5rem 2rem;margin-top:0;margin-bottom:1rem;" >
                  Написать в WhatsApp
             </button>
             </div>
@@ -709,7 +711,7 @@ function setupConsentModalLogic(document) {
             
             <div style="background:rgba(43,156,153,0.07); border-radius:10px; padding:1.2rem 1rem; margin-bottom:1.2rem; display:flex; align-items:center; gap:0.8rem;">
             <i class="fas fa-info-circle" style="color:var(--accent-color); font-size:1.5rem;"></i>
-            <span style="text-align: justify;hyphens: auto;font-size:var(--fs16);font-weight: bold;" edicontent_id="eta-forma-ne-yavlaytsya-sposobom-svyazi">
+            <span style="text-align: justify;hyphens: auto;font-size:var(--fs16);" edicontent_id="eta-forma-ne-yavlaytsya-sposobom-svyazi">
                 Эта форма не является способом связи, она служит только для подтверждения ознакомления с условиями.
             </span>
             </div>
@@ -943,25 +945,6 @@ function setupServicesModalLogic(document) {
             price_edicontent_id: "sessiya-25-000-teng"
         },
         {
-            title: "Разбор по пирамиде логических уровней",
-            title_edicontent_id: "razbor-po-piramide-logicheskih-urovney",
-            icon: "fas fa-brain",
-            short_description: "Один сеанс для быстрого прояснения ситуации — без длительной терапии",
-            short_description_edicontent_id: "odin-seans-dlya-bystrogo-proyasneniya",
-            description: "Быстрая и эффективная техника для работы с конкретной проблемой. После встречи необходима  самостоятельная практика для закрепления результата.",
-            description_edicontent_id: "bystraya-i-effektivnaya-tehnika-dlya-raboty-s-konkretnoy-problemoj",
-            format: "Онлайн в GoogleMeet, один интенсивный сеанс  по конкретному вопросу.",
-            format_edicontent_id: "onlayn-v-googlemeet-odin-intensivnyy-seans-po-konkretnomu-voprosu",
-            short_format: "Онлайн, 90–120 минут, одна встреча",
-            short_format_edicontent_id: "onlayn-90-120-minut-odna-vstrecha",
-            duration: "90-120 минут",
-            duration_edicontent_id: "90-120-minut",
-            short_price: "45 000 ₸",
-            short_price_edicontent_id: "short_razbor-po-piramide-logicheskih-urovney-45-000-teng",
-            price: "45 000 ₸",
-            price_edicontent_id: "razbor-po-piramide-logicheskih-urovney-45-000-teng"
-        },
-                {
             title: "Пакет из 5 сессий",
             title_edicontent_id: "paket-5-sessiy",
             icon: "fas fa-layer-group",
@@ -998,6 +981,25 @@ function setupServicesModalLogic(document) {
             short_price_edicontent_id: "short_paket-10-sessiy-price",
             price: "215 000 ₸ – онлайн (экономия 35 000 ₸)<br>260 000 ₸ – офлайн (экономия 40 000 ₸)<br>Предоплата 100%",
             price_edicontent_id: "paket-10-sessiy-price"
+        },
+        {
+            title: "Разбор по пирамиде логических уровней",
+            title_edicontent_id: "razbor-po-piramide-logicheskih-urovney",
+            icon: "fas fa-brain",
+            short_description: "Один сеанс для быстрого прояснения ситуации — без длительной терапии",
+            short_description_edicontent_id: "odin-seans-dlya-bystrogo-proyasneniya",
+            description: "Быстрая и эффективная техника для работы с конкретной проблемой. После встречи необходима  самостоятельная практика для закрепления результата.",
+            description_edicontent_id: "bystraya-i-effektivnaya-tehnika-dlya-raboty-s-konkretnoy-problemoj",
+            format: "Онлайн в GoogleMeet, один интенсивный сеанс  по конкретному вопросу.",
+            format_edicontent_id: "onlayn-v-googlemeet-odin-intensivnyy-seans-po-konkretnomu-voprosu",
+            short_format: "Онлайн, 90–120 минут, одна встреча",
+            short_format_edicontent_id: "onlayn-90-120-minut-odna-vstrecha",
+            duration: "90-120 минут",
+            duration_edicontent_id: "90-120-minut",
+            short_price: "45 000 ₸",
+            short_price_edicontent_id: "short_razbor-po-piramide-logicheskih-urovney-45-000-teng",
+            price: "45 000 ₸",
+            price_edicontent_id: "razbor-po-piramide-logicheskih-urovney-45-000-teng"
         },
         {
             title: "Трансформационная игра Лила",
