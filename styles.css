@@ -1486,7 +1486,6 @@ lav-logo {
 
 
 .services-group {
-  margin-bottom: 2.5rem;
   padding: 1.5rem 1rem;
   border-radius: 18px;
   background: #f8f8fa;
@@ -1982,12 +1981,12 @@ lav-logo {
 }
 
 .testimonials-section {
-  margin-top: 3rem;
+  margin-top: 0rem;
 }
 
 @media (max-width: 767px) {
   .testimonials-section {
-    margin-top: 2rem;
+    margin-top: 0rem;
   }
   .testimonials-section .section-title {
     margin-bottom: 0.8rem;
