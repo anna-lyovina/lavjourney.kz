@@ -602,14 +602,14 @@
         margin: 0 auto;
         transform: scale(3);
         transform-origin: center center;
-        border-radius: 32% 38% 36% 32%/38% 32% 38% 32%;
+        border-radius: 22% 28% 26% 22%/28% 22% 28% 22%;
         margin-bottom: 25%;
         box-shadow:
           0 8px 32px 0 rgba(43,156,153,0.18),
           0 1.5px 8px 0 rgba(0,0,0,0.10),
           0 0 32px 8px rgba(43,156,153,0.13),
           0 0 0 8px rgba(255,255,255,0.10) inset;
-        border: 3px solid transparent;
+        border: 2px solid transparent;
         position: relative;
         z-index: 1;
         background: linear-gradient(135deg, rgba(43,156,153,0.08) 0%, rgba(255,255,255,0.12) 100%);
@@ -670,7 +670,7 @@
 
       .feelings-list li {
         padding-left: 1.5rem;
-        font-size: var(--fs16);
+        font-size: var(--fs17);
       }
 
       .feelings-list li::before {
@@ -2124,15 +2124,6 @@ lav-logo {
   padding: 36px;
 }
 
-@media (max-width: 767px) {
-  .testimonial-card {
-    width: 350px;
-    height: 350px;
-    flex: 0 0 350px;
-    padding: 28px;
-    border-radius: 28px;
-  }
-}
 
 /* Inner white square */
 .testimonial-inner {
@@ -2145,13 +2136,6 @@ lav-logo {
   padding: 28px;
   position: relative;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-}
-
-@media (max-width: 767px) {
-  .testimonial-inner {
-    padding: 20px;
-    border-radius: 16px;
-  }
 }
 
 /* Testimonial text container */
@@ -2172,13 +2156,6 @@ lav-logo {
   white-space: pre-line;
   text-align: left;
   letter-spacing: 0.01em;
-}
-
-@media (max-width: 767px) {
-  .testimonial-text p {
-    font-size: 13px;
-    line-height: 1.75;
-  }
 }
 
 /* Signature at bottom right corner of OUTER square */
@@ -2211,20 +2188,6 @@ lav-logo {
   content: ', ';
 }
 
-@media (max-width: 767px) {
-  .testimonial-signature {
-    bottom: 16px;
-    right: 16px;
-  }
-  
-  .testimonial-signature .signature-name {
-    font-size: 20px;
-  }
-  
-  .testimonial-signature .signature-city {
-    font-size: 20px;
-  }
-}
 
 /* Hover effects */
 .testimonial-card:hover {
@@ -2365,7 +2328,7 @@ lav-logo {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     animation: fadeInTestimonial 0.5s;
   }
   .testimonials-scroll-btns {
@@ -2610,7 +2573,7 @@ lav-logo {
   }
 
   .crisis-text-container p {
-    font-size: var(--fs18);
+    font-size: var(--fs20);
     line-height: 1.7;
   }
 
@@ -2656,7 +2619,7 @@ lav-logo {
 /* Mobile-friendly styling for zdravstvujte-menya-zovut-anna-levyina section */
 @media (max-width: 767px) {
   #aboutWysiwyg[style*="font-size"] {
-    font-size: var(--fs16) !important;
+    font-size: var(--fs18) !important;
   }
   
   /* Target the specific div */
