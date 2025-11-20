@@ -2768,3 +2768,14 @@ lav-logo {
   position: relative;
   font-size: 2.1rem;
 }
+
+.word-style-list li{
+   margin-left: 1rem;
+   list-style: none;
+}
+
+.word-style-list span:before{
+  position: absolute;
+  margin-left: -1rem;
+  content: '-';
+}
