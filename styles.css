@@ -521,6 +521,7 @@
       transform: scale(1);
       box-shadow: 0 2px 12px rgba(43,156,153,0.10);
       transition: transform 0.22s cubic-bezier(.4,1.4,.6,1), box-shadow 0.22s cubic-bezier(.4,1.4,.6,1);
+      font-family: 'Montserrat', sans-serif;;
     }
 
     .cta-button:hover {
@@ -534,6 +535,7 @@
       flex-direction: column;
       align-items: center;
       gap: 1rem;
+      margin-top: 2.3em;
     }
 
     .hero-image-wrapper img {
@@ -894,6 +896,7 @@
       margin-bottom: 0;
     }
     .footer-center img {
+      margin-top: 0.7rem;
       height: 90px;
     }
     .footer-right {
@@ -937,6 +940,7 @@
       }
 
       .footer-center img {
+        margin-top: 0;
         height: 65px;
       }
     }
@@ -1514,6 +1518,8 @@ lav-logo {
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
       text-align: justify;
       hyphens: auto;
+      width: 50%;
+      margin-left: 50%;
     }
   @media (max-width: 767px) {
     footer {
@@ -1521,6 +1527,11 @@ lav-logo {
       margin-top: 2rem;
     }
     
+    .note-block {
+      width: 100%;
+      margin-left: 0;
+    }
+
     .footer-container {
       padding: 0 1.25rem;
     }
@@ -2047,7 +2058,7 @@ lav-logo {
 .testimonials-board {
   display: flex;
   overflow-x: auto;
-  gap: 2rem;
+  gap: 6.5rem;
   scroll-behavior: smooth;
   cursor: grab;
   padding: 1.5rem 0.5rem 2rem 0.5rem;
@@ -2182,19 +2193,18 @@ lav-logo {
   gap: 0;
   font-family: 'Caveat', cursive;
   z-index: 10;
+  margin-right: 1.5rem;
 }
 
 .testimonial-signature .signature-name {
-  font-size: 24px;
-  font-weight: 600;
-  color: #2c2c2c;
+  font-size: 18px;
+  color: var(--primary-color);
   line-height: 1.1;
 }
 
 .testimonial-signature .signature-city {
-  font-size: 24px;
-  font-weight: 600;
-  color: #2c2c2c;
+  font-size: 18px;
+  color: var(--primary-color);
   line-height: 1.1;
 }
 
@@ -2574,7 +2584,7 @@ lav-logo {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 3em;
+  margin-top: 2em;
 }
 
 .crisis-text-container p {
@@ -2728,14 +2738,13 @@ lav-logo {
 
 .instagram-icon-box i {
   font-size: 1.5rem;
-  color: #1f2937;
+  color: var(--primary-color);
   transition: all 0.3s ease;
 }
 
 .instagram-text {
-  font-size: 1.125rem;
-  font-weight: 500;
-  color: #1f2937;
+  font-size: var(--fs16);
+  color: var(--primary-color);
   letter-spacing: -0.01em;
   transition: all 0.3s ease;
   white-space: nowrap;

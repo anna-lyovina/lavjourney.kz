@@ -698,7 +698,7 @@ function setupConsentModalLogic(document) {
 
             <div style="background:rgba(43,156,153,0.07); border-radius:10px; padding:1.2rem 1rem; margin-bottom:1.2rem; display:flex; align-items:center; gap:0.8rem;">
             <i class="fas fa-info-circle" style="color:var(--accent-color); font-size:1.5rem;"></i>
-            <span style="text-align: justify;hyphens: auto;" edicontent_id="esli-u-vas-est-voprosy-po-dannomu-razdelu" style="font-size:1.08rem; color:var(--primary-color); font-weight:500;">
+            <span style="text-align: justify;hyphens: auto;font-size:var(--fs16);" edicontent_id="esli-u-vas-est-voprosy-po-dannomu-razdelu" style="font-size:1.08rem; color:var(--primary-color); font-weight:500;">
                 Если у Вас есть вопросы по данному разделу, пожалуйста, задайте их до начала работы.
             </span>
             </div>
@@ -711,8 +711,8 @@ function setupConsentModalLogic(document) {
             
             <div style="background:rgba(43,156,153,0.07); border-radius:10px; padding:1.2rem 1rem; margin-bottom:1.2rem; display:flex; align-items:center; gap:0.8rem;">
             <i class="fas fa-info-circle" style="color:var(--accent-color); font-size:1.5rem;"></i>
-            <span style="text-align: justify;hyphens: auto;font-size:var(--fs16);" edicontent_id="eta-forma-ne-yavlaytsya-sposobom-svyazi">
-                Эта форма не является способом связи, она служит только для подтверждения ознакомления с условиями.
+            <span style="text-align: justify;hyphens: auto;font-size:var(--fs16);" edicontent_id="eta-forma-ne-yavlaytsya-sposobom-svyazi-ona-sluzhit">
+                Эта форма не является способом связи, она служит только для подтверждения ознакомления с условиями
             </span>
             </div>
             
@@ -943,44 +943,6 @@ function setupServicesModalLogic(document) {
             short_price_edicontent_id: "short_sessiya_25-000-teng",
             price: "25 000 ₸ – онлайн<br>30 000 ₸ – офлайн<br>Предоплата 100%",
             price_edicontent_id: "sessiya-25-000-teng"
-        },
-        {
-            title: "Пакет из 5 сессий",
-            title_edicontent_id: "paket-5-sessiy",
-            icon: "fas fa-layer-group",
-            short_description: "Индивидуальная терапия с выгодой",
-            short_description_edicontent_id: "short_paket-5-sessiy",
-            description: "Пакет из 5 индивидуальных терапевтических сессий – оптимальный вариант для систематической работы над конкретным запросом. Подходит для решения четко обозначенной проблемы или достижения определенной цели.",
-            description_edicontent_id: "paket-5-sessiy-opisanie",
-            format: "Онлайн по видеосвязи или офлайн в г. Алматы (старый центр), встречи один раз в неделю. Срок действия пакета – 6 недель с момента первой сессии.",
-            format_edicontent_id: "paket-5-sessiy-format",
-            short_format: "Онлайн и офлайн, 60 минут, 5 сессий",
-            short_format_edicontent_id: "short_paket-5-sessiy-format",
-            duration: "60 минут каждая сессия",
-            duration_edicontent_id: "paket-5-sessiy-duration",
-            short_price: "115 000 ₸",
-            short_price_edicontent_id: "short_paket-5-sessiy-price",
-            price: "115 000 ₸ – онлайн (экономия 10 000 ₸)<br>140 000 ₸ – офлайн (экономия 10 000 ₸)<br>Предоплата 100%",
-            price_edicontent_id: "paket-5-sessiy-price"
-        },
-        {
-            title: "Пакет из 10 сессий",
-            title_edicontent_id: "paket-10-sessiy",
-            icon: "fas fa-cubes",
-            short_description: "Индивидуальная терапия с максимальной выгодой",
-            short_description_edicontent_id: "short_paket-10-sessiy",
-            description: "Пакет из 10 индивидуальных терапевтических сессий – лучший выбор для глубинной проработки сложных жизненных ситуаций и достижения устойчивых изменений. Максимальная экономия при длительной работе.",
-            description_edicontent_id: "paket-10-sessiy-opisanie",
-            format: "Онлайн по видеосвязи или офлайн в г. Алматы (старый центр), встречи один раз в неделю. Срок действия пакета – 12 недель с момента первой сессии.",
-            format_edicontent_id: "paket-10-sessiy-format",
-            short_format: "Онлайн и офлайн, 60 минут, 10 сессий",
-            short_format_edicontent_id: "short_paket-10-sessiy-format",
-            duration: "60 минут каждая сессия",
-            duration_edicontent_id: "paket-10-sessiy-duration",
-            short_price: "215 000 ₸",
-            short_price_edicontent_id: "short_paket-10-sessiy-price",
-            price: "215 000 ₸ – онлайн (экономия 35 000 ₸)<br>260 000 ₸ – офлайн (экономия 40 000 ₸)<br>Предоплата 100%",
-            price_edicontent_id: "paket-10-sessiy-price"
         },
         {
             title: "Разбор по пирамиде логических уровней",
