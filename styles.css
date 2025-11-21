@@ -2329,9 +2329,9 @@ lav-logo {
     min-height: 240px;
   }
   .testimonial-card {
-    flex: 0 0 345px;
-    width: 345px;
-    height: 345px;
+    flex: 0 0 340px;
+    width: 340px;
+    height: 340px;
   }
 
   .testimonial-card img {
