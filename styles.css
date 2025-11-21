@@ -1310,6 +1310,24 @@ lav-logo {
     display: block;
     text-align: center;
   }
+
+  /* Modal adjustments for mobile to prevent title/close button overlap */
+  .service-modal {
+    padding: 1.5rem;
+  }
+
+  .service-modal h3 {
+    padding-right: 48px; /* Reserve space for close button */
+    margin-bottom: 1rem;
+  }
+
+  .service-modal .close-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    top: 12px;
+    right: 12px;
+  }
 }
 @media (min-width: 768px) {
   .desktop-only { display: inline !important; }
@@ -2155,7 +2173,6 @@ lav-logo {
   margin: 0;
   white-space: pre-line;
   text-align: left;
-  letter-spacing: 0.01em;
 }
 
 /* Signature at bottom right corner of OUTER square */
@@ -2312,9 +2329,9 @@ lav-logo {
     min-height: 240px;
   }
   .testimonial-card {
-    flex: 0 0 350px;
-    width: 350px;
-    height: 350px;
+    flex: 0 0 340px;
+    width: 340px;
+    height: 340px;
   }
 
   .testimonial-card img {
@@ -2365,6 +2382,10 @@ lav-logo {
   .testimonial-dot.active {
     background: var(--accent-color);
     transform: scale(1.2);
+  }
+
+  .testimonial-text p {
+    font-size: 13.5px;
   }
 }
 
