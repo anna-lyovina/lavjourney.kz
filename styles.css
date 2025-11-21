@@ -2387,6 +2387,11 @@ lav-logo {
   .testimonial-text p {
     font-size: 13.5px;
   }
+
+  .testimonial-inner
+  {
+    padding: 28px 23px 28px 23px;
+  }
 }
 
 
