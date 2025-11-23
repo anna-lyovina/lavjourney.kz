@@ -884,6 +884,15 @@
       letter-spacing: 0.01em;
       padding-right: 1.5rem;
       font-size: var(--fs16);
+      display: grid;
+      grid-template-rows: repeat(4, auto);
+      gap: 0;
+      align-content: start;
+    }
+    .footer-left > div {
+      font-size: var(--fs16);
+      padding: 0;
+      margin: 0;
     }
     .footer-center {
       text-align: center;
@@ -904,6 +913,15 @@
       font-weight: 500;
       letter-spacing: 0.01em;
       padding-left: 1.5rem;
+      display: grid;
+      grid-template-rows: repeat(4, auto);
+      gap: 0;
+      align-content: start;
+    }
+    .footer-right div {
+      font-size: var(--fs16);
+      padding: 0;
+      margin: 0;
     }
     .footer-right a {
       text-decoration: none;
@@ -911,7 +929,6 @@
       font-weight: 600;
       font-size: var(--fs16);
       transition: color 0.3s, background 0.3s, border-radius 0.3s;
-      border-radius: 8px;
       display: inline-block;
     }
     .footer-right a:hover {
@@ -933,10 +950,11 @@
       }
 
       .footer-right {
-        margin-top: 0.3em;
+        margin-top: 0.5em;
         text-align: center !important;
         padding: 0 !important;
         margin-bottom: 0.5em;
+        gap: 0.4em;
       }
 
       .footer-center img {
