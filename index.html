@@ -757,4 +757,51 @@
 
 </body>
 
+<script>
+window.addEventListener('load', function () {
+  var url = new URL(window.location.href);
+
+  var removeList = [
+    'etext',
+    'yclid',
+    'ymclid',
+    'gclid',
+    'fbclid',
+    'ttclid',
+    'msclkid',
+    'dclid',
+    'igshid',
+    'ref',
+    'referrer',
+    'ybaip',
+    '_openstat'
+  ];
+
+  var utmParams = [
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_term',
+    'utm_content'
+  ];
+
+  var changed = false;
+
+  removeList.concat(utmParams).forEach(function (param) {
+    if (url.searchParams.has(param)) {
+      url.searchParams.delete(param);
+      changed = true;
+    }
+  });
+
+  if (changed) {
+    var cleanURL = url.pathname +
+      (url.searchParams.toString() ? '?' + url.searchParams.toString() : '') +
+      url.hash;
+
+    window.history.replaceState({}, document.title, cleanURL);
+  }
+});
+</script>
+
 </html>

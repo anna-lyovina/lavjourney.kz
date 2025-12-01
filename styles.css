@@ -1335,6 +1335,7 @@ lav-logo {
   }
 
   .service-modal h3 {
+    margin-top: 1rem;
     padding-right: 48px; /* Reserve space for close button */
     margin-bottom: 1rem;
   }
