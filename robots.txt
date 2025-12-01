@@ -8,3 +8,5 @@ Crawl-delay: 1
 
 # Important pages
 Sitemap: https://lavjourney.kz/sitemap.xml
+
+Clean-param: etext
