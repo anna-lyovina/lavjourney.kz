@@ -24,6 +24,18 @@
   <script>
     window.onload = async function() {
       await setupMain(document);
+      
+      // Check for hash in URL and navigate to section
+      var hash = window.location.hash;
+      if (hash && hash.length > 1) {
+        // Find and click the corresponding menu item with a short delay
+        // setTimeout(function() {
+          var menuLink = document.querySelector('.menu a[href="' + hash + '"], .footer-right a[href="' + hash + '"]');
+          if (menuLink) {
+            menuLink.click();
+          }
+        // }, 300);
+      }
     };
   </script>
   
