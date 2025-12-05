@@ -1167,25 +1167,31 @@ function setupMenuReactions(document) {
             
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
-            section.classList.add('visible');
-            section.style.transform = 'none';
-            section.style.transition = 'none';
+                section.classList.add('visible');
+                section.style.transform = 'none';
+                section.style.transition = 'none';
             });
 
             const targetId = this.getAttribute('href').slice(1);
-            const targetSection = document.getElementById(targetId);
-            const header = document.querySelector('header');
+            if (targetId === 'about') {
+                window.scrollTo({ top: 10, behavior: 'smooth' });
+            }
+            else {
+                const targetSection = document.getElementById(targetId);
+                const header = document.querySelector('header');
 
-            if (targetSection && header) {
-            const sectionRect = targetSection.getBoundingClientRect();
-            const headerRect = header.getBoundingClientRect();
-
-            window.scrollBy({
-                top: sectionRect.top - headerRect.bottom,
-                behavior: 'smooth'
-            });
-            // Optionally update hash for deep linking
-            history.replaceState(null, '', '#' + targetId);
+                if (targetSection && header) {
+                    const sectionRect = targetSection.getBoundingClientRect();
+                    const headerRect = header.getBoundingClientRect();
+                    const scrollDestinationTop = sectionRect.top - headerRect.bottom;
+                    
+                    window.scrollBy({
+                        top: scrollDestinationTop,
+                        behavior: 'smooth'
+                    });
+                    // Optionally update hash for deep linking
+                    history.replaceState(null, '', '#' + targetId);
+                }
             }
         });
     });
