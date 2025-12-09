@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
-Allow: /articles.html
-Allow: /existential-crisis.html
+Disallow: /articles.html
+Disallow: /existential-crisis.html
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
