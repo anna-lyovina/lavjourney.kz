@@ -924,6 +924,37 @@ function setupConsentModalLogic(document) {
 function setupServicesModalLogic(document) {
     const serviceCards = document.querySelectorAll('.card.service-card.fancy-service');
 
+    const MSG_TEXT = encodeURIComponent('Здравствуйте, связываюсь через сайт');
+    const MSG_TG = 'https://t.me/anna_lyovina_psyche?text=' + MSG_TEXT;
+    const MSG_WA = 'https://wa.me/77067471227?text=' + MSG_TEXT;
+
+    // статьи-лендинги по карточкам, по порядку услуг ниже; null – статьи нет, ведем в мессенджер
+    const SERVICE_ARTICLES = [
+        'https://teletype.in/@anna_lyovina_psyche/s2L5NjQhXGO',
+        'https://teletype.in/@anna_lyovina_psyche/_G8KPZNGPcA',
+        'https://teletype.in/@anna_lyovina_psyche/cDBmxgisDF-',
+        null
+    ];
+
+    function roundMsgBtn(href, iconClass, label) {
+        return `<a href="${href}" class="msg-round" target="_blank" rel="noopener noreferrer" title="${label}" aria-label="${label}" onclick="event.stopPropagation()"><i class="${iconClass}"></i></a>`;
+    }
+
+    // на карточке офлайн-практик только WhatsApp: туда пишут из Алматы
+    function cardMsgButtons(i) {
+        const onlyWa = SERVICE_ARTICLES[i] === null;
+        return (onlyWa ? '' : roundMsgBtn(MSG_TG, 'fab fa-telegram', 'Написать в Telegram'))
+            + roundMsgBtn(MSG_WA, 'fab fa-whatsapp', 'Написать в WhatsApp');
+    }
+
+    function modalMsgButton(i) {
+        const article = SERVICE_ARTICLES[i];
+        if (article) {
+            return `<a href="${article}" class="msg-outline" target="_blank" rel="noopener noreferrer"><i class="far fa-file-lines"></i><span>Читать статью</span></a>`;
+        }
+        return `<a href="${MSG_WA}" class="msg-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i><span>Написать в WhatsApp</span></a>`;
+    }
+
     const services = [
         {
             title: "Психологическая сессия",
@@ -1032,7 +1063,7 @@ function setupServicesModalLogic(document) {
             <span edicontent_id="${services[i].short_price_edicontent_id}" class="service-price" style="font-size: var(--fs16); display: inline-block; background: #fff; color: var(--accent-color); font-weight: 700; border-radius: 999px; padding: 0.45em 1.2em; box-shadow: 0 2px 12px rgba(43,156,153,0.10); letter-spacing: 0.5px; min-width: 90px; margin-right: 0.5rem;">
                 ${services[i].short_price}
             </span>
-            <a href="#contact" class="cta-button" href="#contact" onclick="event.stopPropagation()" style="font-size: var(--fs16); margin-top: 0; background: var(--accent-color); color: #fff; font-weight: 700; padding: 0.6em 2em; box-shadow: 0 2px 12px rgba(43,156,153,0.15); border: none; text-align: center; font-family: 'Poppins', sans-serif; transition: background 0.2s, box-shadow 0.2s;">Написать</a>
+            ${cardMsgButtons(i)}
             </div>
         </div>
 
@@ -1078,14 +1109,16 @@ function setupServicesModalLogic(document) {
             <p edicontent_id="${services[index].duration_edicontent_id}" style="text-align: justify;hyphens: auto;">${services[index].duration}</p>
             <h3>Стоимость, тенге</h3>
             <p edicontent_id="${services[index].price_edicontent_id}" style="text-align: justify;hyphens: auto;">${services[index].price}</p>
-            <div style="text-align: center; margin-top: 0.3rem;">
-            <a href="#contact" class="cta-button" id="serviceModalContactCloseBtn" style="font-size: 1.2rem; padding: 0.6rem 2rem;" >Написать</a>
+            <div class="msg-pair" style="justify-content: center; margin-top: 1.4rem;">
+            ${modalMsgButton(index)}
             </div>
         `;
         locateEditablesAndSetThemAsContentEditable(document, modalContent);
         
 
-        document.getElementById('serviceModalContactCloseBtn').addEventListener('click', closeServiceModal);
+        modalContent.querySelectorAll('.msg-outline').forEach(function (btn) {
+            btn.addEventListener('click', closeServiceModal);
+        });
         document.getElementById('serviceModalOverlay').style.display = 'flex';
         document.body.style.overflow = 'hidden';
         document.announcement_text_marquee_paused = true;
