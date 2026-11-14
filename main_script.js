@@ -947,7 +947,7 @@ function setupServicesModalLogic(document) {
         {
             title: "Разбор по пирамиде логических уровней",
             title_edicontent_id: "razbor-po-piramide-logicheskih-urovney",
-            icon: "fas fa-brain",
+            icon: "fas fa-users",
             short_description: "Один сеанс для быстрого прояснения ситуации — без длительной терапии",
             short_description_edicontent_id: "odin-seans-dlya-bystrogo-proyasneniya",
             description: "Быстрая и эффективная техника для работы с конкретной проблемой. После встречи необходима  самостоятельная практика для закрепления результата.",
@@ -966,7 +966,7 @@ function setupServicesModalLogic(document) {
         {
             title: "Трансформационная игра Лила",
             title_edicontent_id: "transformacionnaya-igra-lila",
-            icon: "fas fa-dice-d20",
+            icon: "fas fa-circle-play",
             short_description: "Духовное путешествие по игровому полю, где каждый ход — шаг к пониманию себя и своей жизни — для ищущих",
             short_description_edicontent_id: "duhovnoe-puteshestvie-po-igrovomu-polyu",
             description: "Духовная настольная игра, которая помогает  понять состояние, осознать глубинные причины, прояснить внутренние процессы и найти новые смыслы.",
@@ -985,7 +985,7 @@ function setupServicesModalLogic(document) {
         {
             title: "Расстановка Телесные шахматы",
             title_edicontent_id: "telesnye-shakhmaty",
-            icon: "fas fa-chess",
+            icon: "fas fa-chess-board",
             short_description: "Глубокая работа в группе, где Ваша история предстает под другим углом и открывает новые возможности и решения",
             short_description_edicontent_id: "glubokaya-rabota-v-gruppe-gde-vasha-istoriya-prestoit-pod-drugim-uglom",
             description: "Интересная и мощная психологическая практика, в которой человек при помощи других участников разыгрывает свою жизненную ситуацию. Здесь становятся видимыми скрытые роли, внутренние конфликты и стратегии поведения. Расстановка помогает осознать, что происходит на самом деле, и открывает новые пути решения.",
