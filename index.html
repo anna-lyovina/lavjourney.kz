@@ -719,6 +719,13 @@
     @media (hover: none) {
       .contact-btn:hover, .contact-social:hover { transform: none; }
     }
+    /* ссылка на политику в подвале */
+    .footer-privacy { transition: opacity .2s ease, color .2s ease; }
+    .footer-privacy:hover, .footer-privacy:focus-visible {
+      opacity: 1 !important;
+      color: var(--accent-color) !important;
+      text-decoration: underline !important;
+    }
   </style>
 
     <section class="section" id="contact">
@@ -732,7 +739,7 @@
       </p>
 
       <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
-        <a href="https://t.me/anna_lyovina_psyche" class="contact-btn" target="_blank" rel="noopener noreferrer"
+        <a href="https://t.me/anna_lyovina_psyche?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%81%D0%B2%D1%8F%D0%B7%D1%8B%D0%B2%D0%B0%D1%8E%D1%81%D1%8C%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20%D1%81%D0%B0%D0%B9%D1%82" class="contact-btn" target="_blank" rel="noopener noreferrer"
            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.3rem; border: 1.5px solid var(--accent-color); border-radius: 10px; color: var(--accent-color); text-decoration: none; font-weight: 600;">
           <i class="fab fa-telegram"></i><span>Написать в Telegram</span>
         </a>
@@ -765,7 +772,6 @@
       <div edicontent_id="klinicheskiy-psikholog">психолог</div>
       <div edicontent_id="onlayn-i-oflayn">онлайн и офлайн</div>
       <div edicontent_id="almaty-kazakhstan">г. Алматы, Казахстан</div>
-      <div style="margin-top: 0.6rem;"><a href="privacy.pdf" target="_blank" rel="noopener noreferrer" style="font-size: 0.85em; color: rgb(68, 68, 68); opacity: 0.7; text-decoration: none;">Политика конфиденциальности</a></div>
     </div>
     <div class="footer-col footer-center">
       <img src="logo.png" alt="Психолог Анна Лёвина" style="object-fit: contain; display: block;">
@@ -777,7 +783,26 @@
       <div><a href="#services" edicontent_id="uslugi-i-tseny">Услуги и цены</a></div>
     </div>
   </div>
+  <div style="text-align: center; margin-top: 2rem; padding-top: 1.2rem; border-top: 1px solid rgba(0, 0, 0, 0.08);">
+    <a class="footer-privacy" href="privacy.pdf" target="_blank" rel="noopener noreferrer"
+       style="font-size: 0.85em; color: rgb(68, 68, 68); opacity: 0.65; text-decoration: none;">Политика конфиденциальности</a>
+  </div>
 </footer>
+
+<script>
+  // внешние ссылки открываем в новой вкладке
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    if (a.target && a.target !== '_self') return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.protocol !== 'http:' && u.protocol !== 'https:') return;
+    if (u.hostname === location.hostname) return;
+    e.preventDefault();
+    window.open(u.href, '_blank', 'noopener');
+  }, true);
+</script>
 
 </body>
 
