@@ -700,6 +700,27 @@
     </div>
   </div>
 
+  <style>
+    /* наведение на кнопки и ссылки в контактах */
+    .contact-btn { transition: background-color .25s ease, color .25s ease, box-shadow .25s ease, transform .25s ease; }
+    .contact-btn:hover, .contact-btn:focus-visible {
+      background-color: var(--accent-color) !important;
+      color: #fff !important;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      transform: translateY(-2px);
+    }
+    .contact-social { transition: color .25s ease, transform .25s ease; }
+    .contact-social:hover, .contact-social:focus-visible {
+      color: var(--accent-color) !important;
+      transform: translateY(-2px);
+    }
+    .contact-social i { transition: transform .25s ease; }
+    .contact-social:hover i { transform: scale(1.15); }
+    @media (hover: none) {
+      .contact-btn:hover, .contact-social:hover { transform: none; }
+    }
+  </style>
+
     <section class="section" id="contact">
     <div class="container">
       <div style="text-align: center; font-size: 2rem; color: var(--accent-color); margin-bottom: 0.5rem;">
@@ -711,11 +732,11 @@
       </p>
 
       <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
-        <a href="https://t.me/anna_lyovina_psyche" target="_blank" rel="noopener noreferrer"
+        <a href="https://t.me/anna_lyovina_psyche" class="contact-btn" target="_blank" rel="noopener noreferrer"
            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.3rem; border: 1.5px solid var(--accent-color); border-radius: 10px; color: var(--accent-color); text-decoration: none; font-weight: 600;">
           <i class="fab fa-telegram"></i><span>Написать в Telegram</span>
         </a>
-        <a href="contact-wa.html" target="_blank" rel="noopener noreferrer"
+        <a href="contact-wa.html" class="contact-btn" target="_blank" rel="noopener noreferrer"
            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.3rem; border: 1.5px solid var(--accent-color); border-radius: 10px; color: var(--accent-color); text-decoration: none; font-weight: 600;">
           <i class="fab fa-whatsapp"></i><span>Написать в WhatsApp</span>
         </a>
@@ -723,11 +744,11 @@
 
       <!-- Social links -->
       <div style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.5rem; margin-bottom: 1rem;">
-        <a href="https://instagram.com/anna_lyovina.psyche/" target="_blank" rel="noopener noreferrer"
+        <a href="https://instagram.com/anna_lyovina.psyche/" class="contact-social" target="_blank" rel="noopener noreferrer"
            style="display: inline-flex; align-items: center; gap: 0.45rem; color: rgb(68, 68, 68); text-decoration: none; font-size: var(--fs16);">
           <i class="fab fa-instagram" style="color: var(--accent-color);"></i><span>Инстаграм</span>
         </a>
-        <a href="https://t.me/anna_lyovina_psyche_channel" target="_blank" rel="noopener noreferrer"
+        <a href="https://t.me/anna_lyovina_psyche_channel" class="contact-social" target="_blank" rel="noopener noreferrer"
            style="display: inline-flex; align-items: center; gap: 0.45rem; color: rgb(68, 68, 68); text-decoration: none; font-size: var(--fs16);">
           <i class="fab fa-telegram" style="color: var(--accent-color);"></i><span>Телеграм-канал</span>
         </a>
