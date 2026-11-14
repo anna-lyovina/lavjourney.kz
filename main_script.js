@@ -545,6 +545,26 @@ async function loadEditables()
     return await result.json();
 }
 
+// запятую оставляем как есть: telegram не раскодирует %2C и показывает его в тексте
+const MSG_TEXT = encodeURIComponent('Здравствуйте, связываюсь через сайт').replace(/%2C/g, ',');
+const MSG_TG = 'https://t.me/anna_lyovina_psyche?text=' + MSG_TEXT;
+const MSG_WA = 'https://wa.me/77067471227?text=' + MSG_TEXT;
+
+// часть текстов приходит из админки вместе со старой кнопкой «Написать» на якорь #contact;
+// меняем такую кнопку на пару ссылок в мессенджеры (в режиме правки не трогаем)
+function upgradeLegacyContactButtons(document) {
+    if (document.edit_mode === true) return;
+    document.querySelectorAll('a.cta-button[href="#contact"]').forEach(function (btn) {
+        const pair = document.createElement('div');
+        pair.className = 'msg-pair';
+        pair.style.justifyContent = 'flex-end';
+        pair.innerHTML =
+            '<a href="' + MSG_TG + '" class="msg-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i><span>Telegram</span></a>'
+            + '<a href="' + MSG_WA + '" class="msg-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>';
+        btn.replaceWith(pair);
+    });
+}
+
 const SPECIAL_ANNOUNCEMENT_VISIBILITY_EDICONTENT_ID = 'announcement_visibility_edicontent_id';
 const SPECIAL_ANNOUNCEMENT_TEXT_EDICONTENT_ID = 'announcement';
 
@@ -627,6 +647,7 @@ function locateEditablesAndSetThemAsContentEditable(document, container) {
 async function setupEditables(document) {
     document.editables_dict = await loadEditables();
     locateEditablesAndSetThemAsContentEditable(document, document);
+    upgradeLegacyContactButtons(document);
 }
 
 function setupConsentModalLogic(document) {
@@ -923,10 +944,6 @@ function setupConsentModalLogic(document) {
 
 function setupServicesModalLogic(document) {
     const serviceCards = document.querySelectorAll('.card.service-card.fancy-service');
-
-    const MSG_TEXT = encodeURIComponent('Здравствуйте, связываюсь через сайт');
-    const MSG_TG = 'https://t.me/anna_lyovina_psyche?text=' + MSG_TEXT;
-    const MSG_WA = 'https://wa.me/77067471227?text=' + MSG_TEXT;
 
     // статьи-лендинги по карточкам, по порядку услуг ниже; null – статьи нет, ведем в мессенджер
     const SERVICE_ARTICLES = [
