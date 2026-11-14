@@ -453,7 +453,10 @@
             <p><br>Я изучаю маршрут изнутри и помогаю увидеть путь.</p>
             <p>Если узнали себя, напишите мне – простроим направление вместе.</p>
           <div class="cta-corner">
-            <a href="#contact" class="cta-button" edicontent_id="zapisatsya-na-vstrechu-crisis">Написать в WhatsApp</a>
+            <div class="msg-pair" style="justify-content: flex-end;">
+              <a href="https://t.me/anna_lyovina_psyche?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%81%D0%B2%D1%8F%D0%B7%D1%8B%D0%B2%D0%B0%D1%8E%D1%81%D1%8C%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20%D1%81%D0%B0%D0%B9%D1%82" class="msg-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i><span>Telegram</span></a>
+              <a href="https://wa.me/77067471227?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%81%D0%B2%D1%8F%D0%B7%D1%8B%D0%B2%D0%B0%D1%8E%D1%81%D1%8C%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20%D1%81%D0%B0%D0%B9%D1%82" class="msg-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+            </div>
           </div>
         </div>
         </div>
@@ -493,7 +496,10 @@
           
           </div>
           <div class="cta-corner">
-            <a href="#contact" class="cta-button">Написать в WhatsApp</a>
+            <div class="msg-pair" style="justify-content: flex-end;">
+              <a href="https://t.me/anna_lyovina_psyche?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%81%D0%B2%D1%8F%D0%B7%D1%8B%D0%B2%D0%B0%D1%8E%D1%81%D1%8C%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20%D1%81%D0%B0%D0%B9%D1%82" class="msg-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i><span>Telegram</span></a>
+              <a href="https://wa.me/77067471227?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%81%D0%B2%D1%8F%D0%B7%D1%8B%D0%B2%D0%B0%D1%8E%D1%81%D1%8C%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20%D1%81%D0%B0%D0%B9%D1%82" class="msg-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+            </div>
           </div>
         </div>
       </div>
@@ -718,6 +724,45 @@
     .contact-social:hover i { transform: scale(1.15); }
     @media (hover: none) {
       .contact-btn:hover, .contact-social:hover { transform: none; }
+    }
+    /* кнопки «написать» и «читать статью» в карточках, модалках и врезках */
+    .msg-round {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.6em; height: 2.6em; margin-left: 0.4rem;
+      border-radius: 999px; background: var(--accent-color); color: #fff;
+      font-size: var(--fs16); text-decoration: none;
+      box-shadow: 0 2px 12px rgba(43, 156, 153, 0.15);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    /* значки внутри: стили карточек красят i в бирюзовый и раздувают, перебиваем */
+    .msg-round i, .msg-outline i {
+      font-size: 1em !important;
+      margin: 0 !important;
+      transform: none !important;
+    }
+    .msg-round i { color: #fff !important; }
+    .msg-round:hover, .msg-round:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(43, 156, 153, 0.3);
+    }
+    .msg-outline {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.7rem 1.4rem; border: 1.5px solid var(--accent-color); border-radius: 10px;
+      color: var(--accent-color); background: transparent;
+      text-decoration: none; font-weight: 600;
+      transition: background-color .25s ease, color .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
+    .msg-outline:hover, .msg-outline:focus-visible {
+      background-color: var(--accent-color); color: #fff;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      transform: translateY(-2px);
+    }
+    .msg-pair { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    @media (max-width: 520px) {
+      .msg-pair { flex-direction: column; align-items: stretch; }
+    }
+    @media (hover: none) {
+      .msg-round:hover, .msg-outline:hover { transform: none; }
     }
     /* ссылка на политику в подвале */
     .footer-privacy { transition: opacity .2s ease, color .2s ease; }
